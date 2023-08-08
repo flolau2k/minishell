@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/08 12:55:04 by flauer           ###   ########.fr        #
+#    Updated: 2023/08/08 13:02:51 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,19 +15,22 @@ NAME =		minishell
 CC =		cc
 CFLAGS =	-Wall -Wextra -Werror
 
-LIBFT =		libft/libft.a
+LIBFTDIR =	libft
+LIBFT =		$(LIBFTDIR)/libft.a
+LIBS =		$(LIBFT)
+
+INCLUDES =	-Iinclude -I$(LIBFTDIR)/include
 
 OBJDIR =	obj
 SRCDIR =	src
-# BONUSDIR =	bonus
-# OBJDIR_B =	obj_bonus
+INCDIR =	include
 
 FILES =		minishell.c
+HEADER_F =	minishell.h
 
 SRC =		$(addprefix $(SRCDIR)/, $(FILES))
 OBJ =		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
-# SRC_BONUS =	$(addprefix $(BONUSDIR)/, $(F_BONUS))
-# OBJ_BONUS = $(addprefix $(OBJDIR_B)/, $(F_BONUS:%.c=%.o))
+HEADERS =	$(addprefix $(INCDIR)/, $(HEADER_F))
 
 all: $(NAME)
 
@@ -35,11 +38,11 @@ debug: CFLAGS += -g
 debug: clean all
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -Llibft -lft
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "built $(NAME)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
@@ -54,16 +57,6 @@ fclean: clean
 	/bin/rm -rf $(NAME)
 
 re:	fclean all
-
-# bonus: $(LIBFT) $(OBJ_BONUS)
-# 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_BONUS) -Llibft -lft
-# 	@echo "built $(NAME) bonus"
-
-# $(OBJDIR_B)/%.o: $(BONUSDIR)/%.c | $(OBJDIR_B)
-# 	$(CC) $(CFLAGS) -c -o $@ $<
-
-# $(OBJDIR_B):
-# 	@mkdir -p $(OBJDIR_B)
 
 $(LIBFT):
 	@git submodule update --init --recursive
