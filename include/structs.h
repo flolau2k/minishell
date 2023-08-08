@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/08 13:07:27 by flauer           ###   ########.fr       */
+/*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/08 13:09:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-int	main(int argc, char **argv, char **env)
+typedef struct s_shell
 {
-	return (EXIT_SUCCESS);
-}
+
+}	t_shell;
+
+#endif
