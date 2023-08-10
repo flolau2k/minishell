@@ -1,23 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/10 10:26:50 by flauer           ###   ########.fr       */
+/*   Created: 2023/08/08 16:54:59 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/10 10:26:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
-int	main(int argc, char **argv, char **env)
-{
-	t_shell	shell;
 
-	init(&shell, argc, argv, env);
-	main_loop(&shell);
-	cleanup(&shell);
-	return (EXIT_SUCCESS);
-}
