@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 13:47:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/21 17:29:27 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+// 
 
+/// @brief Checks for the delimiter and special characters
+/// @param c character passed from the argument string
+/// @return True if it is the researched char, false if not
 static bool	check_char(char c)
 {
 	static bool	is_dquotes;
@@ -33,7 +37,9 @@ static bool	check_char(char c)
 	return (false);
 }
 
-// cat file.txt | grep X >> "out.txtacs $PWD sdf" 'sdf $adksf dsf'
+/// @brief Creates a linked list with each of the arguments
+/// @param instr input argument
+/// @return linked list pointer to the unprocessed tokens
 t_list	*create_linked_list(char *instr)
 {
 	t_list	*ret;
@@ -56,6 +62,9 @@ t_list	*create_linked_list(char *instr)
 	return (ret);
 }
 
+/// @brief Splits the function into individual srtings for creating tokens
+/// @param instr input argument
+/// @return token array for the parsing 
 char	**do_lexing(char *instr)
 {
 	char	**ret;
@@ -69,6 +78,8 @@ char	**do_lexing(char *instr)
 	temp = lst;
 	len = ft_lstsize(lst);
 	ret = malloc(sizeof(char *) * (len + 1));
+	if (!ret)
+		ft_error(NULL); // The passed pointer to be checked 
 	ret[len] = 0;
 	while (i < len)
 	{

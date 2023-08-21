@@ -3,20 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 17:23:13 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/21 17:28:27 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+#include "../libft/include/libft.h"
+
+typedef struct s_var
+{
+	char	*name;
+	char	*val;
+}	t_var;
 
 typedef struct s_shell
 {
 	char	**env;
 	char	**tokens;
+	t_list	*vars;
 }	t_shell;
 
 typedef enum

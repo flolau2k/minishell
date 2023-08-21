@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 11:52:09 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/21 14:55:05 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,8 @@ bool	init(t_shell *shell, int argc, char **argv, char **env);
 
 // lexer.c
 char	**do_lexing(char *instr);
+
+// parser.c
+t_astnode	*parser(char **str);
 
 #endif
