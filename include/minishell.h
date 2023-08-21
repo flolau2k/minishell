@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/10 10:35:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/21 14:41:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,11 @@ int	main(int argc, char **argv, char **env);
 // init.c
 bool	init(t_shell *shell, int argc, char **argv, char **env);
 
+// environment.c
+char	**get_env(char *env[], char *key);
+
+// BUILTINS
+// echo.c
+void	echo()
 
 #endif

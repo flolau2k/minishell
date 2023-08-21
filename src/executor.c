@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 14:11:08 by flauer           ###   ########.fr       */
+/*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/21 14:35:38 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "../include/minishell.h"
 
-typedef struct s_shell
+bool	builtin(char *cmd)
 {
-	char	**env;
-	char	**tokens;
-}	t_shell;
-
-
-
-#endif
+	if (ft_strncmp(cmd, "echo", ft_strlen("echo")))
+		return ()
+}

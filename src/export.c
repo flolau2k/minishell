@@ -1,24 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 14:11:08 by flauer           ###   ########.fr       */
+/*   Created: 2023/08/21 14:10:33 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/21 14:27:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
-
-typedef struct s_shell
-{
-	char	**env;
-	char	**tokens;
-}	t_shell;
+#include "../include/minishell.h"
 
 
-
-#endif
