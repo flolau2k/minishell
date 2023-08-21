@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 14:33:30 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/21 15:20:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,39 @@ char	**get_env(char *env[], char *key)
 		++i;
 	}
 	return (NULL);
+}
+
+char	*get_cmd_path(char *name, char *env[])
+{
+	char	**paths;
+	char	*path;
+	char	*cmd;
+	int		i;
+
+	i = 0;
+	cmd = NULL;
+	paths = get_env(env, "PATH");
+	while (paths[i])
+	{
+		path = ft_strjoin(paths[i], "/");
+		cmd = ft_strjoin(path, name);
+		free(path);
+		if (!access(cmd, X_OK))
+			break ;
+		free(cmd);
+		cmd = NULL;
+		++i;
+	}
+	free_splits(paths);
+	return (cmd);
+}
+
+char	*get_cmd(char *name, char *env[])
+{
+	if (!name)
+		return (NULL);
+	else if (ft_strnstr(name, "/", ft_strlen(name)))
+		return (ft_strdup(name));
+	else
+		return (get_cmd_path(name, env));
 }

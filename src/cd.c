@@ -6,8 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 14:32:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/21 14:52:40 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	cd(t_astnode *cmd)
+{
+	
+}

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 14:41:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/21 15:18:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,32 @@ bool	init(t_shell *shell, int argc, char **argv, char **env);
 
 // environment.c
 char	**get_env(char *env[], char *key);
+char	*get_cmd(char *name, char *env[]);
+char	*get_cmd_path(char *name, char *env[]);
+
+// executor.c
+void	execute(t_astnode *cmd);
 
 // BUILTINS
 // echo.c
-void	echo()
+void	echo(t_astnode *cmd);
+
+// cd.c
+void	cd(t_astnode *cmd);
+
+// env.c
+void	env(t_astnode *cmd);
+
+// exit.c
+void	exit(t_astnode *cmd);
+
+// export.c
+void	export(t_astnode *cmd);
+
+// pwd.c
+void	pwd(t_astnode *pwd);
+
+// unset.c
+void	unset(t_astnode *cmd);
 
 #endif
