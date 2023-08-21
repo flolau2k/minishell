@@ -6,11 +6,12 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/08 13:02:51 by flauer           ###   ########.fr        #
+#    Updated: 2023/08/21 13:43:25 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		minishell
+T_NAME =	tests
 
 CC =		cc
 CFLAGS =	-Wall -Wextra -Werror
@@ -25,11 +26,14 @@ OBJDIR =	obj
 SRCDIR =	src
 INCDIR =	include
 
-FILES =		minishell.c
+FILES =		lexer.c
+T_FILES =	test.c
 HEADER_F =	minishell.h
 
 SRC =		$(addprefix $(SRCDIR)/, $(FILES))
+SRC_T =		$(addprefix $(SRCDIR)/, $(T_FILES))
 OBJ =		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
+T_OBJ =		$(addprefix $(OBJDIR)/, $(T_FILES:%.c=%.o))
 HEADERS =	$(addprefix $(INCDIR)/, $(HEADER_F))
 
 all: $(NAME)
@@ -55,6 +59,7 @@ clean:
 fclean: clean
 	make -C libft fclean
 	/bin/rm -rf $(NAME)
+	/bin/rm -rf $(T_NAME)
 
 re:	fclean all
 
@@ -63,3 +68,7 @@ $(LIBFT):
 	@make -C $(@D)
 
 .PHONY =	all clean fclean re bonus
+
+$(T_NAME): CFLAGS += -g
+$(T_NAME): $(T_OBJ) $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(T_OBJ) $(OBJ) $(LIBS) -o $(T_NAME)

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/10 10:35:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/21 11:52:09 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <readline/history.h>
 
 # include "structs.h"
-# include "libft.h"
+# include "../libft/include/libft.h"
 
 // see https://tldp.org/LDP/abs/html/exitcodes.html
 # define GENERAL_ERROR 1
@@ -36,10 +36,12 @@
 # define CTRL_C 130
 
 // minishell.c
-int	main(int argc, char **argv, char **env);
+int		main(int argc, char **argv, char **env);
 
 // init.c
 bool	init(t_shell *shell, int argc, char **argv, char **env);
 
+// lexer.c
+char	**do_lexing(char *instr);
 
 #endif
