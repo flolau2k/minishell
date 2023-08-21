@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 17:29:27 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/21 18:36:30 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static bool	check_char(char c)
 	}
 	else if (is_squotes && c == '\'')
 		is_squotes = false;
-	else if (is_dquotes && c == '"')
 		is_dquotes = false;
 	return (false);
 }
@@ -78,8 +77,8 @@ char	**do_lexing(char *instr)
 	temp = lst;
 	len = ft_lstsize(lst);
 	ret = malloc(sizeof(char *) * (len + 1));
-	if (!ret)
-		ft_error(NULL); // The passed pointer to be checked 
+	// if (!ret)
+	// 	ft_error(NULL); // The passed pointer to be checked 
 	ret[len] = 0;
 	while (i < len)
 	{

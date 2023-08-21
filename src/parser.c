@@ -6,11 +6,15 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:54:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 16:56:07 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/21 18:39:30 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+/// @brief Function creates the tree from the token array
+/// @param str 
+/// @return 
 t_astnode	*make_tree(char **str)
 {
 		int	i;
