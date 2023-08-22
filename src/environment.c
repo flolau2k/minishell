@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 15:20:59 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 14:26:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /// @brief get the values of a given key from the environment
 /// @param env the environment
 /// @param key desired key
-/// @return string array with the values, NULL if the key is not in environment
+/// @return string array with the values, NULL if the key is not in environment.
+/// If return is not NULL, it will be freeable.
 char	**get_env(char *env[], char *key)
 {
 	int		i;
