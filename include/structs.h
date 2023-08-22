@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 11:08:22 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/22 12:03:24 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_redir
 	t_cmd		*cmd;
 	char		*file;
 	char		*efile;
-	int			mode
+	int			mode;
 	int			fd;
 }	t_redir;
 

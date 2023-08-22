@@ -1,3 +1,4 @@
 obj/
 minishell
 .vscode/
+*.txt

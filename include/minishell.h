@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 14:55:05 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/22 11:49:34 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@
 int		main(int argc, char **argv, char **env);
 
 // init.c
-bool	init(t_shell *shell, int argc, char **argv, char **env);
+bool	init(int argc, char **argv, char **env);
 
 // lexer.c
 char	**do_lexing(char *instr);
 
 // parser.c
-t_astnode	*parser(char **str);
+void	*parser(char **str);
 
 #endif

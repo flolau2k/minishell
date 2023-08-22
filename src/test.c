@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 11:57:56 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 18:29:12 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/22 12:04:01 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	int	i = 0;
-	char **tokens = do_lexing("<here cat | fdks asdf asdfadsfjljadsf\"adsfadsf\" 'adsfadgsa\"asdf\"' | grep >out");
+	char **tokens = do_lexing("< <here cat | fdks asdf asdfadsfjljadsf\"adsfadsf\" 'adsfadgsa\"asdf\"' asd|ads grep > >out");
 	while (tokens[i])
 	{
 		ft_printf("%s\n", tokens[i]);
