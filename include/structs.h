@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 11:20:06 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 11:22:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_redir
 	t_cmd		*cmd;
 	char		*file;
 	char		*efile;
-	int			mode
+	int			mode;
 	int			fd;
 }	t_redir;
 
