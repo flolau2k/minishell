@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 11:24:24 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 11:58:04 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define STRUCTS_H
 
 # include "../libft/include/libft.h"
+
+// typedef struct s_shell
+// {
+
+// }
 
 typedef struct s_var
 {

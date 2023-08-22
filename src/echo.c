@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 16:59:28 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 11:28:20 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	echo(t_astnode *node)
+void	echo(t_exec *node)
 {
-	if (argv[1] )
+	
 }
