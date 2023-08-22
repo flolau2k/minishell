@@ -6,14 +6,14 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 11:22:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 11:24:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-#include "../libft/include/libft.h"
+# include "../libft/include/libft.h"
 
 typedef struct s_var
 {
@@ -21,7 +21,7 @@ typedef struct s_var
 	char	*val;
 }	t_var;
 
-typedef enum
+typedef enum e_nodetype
 {
 	NODE_EXEC,
 	NODE_PIPE,
