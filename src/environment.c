@@ -6,25 +6,23 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 14:26:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 15:55:18 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/// @brief get the values of a given key from the environment
+/// @brief get a single value of a given key from the environment
 /// @param env the environment
 /// @param key desired key
-/// @return string array with the values, NULL if the key is not in environment.
-/// If return is not NULL, it will be freeable.
-char	**get_env(char *env[], char *key)
+/// @return string with the value or NULL, if key is not in the environment.
+/// return may be free'd if not NULL.
+char	*get_env(char *env[], char *key)
 {
 	int		i;
-	char	*trim;
-	char	**ret;
+	char	*ret;
 
 	i = 0;
-	trim = NULL;
 	ret = NULL;
 	if (ft_strlen(key) == 0)
 		return (NULL);
@@ -32,15 +30,31 @@ char	**get_env(char *env[], char *key)
 	{
 		if (ft_strnstr(env[i], key, ft_strlen(key)))
 		{
-			trim = ft_substr(env[i], ft_strlen(key) + 1, \
+			ret = ft_substr(env[i], ft_strlen(key) + 1, \
 				ft_strlen(env[i]) - ft_strlen(key) - 1);
-			ret = ft_split(trim, ':');
-			free(trim);
 			return (ret);
 		}
 		++i;
 	}
 	return (NULL);
+}
+
+/// @brief get the values of a given key from the environment
+/// @param env the environment
+/// @param key desired key
+/// @return string array with the values, NULL if the key is not in environment.
+/// return may be free'd if not NULL.
+char	**get_env_s(char *env[], char *key)
+{
+	char	**ret;
+	char	*val;
+
+	val = get_env(env, key);
+	if (!val)
+		return (NULL);
+	ret = ft_split(val, ':');
+	free(val);
+	return (ret);
 }
 
 char	*get_cmd_path(char *name, char *env[])

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 15:19:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 15:51:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	main(int argc, char **argv, char **env);
 bool	init(int argc, char **argv, char **env);
 
 // environment.c
-char	**get_env(char *env[], char *key);
+char	**get_env_s(char *env[], char *key);
+char	*get_env(char *env[], char *key);
 char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
 
