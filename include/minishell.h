@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 11:28:47 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 13:52:43 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,28 @@ char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
 
 // executor.c
-void	execute(t_cmd *cmd);
+void	f_execute(t_cmd *cmd);
 
 // BUILTINS
 // echo.c
-void	echo(t_exec *cmd);
+void	f_echo(t_exec *cmd);
 
 // cd.c
-void	cd(t_exec *cmd);
+void	f_cd(t_exec *cmd);
 
 // env.c
-void	env(t_exec *cmd);
+void	f_env(t_exec *cmd);
 
 // exit.c
-void	exit(t_exec *cmd);
+void	f_exit(t_exec *cmd);
 
 // export.c
-void	export(t_exec *cmd);
+void	f_export(t_exec *cmd);
 
 // pwd.c
-void	pwd(t_exec *pwd);
+void	f_pwd(t_exec *pwd);
 
 // unset.c
-void	unset(t_exec *cmd);
+void	f_unset(t_exec *cmd);
 
 #endif

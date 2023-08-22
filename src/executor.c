@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 12:16:42 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 13:56:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,34 @@ void	do_pipe(t_pipe *cmd)
 
 }
 
-void	do_exec(t_exec *exec)
-{
-	char	**fcns;
-	
-
-	fcns = (char *[]){"echo", "cd", "env", "exit", "export",
-		"pwd", "unset", NULL};
-
-}
-
 void	do_redir(t_redir *redir)
 {
 	
 }
 
-// void	execute(t_cmd *cmd)
-// {
-// 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")))
-// 		return (echo(cmd));
-// 	else if (ft_strncmp(cmd, "cd", ft_strlen("cd")))
-// 		return (cd(cmd));
-// 	else if (ft_strncmp(cmd, "env", ft_strlen("env")))
-// 		return (env(cmd));
-// 	else if (ft_strncmp(cmd, "exit", ft_strlen("exit")))
-// 		return (exit(cmd));
-// 	else if (ft_strncmp(cmd, "export", ft_strlen("export")))
-// 		return (export(cmd));
-// 	else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")))
-// 		return (pwd(cmd));
-// 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")))
-// 		return (unset(cmd));
-// 	else
-// 		return (exec_from_env(cmd)); //execute cmd from path
-// }
+void	do_execve(t_exec *exec)
+{
+
+}
+
+/// @brief Execute exec node. checking first, if command is a builtin, and
+/// then forwards to the do_execve function
+/// @param exec Node to execute
+void	do_exec(t_exec *exec)
+{
+	char	**fcn_n;
+	void	(**fcn_p)(t_exec *);
+	int		i;
+
+	fcn_n = (char *[]){"echo", "cd", "env", "exit", "export", "pwd", 
+		"unset", NULL};
+	fcn_p = (void *[]){f_echo, f_cd, f_env, f_exit, f_export, f_pwd, 
+		f_unset, NULL};
+	while (fcn_n[i])
+	{
+		if (ft_strncmp(fcn_n[i], exec->cmd, ft_strlen(fcn_n[i])) == 0)
+			return ((*fcn_p[i])(exec));
+		i++;
+	}
+	return (do_execve(exec));
+}
