@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 13:52:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 14:29:54 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ char	*get_cmd_path(char *name, char *env[]);
 
 // executor.c
 void	f_execute(t_cmd *cmd);
+
+// error.c
+void	ft_error(char *msg, int excode);
 
 // BUILTINS
 // echo.c

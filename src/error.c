@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:15:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 13:55:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 14:29:57 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-ft_error(char *msg, int excode)
+void	ft_error(char *msg, int excode)
 {
 	perror(msg);
 	exit(excode);
