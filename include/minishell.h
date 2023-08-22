@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 14:29:54 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 15:19:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void	f_execute(t_cmd *cmd);
 
 // error.c
 void	ft_error(char *msg, int excode);
+
+// destructors.c
+void	free_carr(char **arr);
+void	free_exec(t_exec **arg);
 
 // BUILTINS
 // echo.c
