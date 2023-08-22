@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:15:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/10 10:21:51 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/22 11:11:10 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-ft_error(t_shell *shell)
+ft_error(char *msg, int excode)
 {
-	// free all malloced pointers and exit with appropriate Exitcode 
-	// (see header)
-	exit(GENERAL_ERROR);
+	perror(msg);
+	exit(excode);
 }

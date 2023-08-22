@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/21 17:28:27 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/22 11:08:22 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,42 @@ typedef struct s_var
 	char	*val;
 }	t_var;
 
-typedef struct s_shell
-{
-	char	**env;
-	char	**tokens;
-	t_list	*vars;
-}	t_shell;
-
 typedef enum
 {
-	NODE_CMD,
+	NODE_EXEC,
 	NODE_PIPE,
 	NODE_REDIRECT
 }	t_nodetype;
 
-typedef struct s_astnode
+typedef struct s_cmd
 {
-	t_nodetype			type;
-	char				*cmd;
-	char				**argv;
-	char				**env;
-	struct s_astnode	*left;
-	struct s_astnode	*right;
-}	t_astnode;
+	t_nodetype	type;
+}	t_cmd;
+
+typedef struct s_exec
+{
+	t_nodetype	type;
+	char		*cmd;
+	char		**argv;
+	char		**eargv;
+	char		**env;
+}	t_exec;
+
+typedef struct s_pipe
+{
+	t_nodetype	type;
+	t_cmd		*left;
+	t_cmd		*right;
+}	t_pipe;
+
+typedef struct s_redir
+{
+	t_nodetype	type;
+	t_cmd		*cmd;
+	char		*file;
+	char		*efile;
+	int			mode
+	int			fd;
+}	t_redir;
 
 #endif
