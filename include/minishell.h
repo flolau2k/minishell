@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:06:20 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/24 17:20:15 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define INVALID_ARG_EXIT 128
 # define CTRL_C 130
 
+# define REDIR_CHAR "<>"
+# define PIPE_CHAR "|"
 // minishell.c
 int		main(int argc, char **argv, char **env);
 
@@ -43,6 +45,7 @@ bool	init(t_shell *shell, int argc, char **argv, char **env);
 
 // parser.c
 void	*parser(char **str);
+
 // environment.c
 char	**get_env_s(char *env[], char *key);
 char	*get_env(char *env[], char *key);
@@ -51,6 +54,10 @@ char	*get_cmd_path(char *name, char *env[]);
 
 // lexer.c
 t_cmd	*do_lexing(char *instr, t_cmd *root);
+
+// lexer_utils.c
+
+
 
 // executor.c
 void	f_execute(t_cmd *cmd);
