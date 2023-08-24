@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 11:58:04 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/24 13:55:43 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 # define STRUCTS_H
 
 # include "../libft/include/libft.h"
-
-// typedef struct s_shell
-// {
-
-// }
-
-typedef struct s_var
-{
-	char	*name;
-	char	*val;
-}	t_var;
 
 typedef enum e_nodetype
 {
@@ -37,6 +26,18 @@ typedef struct s_cmd
 {
 	t_nodetype	type;
 }	t_cmd;
+
+typedef struct s_shell
+{
+	char	**env;
+	t_cmd	*root;
+}	t_shell;
+
+typedef struct s_var
+{
+	char	*name;
+	char	*val;
+}	t_var;
 
 typedef struct s_exec
 {

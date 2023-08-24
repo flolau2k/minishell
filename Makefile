@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/21 14:12:44 by flauer           ###   ########.fr        #
+#    Updated: 2023/08/24 13:54:47 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,18 +19,26 @@ LIBFTDIR =	libft
 LIBFT =		$(LIBFTDIR)/libft.a
 LIBS =		$(LIBFT)
 
-INCLUDES =	-Iinclude -I$(LIBFTDIR)/include
-
 OBJDIR =	obj
 SRCDIR =	src
 INCDIR =	include
+VPATH = 	$(SRCDIR)/core $(SRCDIR)/init $(SRCDIR)/builtins $(SRCDIR)/parse $(SRCDIR)/test
+INCLUDES =	-I$(INCDIR) -I$(LIBFTDIR)/include
 
-FILES =		minishell.c
-HEADER_F =	minishell.h
+HEADERS =	include/minishell.h
 
-SRC =		$(addprefix $(SRCDIR)/, $(FILES))
-OBJ =		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
-HEADERS =	$(addprefix $(INCDIR)/, $(HEADER_F))
+#src/init
+FILES =		lexer.c parser.c minishell.c
+
+#src/core
+FILES +=	minishell.c
+
+#src/test
+T_FILES =	test.c
+
+OBJ = 		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
+T_OBJ =		$(addprefix $(OBJDIR)/, $(T_FILES:%.c=%.o))
+
 
 all: $(NAME)
 
@@ -41,7 +49,7 @@ $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "built $(NAME)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
+$(OBJDIR)/%.o: %.c $(HEADERS) | $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 $(OBJDIR):

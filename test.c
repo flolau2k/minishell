@@ -1,35 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_echo.c                                           :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 13:55:56 by flauer           ###   ########.fr       */
+/*   Created: 2023/08/22 12:02:08 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/24 12:15:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "libft/include/libft.h"
 
-void	f_echo(t_exec *cmd)
+void	free_arr(char ***arr)
 {
 	int		i;
-	bool	nl;
+	char	**a;
 
-	nl = true;
-	i = 1;
-	if (cmd->argv[1] && ft_strncmp(cmd->argv[1], "-n", 3) == 0)
+	a = *arr;
+	i = 0;
+	while (a && a[i])
 	{
-		nl = false;
-		i = 2;
-	}
-	while (cmd->argv[i])
-	{
-		printf("%s", cmd->argv[i]);
+		free(a[i]);
 		i++;
 	}
-	if (nl)
-		printf("\n");
-	return (free_exec(cmd));
+	free(a);
+	*arr = NULL;
+}
+
+int	main(void)
+{
+	char	**fcns;
+	int		i;
+
+	//fcns = (char *[]){"1", "2", "3", "4", "5", "6", "7", NULL};
+	fcns = malloc(sizeof(char *) * 8);
+	i = 0;
+	while (i < 7)
+	{
+		fcns[i] = ft_strdup("1");
+		i++;
+	}
+	fcns[i] = NULL;
+	free_arr(&fcns);
+	return (0);
 }
