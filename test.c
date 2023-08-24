@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:02:08 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:50:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/24 16:29:54 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,21 @@ int	main(void)
 		i++;
 	}
 	fcns[i] = NULL;
+	int	pid = fork();
+	if (pid == 0)
+	{
+		fcns[2] = ft_strdup("5");
+		printf("child exited!\n");
+	}
+	else
+	{
+		usleep(100);
+		printf("%s\n", fcns[2]);
+		if (fcns[2][0] == '5')
+			printf("true\n");
+		else
+			printf("false\n");
+	}
 	free_arr(&fcns);
 	return (0);
 }
