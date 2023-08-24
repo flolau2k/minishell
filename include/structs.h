@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 13:55:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/24 14:57:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_exec
 	char		*cmd;
 	char		**argv;
 	char		**eargv;
-	char		**env;
+	t_shell		*sh;
 }	t_exec;
 
 typedef struct s_pipe

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 10:36:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/24 15:56:30 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	f_cd(t_exec *cmd)
 
 	if (!cmd->argv[1])
 	{
-		dir = get_env(cmd->env, "HOME");
+		dir = get_env(cmd->sh->env, "HOME");
 		if (!dir)
-			ft_error("HOME not set!", GENERAL_ERROR);
+			printf("HOME not set!", GENERAL_ERROR); //TODO: set return code to 1
 	}
 	dir = cmd->argv[1];
 	chdir(cmd->argv[1]);

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 13:55:56 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/24 15:50:30 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	f_echo(t_exec *cmd)
 	}
 	if (nl)
 		printf("\n");
-	return (free_exec(cmd));
+	return ;
 }

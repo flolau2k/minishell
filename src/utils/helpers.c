@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 11:45:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/24 14:55:52 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_arr(char ***arr)
 		i++;
 	}
 	free(a);
-	a = NULL;
+	*arr = NULL;
 }
 
 /// @brief get lenth of string array

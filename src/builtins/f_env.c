@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:37 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:18:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/24 15:49:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	f_env(t_exec *cmd)
 	int	i;
 
 	i = 0;
-	while (cmd->env[i])
+	while (cmd->sh->env[i])
 	{
-		printf("%s\n", cmd->env[i]);
+		printf("%s\n", cmd->sh->env[i]);
 		i++;
 	}
 }
