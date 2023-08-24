@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 12:27:24 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/24 14:06:20 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,47 @@ int		main(int argc, char **argv, char **env);
 // init.c
 bool	init(t_shell *shell, int argc, char **argv, char **env);
 
+// parser.c
+void	*parser(char **str);
+// environment.c
+char	**get_env_s(char *env[], char *key);
+char	*get_env(char *env[], char *key);
+char	*get_cmd(char *name, char *env[]);
+char	*get_cmd_path(char *name, char *env[]);
+
 // lexer.c
 t_cmd	*do_lexing(char *instr, t_cmd *root);
 
-// parser.c
-void	*parser(char **str);
+// executor.c
+void	f_execute(t_cmd *cmd);
+
+// error.c
+void	ft_error(char *msg, int excode);
+
+// destructors.c
+void	free_carr(char **arr);
+void	free_exec(t_exec **arg);
+
+// BUILTINS
+// echo.c
+void	f_echo(t_exec *cmd);
+
+// cd.c
+void	f_cd(t_exec *cmd);
+
+// env.c
+void	f_env(t_exec *cmd);
+
+// exit.c
+void	f_exit(t_exec *cmd);
+
+// export.c
+void	f_export(t_exec *cmd);
+
+// pwd.c
+void	f_pwd(t_exec *pwd);
+
+// unset.c
+void	f_unset(t_exec *cmd);
 
 #endif

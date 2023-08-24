@@ -6,12 +6,11 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:26:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:02:50 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/24 14:08:10 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
 
 /// @brief Finds the root node for the AST
 /// @param instr The initial argument string

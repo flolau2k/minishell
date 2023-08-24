@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 11:57:56 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 12:04:01 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/24 14:08:30 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,25 @@ int	main(int argc, char **argv, char **env)
 		i++;
 	}
 	return (0);
+}
+void	f_echo(t_exec *cmd)
+{
+	int		i;
+	bool	nl;
+
+	nl = true;
+	i = 1;
+	if (cmd->argv[1] && ft_strncmp(cmd->argv[1], "-n", 3) == 0)
+	{
+		nl = false;
+		i = 2;
+	}
+	while (cmd->argv[i])
+	{
+		printf("%s", cmd->argv[i]);
+		i++;
+	}
+	if (nl)
+		printf("\n");
+	return (free_exec(cmd));
 }

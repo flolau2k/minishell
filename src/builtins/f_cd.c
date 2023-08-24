@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   f_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/10 10:15:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:07:41 by pcazac           ###   ########.fr       */
+/*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/22 15:58:21 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_error(char *msg, int excode)
+void	f_cd(t_exec *cmd)
 {
-	perror(msg);
-	exit(excode);
+	char	*dir;
+
+	if (!cmd->argv[1])
+	{
+		dir = get_env(cmd->env, "HOME");
+		if (!dir)
+			// HOME not set!
+	}
+	dir = cmd->argv[1];
+	chdir(cmd->argv[1]);
 }

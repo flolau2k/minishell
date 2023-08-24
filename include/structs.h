@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 13:38:39 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/24 14:06:44 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-#include "../libft/include/libft.h"
+# include "../libft/include/libft.h"
 
-typedef enum
+typedef enum e_nodetype
 {
 	NODE_EXEC,
 	NODE_PIPE,

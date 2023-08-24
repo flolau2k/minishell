@@ -1,22 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   destructors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 13:55:16 by flauer           ###   ########.fr       */
+/*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/22 15:22:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	free_carr(char **arr)
 {
-	// init(argc, argv, env);
-	signal_handler(); // handle signals
-	// main_loop(&shell);
-	cleanup(&shell);
-	return (EXIT_SUCCESS);
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		free(arr[i]);
+		++i;
+	}
+	free(arr);
 }
+
+void	free_exec(t_exec **arg)
+{
+	free((*arg)->cmd);
+	free_carr((*arg)->argv);
+	free((*arg)->eargv);
+	free((*arg));
+	*arg = NULL;
+}
+
+// void	free_pipe(t_pipe **arg)
+// {
+// 	free((*arg));
+// 	*arg = NULL;
+// }
+
+// void	free_redir(t_redir **arg)
+// {
+// 	free((*arg)->file);
+// 	free((*arg));
+// }

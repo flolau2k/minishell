@@ -6,7 +6,7 @@
 #    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/24 13:47:25 by pcazac           ###   ########.fr        #
+#    Updated: 2023/08/24 14:05:45 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,16 +23,26 @@ LIBS =		$(LIBFT)
 OBJDIR =	obj
 SRCDIR =	src
 INCDIR =	include
-VPATH = 	$(SRCDIR)/core $(SRCDIR)/init $(SRCDIR)/builtins $(SRCDIR)/parse $(SRCDIR)/test
+VPATH = 	$(SRCDIR)/core $(SRCDIR)/builtins $(SRCDIR)/parse $(SRCDIR)/test \
+			$(SRCDIR)/utils $(SRCDIR)/error
 INCLUDES =	-I$(INCDIR) -I$(LIBFTDIR)/include
 
 HEADERS =	include/minishell.h
 
-#src/init
-FILES =		lexer.c parser.c minishell.c
+#src/parse
+FILES =		lexer.c parser.c init.c
 
 #src/core
-FILES +=	minishell.c
+FILES +=	minishell.c environment.c executor.c
+
+#src/builtins
+FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c
+
+#src/utils
+FILES +=	destructors.c helpers.c
+
+#src/error
+FILES +=	error.c
 
 #src/test
 T_FILES =	test.c

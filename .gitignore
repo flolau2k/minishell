@@ -2,3 +2,5 @@ obj/
 minishell
 .vscode/
 *.txt
+*.out
+*.dSYM

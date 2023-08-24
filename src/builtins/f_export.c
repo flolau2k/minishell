@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/10 10:15:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:07:41 by pcazac           ###   ########.fr       */
+/*   Created: 2023/08/21 14:10:33 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/22 13:52:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_error(char *msg, int excode)
+void	f_export(t_exec *cmd)
 {
-	perror(msg);
-	exit(excode);
+	
 }
