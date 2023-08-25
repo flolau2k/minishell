@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 17:32:16 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/25 11:07:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,7 @@ bool	is_builtin(t_exec *exec)
 void	execute(t_cmd *cmd)
 {
 	if (cmd->type == NODE_EXEC)
-	{
-		if (is_builtin((t_exec *)cmd))
-			
 		return (do_exec((t_exec *)cmd));
-	}
 	else if (cmd->type == NODE_PIPE)
 		return (do_pipe((t_pipe *)cmd));
 	else if (cmd->type == NODE_REDIRECT)
@@ -52,16 +48,27 @@ void	do_redir(t_redir *redir)
 	
 }
 
-void	do_execve(t_exec *exec)
+int	do_execve(t_exec *exec)
 {
-	int	pid;
-	int	stat_loc;
+	int		pid;
+	int		stat_loc;
+	char	*cmd;
+	char	*cmd_msg;
 
+	cmd = get_cmd(exec->cmd, exec->sh->env);
+	if (!cmd)
+	{
+		cmd_msg = ft_strjoin("command not found: ", exec->cmd);
+		ft_error(cmd_msg, CMD_NOT_FOUND);
+	}
 	pid = fork();
 	if (pid == 0)
+	{
 		execve(exec->cmd, exec->argv, exec->sh->env);
-	else
-		waitpid(pid, stat_loc, 0);
+
+	}
+	waitpid(pid, stat_loc, 0);
+
 }
 
 /// @brief Execute exec node. checking first, if command is a builtin, and
