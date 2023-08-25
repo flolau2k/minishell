@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/25 14:29:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/25 18:07:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		array_len(char **arr);
 
 // executor.c
 void	f_execute(t_cmd *cmd);
+int	do_exec(t_exec *exec);
 
 // error.c
 void	ft_error(char *msg, int excode);

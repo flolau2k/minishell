@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 15:50:30 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/25 18:10:44 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	f_echo(t_exec *cmd)
+int	f_echo(t_exec *cmd)
 {
 	int		i;
 	bool	nl;

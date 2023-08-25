@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_echo.c                                           :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 15:35:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/25 19:07:13 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+// #include <criterion/criterion.h>
+// #include <criterion/new/assert.h>
+// #include <criterion/redirect.h>
 
-void	f_echo(t_exec *cmd)
+// void init_cr(void)
+// {
+// 	cr_redirect_stdout();
+// }
+// TestSuite(do_exec_test, .init = init_cr);
+
+int	main(int argc, char **argv, char **env)
 {
-	int		i;
-	bool	nl;
+	(void) argc;
+	(void) argv;
+	(void) env;
+	t_exec	exec;
 
-	nl = true;
-	i = 1;
-	if (cmd->argv[1] && ft_strncmp(cmd->argv[1], "-n", 3) == 0)
-	{
-		nl = false;
-		i = 2;
-	}
-	while (cmd->argv[i])
-	{
-		printf("%s", cmd->argv[i]);
-		i++;
-	}
-	if (nl)
-		printf("\n");
-	return (free_exec(cmd));
+	exec = (t_exec){
+		.type = NODE_EXEC,
+		.cmd = "cd",
+		.argv = NULL,
+		.eargv = NULL,
+		.sh = NULL
+		};
+	
+	do_exec(&exec);
+	// cr_assert_stdout_eq("test");
+	return (0);
 }
