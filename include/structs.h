@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:06:44 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/25 18:53:31 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ typedef enum e_nodetype
 	NODE_PIPE,
 	NODE_REDIRECT
 }	t_nodetype;
+
+typedef enum e_redirtype
+{
+	REDIR_INPUT,
+	REDIR_OUTPUT,
+	REDIR_HEREDOC,
+	REDIR_APPEND
+}	t_redirtype;
 
 typedef struct s_cmd
 {
@@ -40,15 +48,6 @@ typedef struct s_var
 	char	*val;
 }	t_var;
 
-typedef struct s_exec
-{
-	t_nodetype	type;
-	char		*cmd;
-	char		**argv;
-	char		**eargv;
-	char		**env;
-}	t_exec;
-
 typedef struct s_pipe
 {
 	t_nodetype	type;
@@ -65,5 +64,14 @@ typedef struct s_redir
 	int			mode;
 	int			fd;
 }	t_redir;
+
+typedef struct s_exec
+{
+	t_nodetype	type;
+	char		*cmd;
+	char		**argv;
+	char		**eargv;
+	char		**env;
+}	t_exec;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 17:20:15 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/25 19:32:21 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@
 # define INVALID_ARG_EXIT 128
 # define CTRL_C 130
 
-# define REDIR_CHAR "<>"
-# define PIPE_CHAR "|"
+# define R_CHAR "<>"
+# define P_CHAR "|"
+# define S_CHAR "<>|"
+
 // minishell.c
 int		main(int argc, char **argv, char **env);
 
@@ -53,11 +55,20 @@ char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
 
 // lexer.c
-t_cmd	*do_lexing(char *instr, t_cmd *root);
+t_cmd	*do_lexing(char *instr);
 
 // lexer_utils.c
+void		get_args(char ***start, char ***end, char *instr, char *instr_end);
+int			redirect_type(char *instr);
+char		*end_expression(char *instr);
+void		arrange_tree(t_cmd **tree, void *node);
+static bool	check_char(char c);
+// void		split_args(char **start, char **end);
 
-
+// tokenizer.c
+int	pipe_token(char *instr, t_cmd *tree);
+int	redirect_token(char *instr, t_cmd *tree);
+int	command_token(char **start, char **end, t_cmd *tree);
 
 // executor.c
 void	f_execute(t_cmd *cmd);

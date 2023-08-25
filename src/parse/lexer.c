@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 17:29:05 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/25 19:29:56 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,59 +18,62 @@
 // It will run along a statement and divide each compound
 // It will send the divided statement and the to the parser to be recognized and tokenized
 
-
-/// @brief Arranges the order of the instructions in a hierarchy tree
-/// @param tree Pointer to the tree
-void	arrange_tree(t_cmd *tree, t_cmd *node)
+/// @brief searches and adds the tokens to the AST
+/// @param instr 
+/// @param tree 
+/// @return 
+t_exec	*add_command(char *instr, t_cmd *tree)
 {
-	// Arrange the tree
-	
+	int		i;
+	int		s;
+	char	**start;
+	char	**end;
+
+	i = -1;
+	start = NULL;
+	end = NULL;
+	while (instr[++i] && !ft_strchr(P_CHAR, instr[i]))
+	{
+		if (!ft_strchr(R_CHAR, instr[i]))
+		{
+			s = i;
+			while (instr[i] && instr[i] != '|' && !ft_strchr(R_CHAR, instr[i]))
+				i++;
+			get_args(&start, &end, instr + s, instr + i);
+		}
+		if (ft_strchr(R_CHAR, instr[i]) )
+			i += redirect_token(instr[i], tree);
+	}
+	command_token(start, end, tree);
+}
+
+/// @brief Searches first for a command then searches for a pipe or a redir
+/// @param instr Arguments from the command line
+/// @param tree The pointer to the tree
+/// @param i Location on the argument string
+/// @return Returns the pointer to the AST
+t_cmd	*get_tree(char *instr, t_cmd **tree, int i)
+{
+	add_command(instr[i], tree);
+	if (ft_strchr(P_CHAR, instr[i]))
+		i += pipe_token(instr[i], *tree);
+	if (instr[i])
+		get_tree(instr + i, tree, i);
+	return (?????);
 }
 
 /// @brief Splits the function and arranges into a AST
 /// @param instr Input argument
-/// @param root Root node of the AST
 /// @return AST root node
-t_cmd	*do_lexing(char *instr, t_cmd *root)
+t_cmd	*do_lexing(char *instr)
 {
 	int		i;
 	t_cmd	*tree;
 	
-	i = -1;
-	tree = ft_calloc (1, sizeof(t_cmd));
-	if (!tree)
-		ft_error("Allocation error", GENERAL_ERROR);
-	while (instr[++i])
-	{
-		if (ft_strchr(PIPE_CHAR, instr[i]))
-			i += pipe_token(instr[i], tree);
-		else if (ft_strchr(REDIR_CHAR, instr[i]))
-			i += redirect_token(instr[i], tree);
-		else
-			i += command_token(instr[i], tree);
-	}
+	// tree = ft_calloc (1, sizeof(t_cmd));
+	// if (!tree)
+	// 	ft_error("Allocation error", GENERAL_ERROR);
+	get_tree(instr, &tree, 0);
 	return (tree);
 }
 
-// /// @brief Checks for the delimiter and special characters
-// /// @param c character passed from the argument string
-// /// @return True if it is the researched char, false if not
-// static bool	check_char(char c)
-// {
-// 	static bool	is_dquotes;
-// 	static bool	is_squotes;
-
-// 	if (!is_dquotes && !is_squotes)
-// 	{
-// 		if (c == '"')
-// 			is_dquotes = true;
-// 		else if (c == '\'')
-// 			is_squotes = true;
-// 		else if (c == ' ')
-// 			return (true);
-// 	}
-// 	else if (is_squotes && c == '\'')
-// 		is_squotes = false;
-// 		is_dquotes = false;
-// 	return (false);
-// }
