@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:42:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/25 14:29:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,24 @@ void	free_exec(t_exec **arg);
 
 // BUILTINS
 // echo.c
-void	f_echo(t_exec *cmd);
+int	f_echo(t_exec *cmd);
 
 // cd.c
-void	f_cd(t_exec *cmd);
+int	f_cd(t_exec *cmd);
 
 // env.c
-void	f_env(t_exec *cmd);
+int	f_env(t_exec *cmd);
 
 // exit.c
-void	f_exit(t_exec *cmd);
+int	f_exit(t_exec *cmd);
 
 // export.c
-void	f_export(t_exec *cmd);
+int	f_export(t_exec *cmd);
 
 // pwd.c
-void	f_pwd(t_exec *pwd);
+int	f_pwd(t_exec *pwd);
 
 // unset.c
-void	f_unset(t_exec *cmd);
+int	f_unset(t_exec *cmd);
 
 #endif
