@@ -5,3 +5,4 @@ minishell
 *.dSYM
 .DS_Store
 test_minishell
+asf.txt

@@ -1,81 +1,85 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   testasdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:02:08 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/25 14:25:55 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/28 17:18:06 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdlib.h"
 #include "stdio.h"
+#include <fcntl.h>
+// #include <readline/readline.h>
 #include "libft/include/libft.h"
 
-void	free_arr(char ***arr)
+int	exec(char **env)
 {
-	int		i;
-	char	**a;
+	pid_t	pid;
+	int		stat_loc;
 
-	a = *arr;
-	i = 0;
-	while (a && a[i])
+	pid = fork();
+	if (pid == 0)
 	{
-		free(a[i]);
-		i++;
+		char	*argv[2] = {"head", "-1"};
+		execve("head", argv, env);
 	}
-	free(a);
-	*arr = NULL;
+	waitpid(pid, &stat_loc, 0);
+	return (WEXITSTATUS(stat_loc));
 }
 
-const static char	*g_fcn_n[] = 
+int	main(int argc, char **argv, char **env)
 {
-	"echo",
-	"cd",
-	"env",
-	"exit",
-	"export",
-	"pwd",
-	"unset"
-};
+	pid_t	pid;
+	int	fd[2];
 
-int	main(void)
-{
-	char	**fcns;
-	int		i;
-
-	fcns = (char *[]){"1", "2", "3", "4", "5", "6", "7", NULL};
-	i = 0;
-	while (i < 8)
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
 	{
-		printf("%s\n", g_fcn_n[i]);
-		i++;
+		// dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		char	*argv[2] = {"/bin/cat", "/dev/urandom"};
+		execve("/bin/cat", argv, env);
 	}
-	// fcns = malloc(sizeof(char *) * 8);
-	// i = 0;
-	// while (i < 7)
-	// {
-	// 	fcns[i] = ft_strdup("1");
-	// 	i++;
-	// }
-	// fcns[i] = NULL;
-	// int	pid = fork();
-	// if (pid == 0)
-	// {
-	// 	fcns[2] = ft_strdup("5");
-	// 	printf("child exited!\n");
-	// }
-	// else
-	// {
-	// 	usleep(100);
-	// 	printf("%s\n", fcns[2]);
-	// 	if (fcns[2][0] == '5')
-	// 		printf("true\n");
-	// 	else
-	// 		printf("false\n");
-	// }
-	// free_arr(&fcns);
+	else
+	{
+		// dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		exec(env);
+	}
+	// printf("done\n");
 	return (0);
 }
+
+// int	main(void)
+// {
+// 	int	fd1;
+// 	int	fd2;
+// 	char	*line;
+
+// 	fd1 = open("asf.txt", O_RDONLY);
+// 	fd2 = open("asf.txt", O_WRONLY);
+
+// 	line = get_next_line(fd1);
+// 	while (line)
+// 	{
+// 		printf("%s\n", line);
+// 		line = get_next_line(fd1);
+// 	}
+// 	write(fd2, "Hello Petru Hello Petru\n", 12);
+// 	line = get_next_line(fd1);
+// 	while (line)
+// 	{
+// 		printf("%s\n", line);
+// 		line = get_next_line(fd1);
+// 	}
+
+// 	printf("exiting!\n");
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/28 10:18:11 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/28 15:35:41 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,23 @@ void	ft_error(char *msg, int excode);
 void	free_carr(char **arr);
 void	free_exec(t_exec **arg);
 
+// core/pipe.c
+pid_t	create_pipe(void (f1)(void *), void *a1);
+void	hd_child(void *arg);
+
 // BUILTINS
 // echo.c
 int		f_echo(t_exec *cmd);
-
 // cd.c
 int		f_cd(t_exec *cmd);
-
 // env.c
 int		f_env(t_exec *cmd);
-
 // exit.c
 int		f_exit(t_exec *cmd);
-
 // export.c
 int		f_export(t_exec *cmd);
-
 // pwd.c
 int		f_pwd(t_exec *pwd);
-
 // unset.c
 int		f_unset(t_exec *cmd);
 

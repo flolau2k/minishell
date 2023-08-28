@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:15:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 14:29:57 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/28 15:45:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 void	ft_error(char *msg, int excode)
 {
-	perror(msg);
+	char	*message;
+
+	if (msg)
+	{
+		message = ft_strjoin("minishell: ", msg);
+		perror(message);
+		free(message);
+	}
+	else
+		perror("minishell: ");
 	exit(excode);
 }
