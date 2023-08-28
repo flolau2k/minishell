@@ -3,3 +3,5 @@ minishell
 .vscode/
 *.out
 *.dSYM
+.DS_Store
+test_minishell

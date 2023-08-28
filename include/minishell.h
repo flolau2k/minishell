@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/25 18:07:17 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/28 10:18:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_cmd	*do_lexing(char *instr, t_cmd *root);
 int		array_len(char **arr);
 
 // executor.c
-void	f_execute(t_cmd *cmd);
-int	do_exec(t_exec *exec);
+int		execute(t_cmd *cmd);
+int		do_exec(t_exec *exec);
 
 // error.c
 void	ft_error(char *msg, int excode);
@@ -66,24 +66,24 @@ void	free_exec(t_exec **arg);
 
 // BUILTINS
 // echo.c
-int	f_echo(t_exec *cmd);
+int		f_echo(t_exec *cmd);
 
 // cd.c
-int	f_cd(t_exec *cmd);
+int		f_cd(t_exec *cmd);
 
 // env.c
-int	f_env(t_exec *cmd);
+int		f_env(t_exec *cmd);
 
 // exit.c
-int	f_exit(t_exec *cmd);
+int		f_exit(t_exec *cmd);
 
 // export.c
-int	f_export(t_exec *cmd);
+int		f_export(t_exec *cmd);
 
 // pwd.c
-int	f_pwd(t_exec *pwd);
+int		f_pwd(t_exec *pwd);
 
 // unset.c
-int	f_unset(t_exec *cmd);
+int		f_unset(t_exec *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/25 14:38:42 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/28 09:36:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ typedef struct s_redir
 	int			mode;
 	int			fd;
 }	t_redir;
+
+typedef int (*const fcn_p)(t_exec *);
 
 #endif
