@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/25 19:30:59 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/28 17:58:46 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,8 @@ int	command_token(char **start, char **end, t_cmd *tree)
 	node->env = NULL;
 	arrange_tree(tree, node);
 	return (i);
+}
+void	arrange_tree(t_cmd *tree, t_cmd *token)
+{
+	
 }

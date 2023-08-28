@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/25 18:53:31 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/28 17:43:34 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 # include "../libft/include/libft.h"
 
+# define O_HEREDOC 0x0008
+
 typedef enum e_nodetype
 {
 	NODE_EXEC,
@@ -23,13 +25,6 @@ typedef enum e_nodetype
 	NODE_REDIRECT
 }	t_nodetype;
 
-typedef enum e_redirtype
-{
-	REDIR_INPUT,
-	REDIR_OUTPUT,
-	REDIR_HEREDOC,
-	REDIR_APPEND
-}	t_redirtype;
 
 typedef struct s_cmd
 {
@@ -41,6 +36,12 @@ typedef struct s_shell
 	char	**env;
 	t_cmd	*root;
 }	t_shell;
+
+typedef struct s_word
+{
+	char	*start;
+	char	*end;
+}	t_word;
 
 typedef struct s_var
 {

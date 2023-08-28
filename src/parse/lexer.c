@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/25 19:29:56 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/28 17:54:10 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,24 @@
 t_exec	*add_command(char *instr, t_cmd *tree)
 {
 	int		i;
-	int		s;
+	t_word	word;
 	char	**start;
 	char	**end;
 
 	i = -1;
+	word.start = NULL;
+	word.end = NULL;
 	start = NULL;
 	end = NULL;
 	while (instr[++i] && !ft_strchr(P_CHAR, instr[i]))
 	{
 		if (!ft_strchr(R_CHAR, instr[i]))
 		{
-			s = i;
+			word.start = instr + i;
 			while (instr[i] && instr[i] != '|' && !ft_strchr(R_CHAR, instr[i]))
 				i++;
-			get_args(&start, &end, instr + s, instr + i);
+			word.end = instr + i;
+			get_args(&start, &end, &word);
 		}
 		if (ft_strchr(R_CHAR, instr[i]) )
 			i += redirect_token(instr[i], tree);

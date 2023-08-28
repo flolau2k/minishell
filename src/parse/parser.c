@@ -1,20 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-<<<<<<< HEAD
-/*   env.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD:src/parse/parser.c
-=======
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
->>>>>>> origin/env_builtins
 /*   Created: 2023/08/08 16:54:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 15:42:05 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:43:53 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +35,9 @@ void	*parser(char **str)
 
 	l_blocks = 
 	tree = make_tree(str);
-<<<<<<< HEAD
-=======
-/*   Created: 2023/08/21 14:10:37 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 13:53:09 by flauer           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../include/minishell.h"
+}
 
 void	f_env(t_exec *cmd)
 {
->>>>>>> origin/env_builtins:src/builtins/f_env.c
-=======
->>>>>>> origin/env_builtins
 	
 }
