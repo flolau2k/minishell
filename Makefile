@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/29 11:51:26 by flauer           ###   ########.fr        #
+#    Updated: 2023/08/29 13:40:10 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ T_FILES =	test.c
 
 OBJ = 		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
 T_OBJ =		$(addprefix $(OBJDIR)/, $(T_FILES:%.c=%.o))
-
 
 all: $(NAME)
 
