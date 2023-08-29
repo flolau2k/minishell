@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 11:57:56 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 11:58:37 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:47:51 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,23 @@ int	main(int argc, char **argv, char **env)
 // 		printf("\n");
 // 	return (free_exec(cmd));
 // }
+
+int	main(int argc, char **argv, char **env)
+{
+	(void) argc;
+	(void) argv;
+	(void) env;
+	t_exec	exec;
+
+	exec = (t_exec){
+		.type = NODE_EXEC,
+		.cmd = "cd",
+		.argv = NULL,
+		.eargv = NULL,
+		.sh = NULL
+		};
+	
+	do_exec(&exec);
+	// cr_assert_stdout_eq("test");
+	return (0);
+}

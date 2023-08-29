@@ -6,15 +6,13 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/28 17:43:34 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:54:32 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-# include "../libft/include/libft.h"
 
 # define O_HEREDOC 0x0008
 
@@ -25,16 +23,18 @@ typedef enum e_nodetype
 	NODE_REDIRECT
 }	t_nodetype;
 
-
 typedef struct s_cmd
 {
 	t_nodetype	type;
+	pid_t		pid; // initialize with -1
 }	t_cmd;
 
 typedef struct s_shell
 {
 	char	**env;
 	t_cmd	*root;
+	char	*line;
+	int		ret;
 }	t_shell;
 
 typedef struct s_word
@@ -49,9 +49,20 @@ typedef struct s_var
 	char	*val;
 }	t_var;
 
+typedef struct s_exec
+{
+	t_nodetype	type;
+	pid_t		pid;
+	char		*cmd;
+	char		**argv;
+	char		**eargv;
+	t_shell		*sh;
+}	t_exec;
+
 typedef struct s_pipe
 {
 	t_nodetype	type;
+	pid_t		pid;
 	t_cmd		*left;
 	t_cmd		*right;
 }	t_pipe;
@@ -59,6 +70,7 @@ typedef struct s_pipe
 typedef struct s_redir
 {
 	t_nodetype	type;
+	pid_t		pid;
 	t_cmd		*cmd;
 	char		*file;
 	char		*efile;
@@ -66,13 +78,6 @@ typedef struct s_redir
 	int			fd;
 }	t_redir;
 
-typedef struct s_exec
-{
-	t_nodetype	type;
-	char		*cmd;
-	char		**argv;
-	char		**eargv;
-	char		**env;
-}	t_exec;
+typedef void (*fcn_p)(t_exec *);
 
 #endif

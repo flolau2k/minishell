@@ -6,11 +6,11 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 12:01:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:55:13 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 /// @brief free a string array and it's contents.
 /// @param arr array
@@ -27,7 +27,7 @@ void	free_arr(char ***arr)
 		i++;
 	}
 	free(a);
-	a = NULL;
+	*arr = NULL;
 }
 
 /// @brief get lenth of string array

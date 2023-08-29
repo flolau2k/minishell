@@ -1,6 +1,8 @@
 obj/
 minishell
 .vscode/
-*.txt
 *.out
 *.dSYM
+.DS_Store
+test_minishell
+*.txt

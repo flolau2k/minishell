@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 13:55:56 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:55:39 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	f_echo(t_exec *cmd)
 	}
 	if (nl)
 		printf("\n");
-	return (free_exec(cmd));
+	return ;
 }
