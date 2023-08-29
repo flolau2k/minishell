@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/25 19:06:02 by flauer           ###   ########.fr        #
+#    Updated: 2023/08/29 11:21:26 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS =	-Wall -Wextra -Werror
 
 LIBFTDIR =	libft
 LIBFT =		$(LIBFTDIR)/libft.a
-LIBS =		$(LIBFT)
+LIBS =		$(LIBFT) -lreadline
 
 OBJDIR =	obj
 SRCDIR =	src
