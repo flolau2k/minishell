@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   destructors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/10 12:17:04 by flauer           ###   ########.fr       */
+/*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/29 13:43:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	free_carr(char **arr)
 {
-	t_shell	shell;
+	int	i;
 
-	init(&shell, argc, argv, env);
-	signal_handler(); // handle signals
-	main_loop(&shell);
-	cleanup(&shell);
-	return (EXIT_SUCCESS);
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		free(arr[i]);
+		++i;
+	}
+	free(arr);
+}
+
+void	free_exec(t_exec **arg)
+{
+	free((*arg)->cmd);
+	free_carr((*arg)->argv);
+	free((*arg)->eargv);
+	free((*arg));
+	*arg = NULL;
 }

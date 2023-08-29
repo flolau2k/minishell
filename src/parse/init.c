@@ -6,43 +6,19 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:26:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/10 10:46:34 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:33:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../include/minishell.h"
 
-static void	free_tokens(char ***tokens)
+bool	init(t_shell *sh, int argc, char **argv, char **env)
 {
-	int	i;
-
-	i = 0;
-	while (tokens[i])
-	{
-		free(tokens[i]);
-		i++;
-	}
-	free(tokens);
-}
-
-bool	init(t_shell *shell, int argc, char **argv, char **env)
-{
-	int	i;
-
-	i = 1;
-	*shell = (t_shell){};
-	shell->tokens = ft_calloc(argc, sizeof(char *));
-	if (!shell->tokens)
-		return (false);
-	while (i < argc)
-	{
-		shell->tokens[i - 1] = ft_strdup(argv[i]);
-		if (!shell->tokens[i - 1])
-		{
-			free_tokens(shell->tokens);
-			shell->tokens = NULL;
-		}
-		i++;
-	}
+	if (argc > 2)
+		ft_error("put your args as one string please!", GENERAL_ERROR);
+	*sh = (t_shell){};
+	if (argc == 2)
+		sh->line = argv[1];
+	sh->env = set_env(env, NULL);
 	return (true);
 }
