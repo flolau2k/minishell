@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 13:27:37 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 13:32:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../libft/include/libft.h"
 
 # define O_HEREDOC 0x0008
+
+typedef int (*fcn_p)(t_exec *);
 
 typedef enum e_nodetype
 {
@@ -72,7 +74,5 @@ typedef struct s_redir
 	int			mode;
 	int			fd;
 }	t_redir;
-
-typedef int (*fcn_p)(t_exec *);
 
 #endif
