@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 15:47:11 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:51:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,15 @@ void	do_execve(t_exec *exec)
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
 	{
-		printf("minishell: %s: command not found!", exec->cmd);
+		printf("minishell: %s: command not found!\n", exec->cmd);
 		exit(GENERAL_ERROR);
 	}
-	if (execve(exec->cmd, exec->argv, exec->sh->env) == -1)
+	// print_str_arr(exec->argv);
+	// print_str_arr(exec->sh->env);
+	// printf("cmd: %s\n", cmd);
+	if (execve(cmd, exec->argv, exec->sh->env) == -1)
 	{
-		printf("minishell: %s: %s", cmd, strerror(errno));
+		printf("minishell: %s: %s\n", cmd, strerror(errno));
 		exit(GENERAL_ERROR);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 16:12:23 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:18:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_cmd	*do_lexing(t_shell *sh);
 int		array_len(char **arr);
 void	free_arr(char ***arr);
 char	**get_env_arr(char *env[], char *key);
+void	print_str_arr(char **arr);
 
 // executor.c
 void	execute(t_cmd *cmd);
