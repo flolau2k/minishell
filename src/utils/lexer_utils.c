@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/29 14:07:02 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:47:55 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static bool	check_char(char c)
 			is_squotes = true;
 		else if (ft_isspace(c))
 			return (true);
+		else if (c == '|')
+			return (true);
 	}
 	else if (is_squotes && c == '\'')
 		is_squotes = false;
@@ -67,6 +69,8 @@ int	get_word(t_word *word, t_word block, int i)
 		if (check_char(block.start[i]))
 		{
 			word->start = &(block.start[cts]);
+			while (block.start[i] && ft_isspace(block.start[i]))
+				i++;
 			word->end = &(block.start[i]);
 			return (i);
 		}
@@ -75,35 +79,33 @@ int	get_word(t_word *word, t_word block, int i)
 	return (0);
 }
 
+
+
 /// @brief Searches for the end of the expression and splits the args
 /// @param instr Arguments from the command line
 /// @return Returns the pointer to the end of the expression
-void	get_args(char ***start, char ***end, t_word block)
+void	get_args(char ***start, char ***end, t_word block, int i)
 {
-	static int	i;
 	static int	count;
 	t_word		word;
 
-	i = 0;
-	count = 0;
-	while (block.start[i] && (block.start + i) < block.end)
-	{
-		i = get_word(&word, block, i);
-		i++;
-	}
+	count = 1;
+	word.start = NULL;
+	word.end = NULL;
+	i = get_word(&word, block, i);
 	count++;
 	if (word.end < block.end)
-		get_args(start, end, block);
+		get_args(start, end, block, i);
 	if (word.end == block.end)
-		*start = ft_calloc(count, sizeof(char *));
+		*start = ft_calloc(count + 1, sizeof(char *));
 	if (!(*start))
 		ft_error("Allocation erorr", GENERAL_ERROR);
 	if (word.end == block.end)
-		*end = ft_calloc(count, sizeof(char *));
+		*end = ft_calloc(count + 1, sizeof(char *));
 	if (!(*end))
 		ft_error("Allocation erorr", GENERAL_ERROR);
-	*(start)[count] = word.start;
-	*(end)[count] = word.end;
+	(*start)[count - 1] = word.start;
+	(*end)[count - 1] = word.end;
 	count--;
 }
 

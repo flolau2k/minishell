@@ -6,7 +6,7 @@
 #    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/29 14:47:03 by pcazac           ###   ########.fr        #
+#    Updated: 2023/08/29 16:18:49 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ T_NAME =	tests
 TEST =		test_minishell
 
 CC =		cc
-CFLAGS =	-Wall -Wextra -Werror
+CFLAGS =	-Wall -Wextra -Werror -g
 
 LIBFTDIR =	libft
 LIBFT =		$(LIBFTDIR)/libft.a

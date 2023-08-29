@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 15:59:44 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:50:34 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 	char	**start;
 	char	**end;
 
-	i = -1;
-	word.start = NULL;
-	word.end = NULL;
+	i = 0;
+	word = (t_word){.start = NULL, .end = NULL};
 	start = NULL;
 	end = NULL;
-	while (instr[++i] && !ft_strchr(P_CHAR, instr[i]))
+	while (instr[i] && instr[i] != '|')
 	{
 		if (!ft_strchr(R_CHAR, instr[i]))
 		{
@@ -36,9 +35,11 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 			while (instr[i] && instr[i] != '|' && !ft_strchr(R_CHAR, instr[i]))
 				i++;
 			word.end = instr + i;
-			get_args(&start, &end, word);
+			get_args(&start, &end, word, 0);
+			if (!instr[i])
+				break ;
 		}
-		if (ft_strchr(R_CHAR, instr[i]))
+		else
 			i += redirect_token(&(instr[i]), tree);
 	}
 	command_token(sh, start, end, tree);
@@ -56,10 +57,13 @@ void	get_tree(t_shell *sh, char *instr, t_cmd **tree, int i)
 
 	node = NULL;
 	j = -1;
-	while (instr[++j] && ft_strchr(P_CHAR, instr[j]))
+	while (instr[++j])
 	{
 		if (ft_strchr(P_CHAR, instr[j]))
+		{
 			node = pipe_token(tree);
+			break ;
+		}
 	}
 	add_command(sh, &(instr[i]), tree);
 	if (instr[i])

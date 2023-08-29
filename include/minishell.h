@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 16:12:23 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:40:43 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
 
 // lexer_utils.c
-void	get_args(char ***start, char ***end, t_word block);
+void	get_args(char ***start, char ***end, t_word block, int i);
 int		redirect_type(char *instr);
 int		end_expression(char *instr, t_word *word);
 // void		split_args(char **start, char **end);
