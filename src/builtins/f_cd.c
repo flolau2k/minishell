@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/25 19:05:27 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 11:10:34 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	f_cd(t_exec *cmd)
+void	f_cd(t_exec *cmd)
 {
 	// char	*dir;
 

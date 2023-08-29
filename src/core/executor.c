@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/28 18:02:52 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 11:36:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,7 @@ fcn_p	get_builtin(t_exec *exec)
 	return (NULL);
 }
 
-int	execute(t_cmd *cmd)
-{
-	t_exec		*exec;
-	fcn_p		fcn;
-	pid_t		pid;
-
-	if (cmd->type == NODE_EXEC)
-	{
-		exec = (t_exec *)cmd;
-		fcn = get_builtin(exec);
-		if (fcn)
-			return (fcn(exec));
-	}
-	pid = fork();
-	if (pid == -1)
-		ft_error("fork", GENERAL_ERROR);
-	if (pid == 0)
-	{
-		
-	}
-	return (exec_rec(cmd));
-}
-
-int	exec_rec(t_cmd *cmd)
+void	execute(t_cmd *cmd)
 {
 	if (cmd->type == NODE_EXEC)
 		return (do_exec((t_exec *)cmd));
@@ -79,56 +56,31 @@ int	exec_rec(t_cmd *cmd)
 		return (do_redir((t_redir *)cmd));
 }
 
-// int	do_pipe(t_pipe *cmd)
-// {
-// 	int	fd[2];
-// 	int	pid;
-
-// 	if (pipe(fd) == -1)
-// 		ft_error(NULL, GENERAL_ERROR);
-// 	pid = fork();
-// 	if (pid == -1)
-// 		ft_error(strerror(errno), GENERAL_ERROR);
-// 	if (pid == 0)
-// 	{
-// 		dup2(fd[1], STDOUT_FILENO);
-// 		close(fd[0]);
-// 		close(fd[1]);
-// 		return (execute(cmd->left));
-// 	}
-// 	else
-// 	{
-// 		dup2(fd[0], STDIN_FILENO);
-// 		close(fd[0]);
-// 		close(fd[1]);
-// 		return (execute(cmd->right));
-// 	}
-// }
-
-int	do_pipe(t_pipe *cmd)
+void	do_pipe(t_pipe *cmd)
 {
 	pid_t	pid;
 
 	pid = create_pipe(&execute, cmd->left);
-	if (pid == 0)
-		exit(0);
-	
+	cmd->right->pid = pid;
+	execute(cmd->right);
 }
 
-int	do_redir(t_redir *redir)
+void	do_redir(t_redir *redir)
 {
+	redir->cmd->pid = redir->pid;
 	if (redir->mode & O_HEREDOC)
-	{
-		
-	}
-	redir->fd = open(redir->file, redir->mode);
-	if (redir->fd == -1)
-		ft_error(strerror(errno), GENERAL_ERROR);
-	if (redir->mode & O_WRONLY)
-		dup2(redir->fd, STDOUT_FILENO);
+		here_doc(redir->file);
 	else
-		dup2(redir->fd, STDIN_FILENO);
-	close(redir->fd);
+	{
+		redir->fd = open(redir->file, redir->mode);
+		if (redir->fd == -1)
+			ft_error(strerror(errno), GENERAL_ERROR);
+		if (redir->mode & O_WRONLY)
+			dup2(redir->fd, STDOUT_FILENO);
+		else
+			dup2(redir->fd, STDIN_FILENO);
+		close(redir->fd);
+	}
 	return (execute(redir->cmd));
 }
 
@@ -150,20 +102,25 @@ void	do_execve(t_exec *exec)
 	}
 }
 
-/// @brief Execute exec node. checking first, if command is a builtin, and
-/// then forwards to the do_execve function
+/// @brief Execute exec node.
 /// @param exec Node to execute
-int	do_exec(t_exec *exec)
+void	do_exec(t_exec *exec)
 {
-	int	i;
-	int	pid;
-	int	stat_loc;
-
-	i = 0;
+	int		stat_loc;
+	pid_t	npid;
+	fcn_p	fcn;
 	
-	pid = fork();
-	if (pid == 0)
+	if (exec->pid == 0)
 		do_execve(exec);
-	waitpid(pid, &stat_loc, 0);
-	return (WEXITSTATUS(stat_loc));
+	fcn = get_builtin(exec);
+	if (fcn)
+		return (fcn(exec));
+	else
+	{
+		npid = fork();
+		if (npid == 0)
+			do_execve(exec);
+		waitpid(npid, &stat_loc, 0);
+		set_shell_ret(WEXITSTATUS(stat_loc)); // set last return code!
+	}
 }

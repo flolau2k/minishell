@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/28 15:35:41 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 11:26:44 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # include "structs.h"
 # include "libft.h"
+
+# define HERE_DOC_PROMPT "> "
 
 // see https://tldp.org/LDP/abs/html/exitcodes.html
 # define GENERAL_ERROR 1
@@ -54,8 +56,8 @@ t_cmd	*do_lexing(char *instr, t_cmd *root);
 int		array_len(char **arr);
 
 // executor.c
-int		execute(t_cmd *cmd);
-int		do_exec(t_exec *exec);
+void	execute(t_cmd *cmd);
+void	do_exec(t_exec *exec);
 
 // error.c
 void	ft_error(char *msg, int excode);
@@ -68,20 +70,24 @@ void	free_exec(t_exec **arg);
 pid_t	create_pipe(void (f1)(void *), void *a1);
 void	hd_child(void *arg);
 
+// core/here_doc.c
+void	here_doc(t_args *args);
+void	hd_child(void *arg);
+
 // BUILTINS
 // echo.c
-int		f_echo(t_exec *cmd);
+void	f_echo(t_exec *cmd);
 // cd.c
-int		f_cd(t_exec *cmd);
+void	f_cd(t_exec *cmd);
 // env.c
-int		f_env(t_exec *cmd);
+void	f_env(t_exec *cmd);
 // exit.c
-int		f_exit(t_exec *cmd);
+void	f_exit(t_exec *cmd);
 // export.c
-int		f_export(t_exec *cmd);
+void	f_export(t_exec *cmd);
 // pwd.c
-int		f_pwd(t_exec *pwd);
+void	f_pwd(t_exec *pwd);
 // unset.c
-int		f_unset(t_exec *cmd);
+void	f_unset(t_exec *cmd);
 
 #endif
