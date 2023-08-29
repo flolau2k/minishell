@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 11:38:56 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 11:48:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # include "structs.h"
 # include "libft.h"
 
-# define HERE_DOC_PROMPT "> "
+# define HERE_DOC_PROMPT "(heredoc)> "
+# define MINISHELL_PROMPT "> "
 
 // see https://tldp.org/LDP/abs/html/exitcodes.html
 # define GENERAL_ERROR 1
@@ -71,7 +72,7 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
 
 // core/here_doc.c
 void	here_doc(char *lim);
-void	hd_child(void *lim);
+void	hd_child(char *lim);
 
 // BUILTINS
 // echo.c
