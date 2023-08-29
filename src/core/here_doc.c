@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 11:47:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:30:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	hd_child(char *lim)
+void	hd_child(char *lim) //TODO check length!
 {
 	char	*line;
 	char	*nlim;
