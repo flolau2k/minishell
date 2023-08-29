@@ -3,23 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/25 19:07:13 by flauer           ###   ########.fr       */
+/*   Created: 2023/08/21 11:57:56 by flauer            #+#    #+#             */
+/*   Updated: 2023/08/29 14:47:51 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-// #include <criterion/criterion.h>
-// #include <criterion/new/assert.h>
-// #include <criterion/redirect.h>
+#include "../../include/minishell.h"
 
-// void init_cr(void)
+int	main(int argc, char **argv, char **env)
+{
+	do_lexing("< <here cat | fdks asdf asdfadsfjljadsf\"adsfadsf\" 'adsfadgsa\"asdf\"' asd|ads grep > >out");
+	return (0);
+}
+// void	f_echo(t_exec *cmd)
 // {
-// 	cr_redirect_stdout();
+// 	int		i;
+// 	bool	nl;
+
+// 	nl = true;
+// 	i = 1;
+// 	if (cmd->argv[1] && ft_strncmp(cmd->argv[1], "-n", 3) == 0)
+// 	{
+// 		nl = false;
+// 		i = 2;
+// 	}
+// 	while (cmd->argv[i])
+// 	{
+// 		printf("%s", cmd->argv[i]);
+// 		i++;
+// 	}
+// 	if (nl)
+// 		printf("\n");
+// 	return (free_exec(cmd));
 // }
-// TestSuite(do_exec_test, .init = init_cr);
 
 int	main(int argc, char **argv, char **env)
 {

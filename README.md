@@ -1,2 +1,1 @@
-# minishell
-simple shell
+A small version of Minishell 

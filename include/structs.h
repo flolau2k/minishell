@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 13:50:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:54:32 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-# include "../libft/include/libft.h"
 
 # define O_HEREDOC 0x0008
 
@@ -37,6 +36,12 @@ typedef struct s_shell
 	char	*line;
 	int		ret;
 }	t_shell;
+
+typedef struct s_word
+{
+	char	*start;
+	char	*end;
+}	t_word;
 
 typedef struct s_var
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/24 14:48:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 15:46:37 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,24 @@ char	*get_env(char *env[], char *key)
 		++i;
 	}
 	return (NULL);
+}
+
+/// @brief get the values of a given key from the environment
+/// @param env the environment
+/// @param key desired key
+/// @return string array with the values, NULL if the key is not in environment.
+/// return may be free'd if not NULL.
+char	**get_env_s(char *env[], char *key)
+{
+	char	**ret;
+	char	*val;
+
+	val = get_env(env, key);
+	if (!val)
+		return (NULL);
+	ret = ft_split(val, ':');
+	free(val);
+	return (ret);
 }
 
 char	*get_cmd_path(char *name, char *env[])
