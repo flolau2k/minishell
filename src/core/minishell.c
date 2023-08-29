@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 11:47:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 13:30:44 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	main_loop(t_shell *sh)
 {
-	char	*line;
 	t_cmd	*root;
 
+	if (sh->line)
+	{
+		root = parse(sh->line);
+		execute(root);
+	}
 	while (true)
 	{
-		line = readline(MINISHELL_PROMPT);
-		root = parse(line);
-		free(line);
+		sh->line = readline(MINISHELL_PROMPT);
+		root = parse(sh->line);
 		execute(root);
+		free(sh->line);
 	}
 }
 

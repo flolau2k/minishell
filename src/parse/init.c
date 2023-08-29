@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:26:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 11:44:24 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 13:29:57 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@
 
 bool	init(t_shell *sh, int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
+	if (argc > 2)
+		ft_error("put your args as one string please!", GENERAL_ERROR);
 	*sh = (t_shell){};
+	sh->line = argv[1];
 	sh->env = set_env(env, NULL);
 	return (true);
 }

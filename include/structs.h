@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 11:11:06 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 13:27:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_shell
 {
 	char	**env;
 	t_cmd	*root;
+	char	*line;
 	int		ret;
 }	t_shell;
 
