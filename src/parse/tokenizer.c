@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/29 14:06:57 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:00:08 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		redirect_token(char *instr, t_cmd **tree)
 /// @brief Creates, initializes and returns a command node for the AST
 /// @param root Pointer to the command position
 /// @return The pointer to the node
-int		command_token(char **start, char **end, t_cmd **tree)
+int		command_token(t_shell *sh, char **start, char **end, t_cmd **tree)
 {
 	t_exec	*node;
 	int		i;
@@ -73,7 +73,7 @@ int		command_token(char **start, char **end, t_cmd **tree)
 	node->cmd = start[0];
 	node->argv = start;
 	node->eargv = end;
-	node->env = NULL;
+	node->sh = sh;
 	ft_printf("Type: %i\n", node->type);
 	arrange_command_tree(tree, node);
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 14:49:59 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:12:23 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,12 @@ char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
 
 // lexer.c
-t_cmd	*do_lexing(char *instr, t_cmd *root);
+t_cmd	*do_lexing(t_shell *sh);
+
 // helpers.c
 int		array_len(char **arr);
+void	free_arr(char ***arr);
+char	**get_env_arr(char *env[], char *key);
 
 // executor.c
 void	execute(t_cmd *cmd);
@@ -76,6 +79,7 @@ void	free_exec(t_exec **arg);
 
 // core/pipe.c
 pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
+pid_t	create_pipe_c(void (f1)(char *), char *a1);
 
 // core/here_doc.c
 void	here_doc(char *lim);
@@ -89,9 +93,6 @@ char	**get_env_s(char *env[], char *key);
 char	*get_env(char *env[], char *key);
 char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
-
-// lexer.c
-t_cmd	*do_lexing(char *instr);
 
 // lexer_utils.c
 void	get_args(char ***start, char ***end, t_word block);
@@ -107,7 +108,7 @@ void	arrange_command_tree(t_cmd **tree, t_exec *node);
 // tokenizer.c
 t_cmd	*pipe_token(t_cmd **tree);
 int		redirect_token(char *instr, t_cmd **tree);
-int		command_token(char **start, char **end, t_cmd **tree);
+int		command_token(t_shell *sh, char **start, char **end, t_cmd **tree);
 
 // executor.c
 void	f_execute(t_cmd *cmd);

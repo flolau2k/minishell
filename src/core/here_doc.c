@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 14:30:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:12:43 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void	here_doc(char *lim)
 {
 	pid_t	pid;
 
-	pid = create_pipe(&hd_child, lim);
+	pid = create_pipe_c(&hd_child, lim);
 	waitpid(pid, NULL, 0);
 }

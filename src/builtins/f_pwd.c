@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_pwd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:29 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/22 15:36:13 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:13:55 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	f_pwd(t_exec *cmd)
 {
 	char	*cwd;
+	(void)cmd;
 
 	cwd = getcwd(NULL, 0);
 	printf("%s\n", cwd);
 	free(cwd);
-	free_exec(cmd);
+	// free_exec(cmd);
 }
