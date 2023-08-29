@@ -6,7 +6,7 @@
 #    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/24 14:05:45 by pcazac           ###   ########.fr        #
+#    Updated: 2023/08/29 13:53:20 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,17 +30,17 @@ INCLUDES =	-I$(INCDIR) -I$(LIBFTDIR)/include
 HEADERS =	include/minishell.h
 
 #src/parse
-FILES =		lexer.c parser.c init.c
+FILES =		lexer.c parser.c init.c  tokenizer.c tree.c
 
 #src/core
-FILES +=	minishell.c environment.c executor.c
+# FILES +=	minishell.c environment.c executor.c
 
 #src/builtins
-FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c
+# FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c
 
 #src/utils
-FILES +=	destructors.c helpers.c
-
+FILES +=	lexer_utils.c
+# destructors.c helpers.c 
 #src/error
 FILES +=	error.c
 
