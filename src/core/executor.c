@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 13:39:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 13:50:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static const char	*g_fcn_n[] = {
 };
 
 static const fcn_p	g_fcn_p[] = {
-	&f_echo,
-	&f_cd,
-	&f_env,
-	&f_exit,
-	&f_export,
-	&f_pwd,
-	&f_unset
+	(fcn_p)&f_echo,
+	(fcn_p)&f_cd,
+	(fcn_p)&f_env,
+	(fcn_p)&f_exit,
+	(fcn_p)&f_export,
+	(fcn_p)&f_pwd,
+	(fcn_p)&f_unset
 };
 
-fcn_p	get_builtin(t_exec *exec)
+static fcn_p	get_builtin(t_exec *exec)
 {
 	int	i;
 
@@ -87,7 +87,6 @@ void	do_redir(t_redir *redir)
 void	do_execve(t_exec *exec)
 {
 	char	*cmd;
-	char	*cmd_msg;
 
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
