@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 11:26:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 11:38:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,11 @@ void	free_carr(char **arr);
 void	free_exec(t_exec **arg);
 
 // core/pipe.c
-pid_t	create_pipe(void (f1)(void *), void *a1);
-void	hd_child(void *arg);
+pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
 
 // core/here_doc.c
-void	here_doc(t_args *args);
-void	hd_child(void *arg);
+void	here_doc(char *lim);
+void	hd_child(void *lim);
 
 // BUILTINS
 // echo.c

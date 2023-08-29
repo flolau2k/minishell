@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 10:37:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/29 11:38:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,4 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1)
 		close(pipe_fd[1]);
 	}
 	return (pid);
-}
-
-void	hd_child(void *arg)
-{
-	char	*line;
-	char	*lim;
-
-	lim = ft_strjoin((char *)arg, "\n");
-	line = get_next_line(STDIN_FILENO);
-	while (ft_strncmp(line, lim, ft_strlen(lim)))
-	{
-		ft_printf("%s", line);
-		free(line);
-		line = get_next_line(STDIN_FILENO);
-	}
-	free(line);
-	free(lim);
-	exit(0);
 }
