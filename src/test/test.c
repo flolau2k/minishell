@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 11:57:56 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 16:18:44 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/30 13:06:11 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	do_lexing("< <here cat | fdks asdf asdfadsfjljadsf\"adsfadsf\" 'adsfadgsa\"asdf\"' asd|ads grep > >out");
+	do_lexing(" <here cat | fdks asdf asdfadsfjljadsf\"adsfadsf\" 'adsfadgsa\"asdf\"' asd|ads grep > >out");
 	return (0);
 }
 // void	f_echo(t_exec *cmd)
@@ -39,22 +39,22 @@ int	main(int argc, char **argv, char **env)
 // 	return (free_exec(cmd));
 // }
 
-int	main(int argc, char **argv, char **env)
-{
-	(void) argc;
-	(void) argv;
-	(void) env;
-	t_exec	exec;
+// int	main(int argc, char **argv, char **env)
+// {
+// 	(void) argc;
+// 	(void) argv;
+// 	(void) env;
+// 	t_exec	exec;
 
-	exec = (t_exec){
-		.type = NODE_EXEC,
-		.cmd = "cd",
-		.argv = NULL,
-		.eargv = NULL,
-		.sh = NULL
-		};
+// 	exec = (t_exec){
+// 		.type = NODE_EXEC,
+// 		.cmd = "cd",
+// 		.argv = NULL,
+// 		.eargv = NULL,
+// 		.sh = NULL
+// 		};
 	
-	do_exec(&exec);
-	// cr_assert_stdout_eq("test");
-	return (0);
-}
+// 	do_exec(&exec);
+// 	// cr_assert_stdout_eq("test");
+// 	return (0);
+// }

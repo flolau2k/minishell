@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
+#    By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/29 16:18:49 by pcazac           ###   ########.fr        #
+#    Updated: 2023/08/30 12:54:33 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,5 +85,5 @@ $(TEST): $(LIBFT) $(T_OBJ) $(OBJ)
 .PHONY =	all clean fclean re bonus
 
 $(T_NAME): CFLAGS += -g
-$(T_NAME): $(T_OBJ) $(OBJ) $(LIBFT)
+$(T_NAME): $(LIBFT) $(T_OBJ) $(OBJ)
 	$(CC) $(CFLAGS) $(T_OBJ) $(OBJ) $(LIBS) -o $(T_NAME)

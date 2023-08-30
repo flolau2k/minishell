@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 16:40:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/30 18:06:18 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ char	*get_env(char *env[], char *key);
 char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
 
-// lexer.c
-t_cmd	*do_lexing(t_shell *sh);
-
 // helpers.c
 int		array_len(char **arr);
 void	free_arr(char ***arr);
@@ -88,14 +85,11 @@ void	hd_child(char *lim);
 // parser.c
 void	*parser(char **str);
 
-// environment.c
-char	**get_env_s(char *env[], char *key);
-char	*get_env(char *env[], char *key);
-char	*get_cmd(char *name, char *env[]);
-char	*get_cmd_path(char *name, char *env[]);
+// lexer.c
+t_cmd	*do_lexing(t_shell *sh);
 
 // lexer_utils.c
-void	get_args(char ***start, char ***end, t_word block, int i);
+void	get_args(t_array *array, t_word block, int i, int count);
 int		redirect_type(char *instr);
 int		end_expression(char *instr, t_word *word);
 // void		split_args(char **start, char **end);
@@ -105,10 +99,16 @@ void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
 void	arrange_redir_tree(t_cmd **tree, t_redir *node);
 void	arrange_command_tree(t_cmd **tree, t_exec *node);
 
+// environment.c
+char	**get_env_s(char *env[], char *key);
+char	*get_env(char *env[], char *key);
+char	*get_cmd(char *name, char *env[]);
+char	*get_cmd_path(char *name, char *env[]);
+
 // tokenizer.c
 t_cmd	*pipe_token(t_cmd **tree);
 int		redirect_token(char *instr, t_cmd **tree);
-int		command_token(t_shell *sh, char **start, char **end, t_cmd **tree);
+int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
 
 // executor.c
 void	f_execute(t_cmd *cmd);
