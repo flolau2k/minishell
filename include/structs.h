@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 11:04:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/31 14:46:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_shell
 	t_cmd	*root;
 	char	*line;
 	int		ret;
+	int		ttyin;
+	int		ttyout;
 }	t_shell;
 
 typedef struct s_word
@@ -74,6 +76,8 @@ typedef struct s_redir
 	char		*efile;
 	int			mode;
 	int			fd;
+	int			ttyin;
+	int			ttyout;
 }	t_redir;
 
 typedef void (*fcn_p)(t_exec *);
