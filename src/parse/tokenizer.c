@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/31 14:22:59 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:55:09 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_cmd	*pipe_token(t_cmd **tree)
 	if (!node)
 		ft_error("Allocation error", GENERAL_ERROR);
 	node->type = NODE_PIPE;
+	node->pid = -1;
 	node->left = NULL;
 	node->right = NULL;
 	arrange_pipe_tree(tree, node);
@@ -44,6 +45,7 @@ int		redirect_token(char *instr, t_cmd **tree)
 		ft_error("Allocation error", GENERAL_ERROR);
 	i = end_expression(instr, &word);
 	node->type = NODE_REDIRECT;
+	node->pid = -1;
 	node->cmd = NULL;
 	node->file = word.start;
 	node->efile = word.end;
@@ -66,6 +68,7 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	if (!node)
 		ft_error("Allocation error", GENERAL_ERROR);
 	node->type = NODE_EXEC;
+	node->pid = -1;
 	node->cmd = array->start[0];
 	node->argv = array->start;
 	node->eargv = array->end;
