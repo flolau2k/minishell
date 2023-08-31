@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:54:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 15:42:30 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:16:14 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	f_env(t_exec *cmd)
 {
