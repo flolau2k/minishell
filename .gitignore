@@ -6,3 +6,5 @@ minishell
 .DS_Store
 test_minishell
 *.txt
+out
+text

@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/29 14:07:02 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:33:04 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 int	redirect_type(char *instr)
 {
 	if (instr[0] == '>' && instr[1] == '>')
-		return (O_APPEND);
+		return (O_WRONLY | O_CREAT | O_APPEND);
 	else if (instr[0] == '<' && instr[1] == '<')
 		return (O_HEREDOC);
 	else if (instr[0] == '>')
-		return (O_WRONLY);
+		return (O_WRONLY | O_CREAT | O_TRUNC);
 	else if (instr[0] == '<')
 		return (O_RDONLY);
 	return (0);
@@ -31,7 +31,7 @@ int	redirect_type(char *instr)
 /// @brief Checks for the delimiter and special characters
 /// @param c character passed from the argument string
 /// @return True if it is the researched char, false if not
-static bool	check_char(char c)
+bool	check_char(char c)
 {
 	static bool	is_dquotes;
 	static bool	is_squotes;
@@ -44,6 +44,12 @@ static bool	check_char(char c)
 			is_squotes = true;
 		else if (ft_isspace(c))
 			return (true);
+		else if (c == '|')
+			return (true);
+		// else if (c == '<')
+		// 	return (true);
+		// else if (c == '>')
+		// 	return (true);
 	}
 	else if (is_squotes && c == '\'')
 		is_squotes = false;
@@ -62,15 +68,23 @@ int	get_word(t_word *word, t_word block, int i)
 	while (block.start[i] && ft_isspace(block.start[i]))
 		i++;
 	cts = i;
-	while (block.start[i])
+	while (block.start[i] && block.start + i <= block.end)
 	{
 		if (check_char(block.start[i]))
+		{
+			word->start = &(block.start[cts]);
+			// while (block.start[i] && ft_isspace(block.start[i]))
+			// 	i++;
+			word->end = &(block.start[i]);
+			return (i);
+		}
+		i++;
+		if (!block.start[i])
 		{
 			word->start = &(block.start[cts]);
 			word->end = &(block.start[i]);
 			return (i);
 		}
-		i++;
 	}
 	return (0);
 }
@@ -78,35 +92,32 @@ int	get_word(t_word *word, t_word block, int i)
 /// @brief Searches for the end of the expression and splits the args
 /// @param instr Arguments from the command line
 /// @return Returns the pointer to the end of the expression
-void	get_args(char ***start, char ***end, t_word block)
+void	get_args(t_array *array, t_word block, int i, int count)
 {
-	static int	i;
-	static int	count;
 	t_word		word;
 
-	i = 0;
-	count = 0;
-	while (block.start[i] && (block.start + i) < block.end)
-	{
-		i = get_word(&word, block, i);
-		i++;
-	}
+	word = (t_word){};
+	i = get_word(&word, block, i);
+	if (i == 0)
+		return ;
 	count++;
 	if (word.end < block.end)
-		get_args(start, end, block);
-	if (word.end == block.end)
-		*start = ft_calloc(count, sizeof(char *));
-	if (!(*start))
-		ft_error("Allocation erorr", GENERAL_ERROR);
-	if (word.end == block.end)
-		*end = ft_calloc(count, sizeof(char *));
-	if (!(*end))
-		ft_error("Allocation erorr", GENERAL_ERROR);
-	*(start)[count] = word.start;
-	*(end)[count] = word.end;
+		get_args(array, block, i, count);
+	if (word.end == block.end && !array->start && !array->end)
+	{
+			array->start = ft_calloc(count + 1, sizeof(char *));
+		if (!(array->start))
+			ft_error("Allocation erorr", GENERAL_ERROR);
+		array->end = ft_calloc(count + 1, sizeof(char *));
+		if (!(array->end))
+			ft_error("Allocation erorr", GENERAL_ERROR);
+	}
+	else if (word.end == block.end)
+		count = new_arr(array, count);
+	(array->start)[count - 1] = word.start;
+	(array->end)[count - 1] = word.end;
 	count--;
 }
-
 
 /// @brief Searches for the end of the expression
 /// @param instr Arguments from the command line

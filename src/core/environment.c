@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 15:46:37 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:07:39 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ char	**set_env(char **env, char *newval)
 	char	**ret;
 
 	i = 0;
-	len = array_len(*env);
+	len = array_len(env);
 	if (newval)
-		len = array_len(*env) + 1;
+		len = array_len(env) + 1;
 	ret = malloc(sizeof(char *) * (len + 1));
 	if (!ret)
 		ft_error("malloc error!", GENERAL_ERROR);
@@ -98,7 +98,7 @@ char	*get_cmd_path(char *name, char *env[])
 
 	i = 0;
 	cmd = NULL;
-	paths = get_env(env, "PATH");
+	paths = get_env_s(env, "PATH");
 	while (paths[i])
 	{
 		path = ft_strjoin(paths[i], "/");
@@ -110,7 +110,7 @@ char	*get_cmd_path(char *name, char *env[])
 		cmd = NULL;
 		++i;
 	}
-	free_splits(paths);
+	free_arr(&paths);
 	return (cmd);
 }
 

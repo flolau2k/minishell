@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 15:47:11 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 14:41:23 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,15 @@ void	do_redir(t_redir *redir)
 {
 	redir->cmd->pid = redir->pid;
 	if (redir->mode & O_HEREDOC)
-		here_doc(redir->file);
+		here_doc(redir);
 	else
 	{
-		redir->fd = open(redir->file, redir->mode);
+		redir->fd = open(redir->file, redir->mode, 0644);
 		if (redir->fd == -1)
-			ft_error(strerror(errno), GENERAL_ERROR);
+		{
+			printf("minishell: %s: %s\n", redir->file, strerror(errno));
+			exit(GENERAL_ERROR);
+		}
 		if (redir->mode & O_WRONLY)
 			dup2(redir->fd, STDOUT_FILENO);
 		else
@@ -91,12 +94,12 @@ void	do_execve(t_exec *exec)
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
 	{
-		printf("minishell: %s: command not found!", exec->cmd);
+		printf("minishell: %s: command not found!\n", exec->cmd);
 		exit(GENERAL_ERROR);
 	}
-	if (execve(exec->cmd, exec->argv, exec->sh->env) == -1)
+	if (execve(cmd, exec->argv, exec->sh->env) == -1)
 	{
-		printf("minishell: %s: %s", cmd, strerror(errno));
+		printf("minishell: %s: %s\n", cmd, strerror(errno));
 		exit(GENERAL_ERROR);
 	}
 }
@@ -121,5 +124,7 @@ void	do_exec(t_exec *exec)
 			do_execve(exec);
 		waitpid(npid, &stat_loc, 0);
 		exec->sh->ret = WEXITSTATUS(stat_loc);
+		close(STDIN_FILENO);
+		wait_exit();
 	}
 }

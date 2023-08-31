@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:26:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 14:54:04 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 14:27:06 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ bool	init(t_shell *sh, int argc, char **argv, char **env)
 	if (argc == 2)
 		sh->line = argv[1];
 	sh->env = set_env(env, NULL);
+	sh->ttyin = dup(STDIN_FILENO);
+	sh->ttyout = dup(STDOUT_FILENO);
 	return (true);
 }
 
