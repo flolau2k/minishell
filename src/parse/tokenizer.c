@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/30 18:15:16 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 09:28:48 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,19 @@ void	print_tree(t_cmd **tree)
 	if ( *tree && (*tree)->type == NODE_PIPE)
 	{
 		pipe = (t_pipe *)(*tree);
+		printf("|||---START PIPE---|||\n");
 		printf("Pipe: %p\n", pipe);
-		printf("Pipe Type %i\n", pipe->type);
-		printf("Pipe Left: %p\n", pipe->left);
+		printf("Pipe Type: %i\n", pipe->type);
 		if (pipe->left)
 		{
-			printf("Type_Left: %i\n", pipe->left->type);
-			printf("\n\n");
+			printf("Pipe Left: %p\n", pipe->left);
+			printf("Pipe Type Left: %i\n", pipe->left->type);
 			print_tree(&(pipe->left));
 		}
-		printf("Pipe Right: %p\n", pipe->right);
 		if (pipe->right)
 		{
-			printf("Type_Right: %i\n", pipe->right->type);
-			printf("\n\n");
+			printf("Pipe Right: %p\n", pipe->right);
+			printf("Pipe Type Right: %i\n", pipe->right->type);
 			print_tree(&(pipe->right));
 		}
 		return ;
@@ -43,10 +42,10 @@ void	print_tree(t_cmd **tree)
 	else if ( *tree && (*tree)->type == NODE_REDIRECT)
 	{
 		redir = (t_redir *)(*tree);
+		printf("---START REDIRECT---\n");
 		printf("Redir Type: %i\n", redir->type);
 		printf("Redir Arg: %s\n",redir->file);
-		printf("Redir End Arg: %s\n",redir->file);
-		printf("\n\n");
+		printf("Redir End Arg: %s\n",redir->efile);
 		if (redir->cmd)
 			print_tree(&(redir->cmd));
 		return ;
@@ -54,6 +53,7 @@ void	print_tree(t_cmd **tree)
 	else if ( *tree && (*tree)->type == NODE_EXEC)
 	{
 		exec = (t_exec *)(*tree);
+		printf("---START COMMAND---\n");
 		printf("Exec Type: %i\n", exec->type);
 		printf("Exec Command: %s\n", exec->cmd);
 		int i = -1;
@@ -62,7 +62,6 @@ void	print_tree(t_cmd **tree)
 			printf("Exec Arrg: %s\n", exec->argv[i]);
 			printf("Exec End Arg: %s\n", exec->eargv[i]);
 		}
-		printf("\n\n");
 		return ;
 	}
 }
@@ -84,6 +83,7 @@ t_cmd	*pipe_token(t_cmd **tree)
 	node->left = NULL;
 	node->right = NULL;
 	arrange_pipe_tree(tree, node);
+	printf("<<<------###TREE ROOT###----->>>\n\n");
 	print_tree(tree);
 	return ((t_cmd *)node);
 }
@@ -107,8 +107,9 @@ int		redirect_token(char *instr, t_cmd **tree)
 	node->efile = word.end;
 	node->mode = redirect_type(instr);
 	node->fd = 0;
-	print_tree(tree);
 	arrange_redir_tree(tree, node);
+	printf("<<<------###TREE ROOT###----->>>\n\n");
+	print_tree(tree);
 	return (i);
 }
 
@@ -129,7 +130,8 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	node->argv = array->start;
 	node->eargv = array->end;
 	node->sh = sh;
-	print_tree(tree);
 	arrange_command_tree(tree, node);
+	printf("<<<------###TREE ROOT###----->>>\n\n");
+	print_tree(tree);
 	return (i);
 }

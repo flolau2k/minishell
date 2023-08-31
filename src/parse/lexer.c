@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/30 20:12:00 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 09:07:13 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,11 @@ void	get_tree(t_shell *sh, char *instr, t_cmd **tree, int i)
 
 	node = NULL;
 	j = i;
-	while (instr[j])
-	{
-		if (ft_strchr(P_CHAR, instr[j]))
-		{
-			node = pipe_token(tree);
-			break ;
-		}
+	while (instr[j] && instr[j] != '|')
 		j++;
-	}
 	add_command(sh, &(instr[i]), tree);
+	if (instr[j] == '|')
+		node = pipe_token(tree);
 	i = j;
 	if (instr[j])
 		get_tree(sh, instr + j, &node, j);
