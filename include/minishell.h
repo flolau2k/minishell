@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/30 18:06:18 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 11:04:11 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define CMD_NOT_FOUND 127
 # define INVALID_ARG_EXIT 128
 # define CTRL_C 130
+
+# define O_HEREDOC 0x0010
 
 # define R_CHAR "<>"
 # define P_CHAR "|"
@@ -92,7 +94,9 @@ t_cmd	*do_lexing(t_shell *sh);
 void	get_args(t_array *array, t_word block, int i, int count);
 int		redirect_type(char *instr);
 int		end_expression(char *instr, t_word *word);
-// void		split_args(char **start, char **end);
+
+// token_utils.c
+int	new_arr(t_array *array, int count);
 
 // tree.c
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);

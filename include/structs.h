@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/30 17:25:16 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 11:04:10 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-# define O_HEREDOC 0x0008
 
 typedef enum e_nodetype
 {

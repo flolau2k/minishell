@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 09:07:13 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 10:18:38 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 			if (!instr[i])
 				break ;
 		}
-		else
+		if (ft_strchr(R_CHAR, instr[i]))
 			i += redirect_token(&(instr[i]), tree);
 	}
 	command_token(sh, &array, tree);
@@ -59,10 +59,13 @@ void	get_tree(t_shell *sh, char *instr, t_cmd **tree, int i)
 		j++;
 	add_command(sh, &(instr[i]), tree);
 	if (instr[j] == '|')
+	{
 		node = pipe_token(tree);
+		j++;
+	}
 	i = j;
 	if (instr[j])
-		get_tree(sh, instr + j, &node, j);
+		get_tree(sh, instr, &node, j);
 	return ;
 }
 

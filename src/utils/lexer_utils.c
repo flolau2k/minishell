@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/30 18:05:20 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 10:54:09 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 int	redirect_type(char *instr)
 {
 	if (instr[0] == '>' && instr[1] == '>')
-		return (O_APPEND);
+		return (O_WRONLY | O_CREAT | O_APPEND);
 	else if (instr[0] == '<' && instr[1] == '<')
 		return (O_HEREDOC);
 	else if (instr[0] == '>')
-		return (O_WRONLY);
+		return (O_WRONLY | O_CREAT | O_TRUNC);
 	else if (instr[0] == '<')
 		return (O_RDONLY);
 	return (0);
@@ -97,14 +97,17 @@ void	get_args(t_array *array, t_word block, int i, int count)
 	count++;
 	if (word.end < block.end)
 		get_args(array, block, i, count);
-	if (word.end == block.end)
-		array->start = ft_calloc(count + 1, sizeof(char *));
-	if (!(array->start))
-		ft_error("Allocation erorr", GENERAL_ERROR);
-	if (word.end == block.end)
+	if (word.end == block.end && !array->start && !array->end)
+	{
+			array->start = ft_calloc(count + 1, sizeof(char *));
+		if (!(array->start))
+			ft_error("Allocation erorr", GENERAL_ERROR);
 		array->end = ft_calloc(count + 1, sizeof(char *));
-	if (!(array->end))
-		ft_error("Allocation erorr", GENERAL_ERROR);
+		if (!(array->end))
+			ft_error("Allocation erorr", GENERAL_ERROR);
+	}
+	else if (word.end == block.end)
+		count = new_arr(array, count);
 	(array->start)[count - 1] = word.start;
 	(array->end)[count - 1] = word.end;
 	count--;

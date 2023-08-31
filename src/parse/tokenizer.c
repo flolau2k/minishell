@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/31 09:28:48 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 10:29:02 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ void	print_tree(t_cmd **tree)
 		printf("Pipe Type: %i\n", pipe->type);
 		if (pipe->left)
 		{
+			printf("|||---Pipe Left---|||\n");
 			printf("Pipe Left: %p\n", pipe->left);
 			printf("Pipe Type Left: %i\n", pipe->left->type);
 			print_tree(&(pipe->left));
 		}
 		if (pipe->right)
 		{
+			printf("|||---Pipe Right---|||\n");
 			printf("Pipe Right: %p\n", pipe->right);
 			printf("Pipe Type Right: %i\n", pipe->right->type);
 			print_tree(&(pipe->right));
@@ -44,6 +46,7 @@ void	print_tree(t_cmd **tree)
 		redir = (t_redir *)(*tree);
 		printf("---START REDIRECT---\n");
 		printf("Redir Type: %i\n", redir->type);
+		printf("Redir Mode: %i\n", redir->mode);
 		printf("Redir Arg: %s\n",redir->file);
 		printf("Redir End Arg: %s\n",redir->efile);
 		if (redir->cmd)
@@ -83,6 +86,7 @@ t_cmd	*pipe_token(t_cmd **tree)
 	node->left = NULL;
 	node->right = NULL;
 	arrange_pipe_tree(tree, node);
+	printf("\n\n");
 	printf("<<<------###TREE ROOT###----->>>\n\n");
 	print_tree(tree);
 	return ((t_cmd *)node);
@@ -108,6 +112,7 @@ int		redirect_token(char *instr, t_cmd **tree)
 	node->mode = redirect_type(instr);
 	node->fd = 0;
 	arrange_redir_tree(tree, node);
+	printf("\n\n");
 	printf("<<<------###TREE ROOT###----->>>\n\n");
 	print_tree(tree);
 	return (i);
@@ -131,6 +136,7 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	node->eargv = array->end;
 	node->sh = sh;
 	arrange_command_tree(tree, node);
+	printf("\n\n");
 	printf("<<<------###TREE ROOT###----->>>\n\n");
 	print_tree(tree);
 	return (i);
