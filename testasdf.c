@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "unistd.h"
+#include "sys/wait.h"
 #include "stdlib.h"
 #include "stdio.h"
 #include <fcntl.h>
@@ -86,9 +88,28 @@
 
 int	main(void)
 {
-	char *line;
+	char	*line;
+	pid_t	pid;
+	int		fd[2];
 
-	line = readline("> ");
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		close(fd[0]);
+		line = readline("> ");
+	}
+	else
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		// line = get_next_line(STDIN_FILENO);
+		line = ft_strdup("linasdflkdlsfkdlskgjljsdlfa");
+		waitpid(pid, NULL, 0);
+	}
 	printf("line: %s\n", line);
 	free(line);
 	return (0);
