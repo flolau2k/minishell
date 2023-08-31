@@ -6,11 +6,11 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 11:04:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/31 14:52:13 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 // void	main_loop(t_shell *sh)
 // {
@@ -68,6 +68,8 @@ int	main(int argc, char **argv, char **env)
 	redir.file = "out.txt";
 	redir.efile = NULL;
 	redir.mode = O_WRONLY | O_CREAT | O_TRUNC;
+	redir.ttyin = sh.ttyin;
+	redir.ttyout = sh.ttyout;
 	redir.fd = 0;
 	t_pipe	pipe;
 	pipe.type = NODE_PIPE;
@@ -89,6 +91,8 @@ int	main(int argc, char **argv, char **env)
 	red2.file = "LIM";
 	red2.efile = NULL;
 	red2.mode = O_HEREDOC;
+	red2.ttyin = sh.ttyin;
+	red2.ttyout = sh.ttyout;
 	red2.fd = 0;
 	t_pipe	pip2;
 	pip2.type = NODE_PIPE;
@@ -96,9 +100,10 @@ int	main(int argc, char **argv, char **env)
 	pip2.left = (t_cmd *)&red2;
 	pip2.right = (t_cmd *)&pipe;
 	root = (t_cmd *)&pip2;
+	printf("red2 mode: 0x%X\n", red2.mode);
 	execute(root);
 	// printf("exit code: %i\n", sh.ret);
 	return (0);
 }
 
-// <asf.txt cat | grep Petru | wc -l >out.txt
+// << LIM cat | grep Petru | wc -l >out.txt
