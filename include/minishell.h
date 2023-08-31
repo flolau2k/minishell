@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 14:50:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:45:44 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ char	*get_env(char *env[], char *key);
 char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
 
-// lexer.c
-t_cmd	*do_lexing(t_shell *sh);
-
 // helpers.c
 int		array_len(char **arr);
 void	free_arr(char ***arr);
@@ -91,7 +88,25 @@ void	here_doc(t_redir *redir);
 void	hd_child(t_cmd *red);
 
 // parser.c
-void	*parser(char **str);
+void	do_parsing(t_cmd *str);
+
+// lexer_utils.c
+void	get_args(t_array *array, t_word block, int i, int count);
+int		redirect_type(char *instr);
+int		end_expression(char *instr, t_word *word);
+bool	check_char(char c);
+
+// lexer.c
+t_cmd	*do_lexing(t_shell *sh);
+
+// token_utils.c
+int	new_arr(t_array *array, int count);
+
+// tree.c
+void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
+void	arrange_redir_tree(t_cmd **tree, t_redir *node);
+void	arrange_command_tree(t_cmd **tree, t_exec *node);
+void	print_tree(t_cmd **tree); // Test function
 
 // environment.c
 char	**get_env_s(char *env[], char *key);
@@ -99,21 +114,10 @@ char	*get_env(char *env[], char *key);
 char	*get_cmd(char *name, char *env[]);
 char	*get_cmd_path(char *name, char *env[]);
 
-// lexer_utils.c
-void	get_args(char ***start, char ***end, t_word block);
-int		redirect_type(char *instr);
-int		end_expression(char *instr, t_word *word);
-// void		split_args(char **start, char **end);
-
-// tree.c
-void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
-void	arrange_redir_tree(t_cmd **tree, t_redir *node);
-void	arrange_command_tree(t_cmd **tree, t_exec *node);
-
 // tokenizer.c
 t_cmd	*pipe_token(t_cmd **tree);
 int		redirect_token(char *instr, t_cmd **tree);
-int		command_token(t_shell *sh, char **start, char **end, t_cmd **tree);
+int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
 
 // executor.c
 void	f_execute(t_cmd *cmd);

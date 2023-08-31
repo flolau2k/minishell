@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/29 17:06:51 by flauer           ###   ########.fr        #
+#    Updated: 2023/08/31 15:45:20 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ FILES +=	executor.c minishell.c environment.c here_doc.c pipe.c get_cmd.c
 #src/builtins
 FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c
 #src/utils
-FILES +=	destructors.c helpers.c lexer_utils.c
+FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c
 #src/error
 FILES +=	error.c
 #src/test
@@ -85,5 +85,5 @@ $(TEST): $(LIBFT) $(T_OBJ) $(OBJ)
 .PHONY =	all clean fclean re bonus
 
 $(T_NAME): CFLAGS += -g
-$(T_NAME): $(T_OBJ) $(OBJ) $(LIBFT)
+$(T_NAME): $(LIBFT) $(T_OBJ) $(OBJ)
 	$(CC) $(CFLAGS) $(T_OBJ) $(OBJ) $(LIBS) -o $(T_NAME)

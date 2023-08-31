@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 14:46:56 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:46:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ typedef struct s_word
 	char	*start;
 	char	*end;
 }	t_word;
+
+typedef struct s_array
+{
+	char	**start;
+	char	**end;
+}	t_array;
 
 typedef struct s_var
 {
