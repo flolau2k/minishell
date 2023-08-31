@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 17:18:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/31 11:04:20 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define INVALID_ARG_EXIT 128
 # define CTRL_C 130
 
+# define O_HEREDOC 0x0010
+
 # define R_CHAR "<>"
 # define P_CHAR "|"
 # define S_CHAR "<>|"
@@ -63,6 +65,8 @@ int		array_len(char **arr);
 void	free_arr(char ***arr);
 char	**get_env_arr(char *env[], char *key);
 void	print_str_arr(char **arr);
+
+void	wait_exit(void);
 
 // executor.c
 void	execute(t_cmd *cmd);
