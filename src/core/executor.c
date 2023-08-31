@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 11:06:04 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/31 14:41:23 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ void	do_redir(t_redir *redir)
 {
 	redir->cmd->pid = redir->pid;
 	if (redir->mode & O_HEREDOC)
-	{
-		printf("attempting here_doc...\n");
-		here_doc(redir->file);
-	}
+		here_doc(redir);
 	else
 	{
 		redir->fd = open(redir->file, redir->mode, 0644);
