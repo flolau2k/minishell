@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 15:49:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:59:40 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,20 @@ void	main_loop(t_shell *sh)
 	while (true)
 	{
 		sh->line = readline(MINISHELL_PROMPT);
+		while (!sh->line)
+		{
+			sh->line = readline(MINISHELL_PROMPT);
+		}
 		root = do_lexing(sh);
-		printf("<<<------###TREE ROOT###----->>>\n\n");
-		print_tree(&root);
+		// printf("<<<------###TREE ROOT###----->>>\n\n");
+		// print_tree(&root);
 		do_parsing(root);
-		printf("\n\n");
-		printf("<<<------###PARSED AST TREE###----->>>\n\n");
-		print_tree(&root);
+		// printf("\n\n");
+		// printf("<<<------###PARSED AST TREE###----->>>\n\n");
+		// print_tree(&root);
 		execute(root);
 		free(sh->line);
+		printf("done loop...\n");
 	}
 }
 
