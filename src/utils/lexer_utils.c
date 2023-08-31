@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/31 10:54:09 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:33:04 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	redirect_type(char *instr)
 /// @brief Checks for the delimiter and special characters
 /// @param c character passed from the argument string
 /// @return True if it is the researched char, false if not
-static bool	check_char(char c)
+bool	check_char(char c)
 {
 	static bool	is_dquotes;
 	static bool	is_squotes;
@@ -46,6 +46,10 @@ static bool	check_char(char c)
 			return (true);
 		else if (c == '|')
 			return (true);
+		// else if (c == '<')
+		// 	return (true);
+		// else if (c == '>')
+		// 	return (true);
 	}
 	else if (is_squotes && c == '\'')
 		is_squotes = false;
@@ -64,13 +68,13 @@ int	get_word(t_word *word, t_word block, int i)
 	while (block.start[i] && ft_isspace(block.start[i]))
 		i++;
 	cts = i;
-	while (block.start[i])
+	while (block.start[i] && block.start + i <= block.end)
 	{
-	 	if (check_char(block.start[i]))
+		if (check_char(block.start[i]))
 		{
 			word->start = &(block.start[cts]);
-			while (block.start[i] && ft_isspace(block.start[i]))
-				i++;
+			// while (block.start[i] && ft_isspace(block.start[i]))
+			// 	i++;
 			word->end = &(block.start[i]);
 			return (i);
 		}
@@ -92,8 +96,10 @@ void	get_args(t_array *array, t_word block, int i, int count)
 {
 	t_word		word;
 
-	word = (t_word){.start = NULL, .end = NULL};
+	word = (t_word){};
 	i = get_word(&word, block, i);
+	if (i == 0)
+		return ;
 	count++;
 	if (word.end < block.end)
 		get_args(array, block, i, count);

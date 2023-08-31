@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 10:18:38 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:39:39 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 	t_array	array;
 
 	i = 0;
-	word = (t_word){.start = NULL, .end = NULL};
-	array = (t_array){.start = NULL, .end = NULL};
+	word = (t_word){};
+	array = (t_array){};
 	while (instr[i] && instr[i] != '|')
 	{
+		while (instr[i] && ft_isspace(instr[i]))
+			i++;
 		if (!ft_strchr(R_CHAR, instr[i]))
 		{
 			word.start = instr + i;
-			while (instr[i] && instr[i] != '|' && !ft_strchr(R_CHAR, instr[i]))
+			while (instr[i] && !ft_strchr(S_CHAR, instr[i]) && !ft_isspace(instr[i]))
 				i++;
 			word.end = instr + i;
 			get_args(&array, word, 0, 0);

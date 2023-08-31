@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 11:04:11 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:32:34 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,16 @@ void	here_doc(char *lim);
 void	hd_child(char *lim);
 
 // parser.c
-void	*parser(char **str);
-
-// lexer.c
-t_cmd	*do_lexing(t_shell *sh);
+void	do_parsing(t_cmd *str);
 
 // lexer_utils.c
 void	get_args(t_array *array, t_word block, int i, int count);
 int		redirect_type(char *instr);
 int		end_expression(char *instr, t_word *word);
+bool	check_char(char c);
+
+// lexer.c
+t_cmd	*do_lexing(t_shell *sh);
 
 // token_utils.c
 int	new_arr(t_array *array, int count);
@@ -102,6 +103,7 @@ int	new_arr(t_array *array, int count);
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
 void	arrange_redir_tree(t_cmd **tree, t_redir *node);
 void	arrange_command_tree(t_cmd **tree, t_exec *node);
+void	print_tree(t_cmd **tree); // Test function
 
 // environment.c
 char	**get_env_s(char *env[], char *key);
