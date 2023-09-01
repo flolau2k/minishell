@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 12:42:16 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:20:04 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	**set_env(char **env, char *newval)
 	ret = malloc(sizeof(char *) * (len + 1));
 	if (!ret)
 		ft_error("malloc error!", GENERAL_ERROR);
+	ret[len] = NULL;
 	while (i < (len - 1))
 	{
 		ret[i] = ft_strdup(env[i]);
