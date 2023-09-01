@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/08/31 15:45:20 by flauer           ###   ########.fr        #
+#    Updated: 2023/09/01 14:30:17 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,10 @@ HEADERS =	include/minishell.h
 #src/parse
 FILES =		lexer.c parser.c init.c tree.c tokenizer.c
 #src/core
-FILES +=	executor.c minishell.c environment.c here_doc.c pipe.c get_cmd.c
+FILES +=	executor.c minishell.c environment.c here_doc.c pipe.c
 #src/builtins
-FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c
+FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c \
+			builtins.c
 #src/utils
 FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c
 #src/error
