@@ -6,10 +6,9 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 15:46:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 12:18:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -24,7 +23,6 @@ typedef enum e_nodetype
 typedef struct s_cmd
 {
 	t_nodetype	type;
-	pid_t		pid; // initialize with -1
 }	t_cmd;
 
 typedef struct s_shell
@@ -58,7 +56,6 @@ typedef struct s_var
 typedef struct s_exec
 {
 	t_nodetype	type;
-	pid_t		pid;
 	char		*cmd;
 	char		**argv;
 	char		**eargv;
@@ -68,7 +65,6 @@ typedef struct s_exec
 typedef struct s_pipe
 {
 	t_nodetype	type;
-	pid_t		pid;
 	t_cmd		*left;
 	t_cmd		*right;
 }	t_pipe;
@@ -76,7 +72,6 @@ typedef struct s_pipe
 typedef struct s_redir
 {
 	t_nodetype	type;
-	pid_t		pid;
 	t_cmd		*cmd;
 	char		*file;
 	char		*efile;
@@ -86,6 +81,6 @@ typedef struct s_redir
 	int			ttyout;
 }	t_redir;
 
-typedef void (*fcn_p)(t_exec *);
+typedef int	(*t_fcn_p)(t_exec *);
 
 #endif

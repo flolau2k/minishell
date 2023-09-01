@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 15:45:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 12:28:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	print_str_arr(char **arr);
 void	wait_exit(void);
 
 // executor.c
-void	execute(t_cmd *cmd);
+int		execute(t_cmd *cmd);
+void	rec_execute(t_cmd *cmd);
 void	do_exec(t_exec *exec);
 void	do_pipe(t_pipe *cmd);
 void	do_redir(t_redir *redir);
-void	do_execve(t_exec *exec);
 
 // error.c
 void	ft_error(char *msg, int excode);
@@ -100,7 +100,7 @@ bool	check_char(char c);
 t_cmd	*do_lexing(t_shell *sh);
 
 // token_utils.c
-int	new_arr(t_array *array, int count);
+int		new_arr(t_array *array, int count);
 
 // tree.c
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
