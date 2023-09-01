@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 16:21:47 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:26:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char	**unset_env(char **env, char *val);
 char	*get_cmd_path(char *name, char **env);
 char	**get_env_s(char **env, char *key);
 char	*get_cmd(char *name, char **env);
-void	ft_set_null(unsigned int i, char *str);
 
 // helpers.c
 int		array_len(char **arr);

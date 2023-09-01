@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 15:56:47 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:26:13 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,4 @@ char	*get_cmd(char *name, char **env)
 		return (ft_strdup(name));
 	else
 		return (get_cmd_path(name, env));
-}
-
-void	ft_set_null(unsigned int i, char *str)
-{
-	str[i] = 0;
 }
