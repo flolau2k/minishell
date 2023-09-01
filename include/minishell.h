@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 16:26:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:33:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <signal.h>
 # include <sys/wait.h>
 # include <errno.h>
 # include <readline/readline.h>
