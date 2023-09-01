@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 16:33:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:52:43 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define R_CHAR "<>"
 # define P_CHAR "|"
 # define S_CHAR "<>|"
+
+extern int	g_sig;
 
 // SRC
 // CORE
