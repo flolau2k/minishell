@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 15:05:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:57:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,18 @@ bool	init(t_shell *sh, int argc, char **argv, char **env);
 
 // environment.c
 char	**set_env(char **env, char *newval);
-char	*get_env(char *env[], char *key);
-char	*get_cmd(char *name, char *env[]);
-char	*get_cmd_path(char *name, char *env[]);
+char	*get_env(char **env, char *key);
+char	**unset_env(char **env, char *val);
+
+// environment_helper.c
+char	*get_cmd_path(char *name, char **env);
+char	**get_env_s(char **env, char *key);
+char	*get_cmd(char *name, char **env);
+void	ft_set_null(unsigned int i, char *str);
 
 // helpers.c
 int		array_len(char **arr);
-void	free_arr(char ***arr);
+void	free_arr(char **arr);
 void	wait_exit(void);
 
 // error.c
@@ -117,12 +122,6 @@ void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
 void	arrange_redir_tree(t_cmd **tree, t_redir *node);
 void	arrange_command_tree(t_cmd **tree, t_exec *node);
 void	print_tree(t_cmd **tree); // Test function
-
-// environment.c
-char	**get_env_s(char *env[], char *key);
-char	*get_env(char *env[], char *key);
-char	*get_cmd(char *name, char *env[]);
-char	*get_cmd_path(char *name, char *env[]);
 
 // tokenizer.c
 t_cmd	*pipe_token(t_cmd **tree);

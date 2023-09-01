@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 13:03:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:49:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 /// @brief free a string array and it's contents.
 /// @param arr array
-void	free_arr(char ***arr)
+void	free_arr(char **arr)
 {
 	int		i;
-	char	**a;
 
-	a = *arr;
 	i = 0;
-	while (a && a[i])
+	while (arr && arr[i])
 	{
-		free(a[i]);
+		free(arr[i]);
 		i++;
 	}
-	free(a);
-	*arr = NULL;
+	free(arr);
 }
 
 /// @brief get lenth of string array

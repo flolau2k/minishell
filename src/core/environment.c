@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 15:20:04 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:17:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ char	**set_env(char **env, char *newval)
 	i = 0;
 	len = array_len(env);
 	if (newval)
-		len = array_len(env) + 1;
+		len++;
 	ret = malloc(sizeof(char *) * (len + 1));
 	if (!ret)
 		ft_error("malloc error!", GENERAL_ERROR);
 	ret[len] = NULL;
-	while (i < (len - 1))
+	while (i < len)
 	{
-		ret[i] = ft_strdup(env[i]);
+		if (newval && i == len - 1)
+			ret[i] = ft_strdup(newval);
+		else
+			ret[i] = ft_strdup(env[i]);
 		i++;
 	}
 	if (newval)
-	{
-		ret[i] = newval;
-		free_arr(&env);
-	}
+		free_arr(env);
 	return (ret);
 }
 
@@ -50,7 +50,7 @@ char	**set_env(char **env, char *newval)
 /// @param key desired key
 /// @return string with the value or NULL, if key is not in the environment.
 /// return may be free'd if not NULL.
-char	*get_env(char *env[], char *key)
+char	*get_env(char **env, char *key)
 {
 	int		i;
 	char	*ret;
@@ -72,55 +72,22 @@ char	*get_env(char *env[], char *key)
 	return (NULL);
 }
 
-/// @brief get the values of a given key from the environment
-/// @param env the environment
-/// @param key desired key
-/// @return string array with the values, NULL if the key is not in environment.
-/// return may be free'd if not NULL.
-char	**get_env_s(char *env[], char *key)
+char	**unset_env(char **env, char *val)
 {
-	char	**ret;
-	char	*val;
-
-	val = get_env(env, key);
-	if (!val)
-		return (NULL);
-	ret = ft_split(val, ':');
-	free(val);
-	return (ret);
-}
-
-char	*get_cmd_path(char *name, char *env[])
-{
-	char	**paths;
-	char	*path;
-	char	*cmd;
-	int		i;
+	int	i;
+	int	len;
 
 	i = 0;
-	cmd = NULL;
-	paths = get_env_s(env, "PATH");
-	while (paths[i])
+	len = array_len(env);
+	if (!val || len == 0 || ft_strlen(val) == 0)
+		return (env);
+	while (i < len && ft_strncmp(val, env[i], ft_strlen(val)))
+		i++;
+	while (i < (len - 1))
 	{
-		path = ft_strjoin(paths[i], "/");
-		cmd = ft_strjoin(path, name);
-		free(path);
-		if (!access(cmd, X_OK))
-			break ;
-		free(cmd);
-		cmd = NULL;
-		++i;
+		env[i] = env[i + 1];
+		i++;
 	}
-	free_arr(&paths);
-	return (cmd);
-}
-
-char	*get_cmd(char *name, char *env[])
-{
-	if (!name)
-		return (NULL);
-	else if (ft_strnstr(name, "/", ft_strlen(name)))
-		return (ft_strdup(name));
-	else
-		return (get_cmd_path(name, env));
-}
+	env[i] = NULL;
+	return (env);
+}	
