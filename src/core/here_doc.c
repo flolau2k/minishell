@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 12:34:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 12:40:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	hd_child(t_cmd *redir) //TODO check length!
+void	hd_child(t_cmd *redir)
 {
 	char	*line;
 	char	*nlim;
@@ -20,13 +20,13 @@ void	hd_child(t_cmd *redir) //TODO check length!
 
 	red = (t_redir *)redir;
 	nlim = ft_strjoin((char *)red->file, "\n");
-	write(red->ttyout, HERE_DOC_PROMPT, ft_strlen(HERE_DOC_PROMPT) - 1);
+	write(red->ttyout, HERE_DOC_PROMPT, ft_strlen(HERE_DOC_PROMPT));
 	line = get_next_line(red->ttyin);
 	while (ft_strncmp(line, nlim, ft_strlen(nlim)))
 	{
 		printf("%s", line);
 		free(line);
-		write(red->ttyout, HERE_DOC_PROMPT, ft_strlen(HERE_DOC_PROMPT) - 1);
+		write(red->ttyout, HERE_DOC_PROMPT, ft_strlen(HERE_DOC_PROMPT));
 		line = get_next_line(red->ttyin);
 	}
 	free(line);
