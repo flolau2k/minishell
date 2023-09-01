@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 15:16:04 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 14:32:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ void	f_echo(t_exec *cmd)
 		nl = false;
 		i = 2;
 	}
-	while (cmd->argv[i])
+	while (cmd->argv[i] && cmd->argv[i+1])
 	{
-		printf("%s", cmd->argv[i]);
+		printf("%s ", cmd->argv[i]);
 		i++;
 	}
+	printf("%s", cmd->argv[i]);
 	if (nl)
 		printf("\n");
 	return ;
