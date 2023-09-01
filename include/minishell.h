@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 13:16:30 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:05:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	do_redir(t_redir *redir);
 
 // BUILTINS
 t_fcn_p	get_builtin(t_exec *exec);
-void	f_echo(t_exec *cmd);
-void	f_cd(t_exec *cmd);
-void	f_env(t_exec *cmd);
-void	f_exit(t_exec *cmd);
-void	f_export(t_exec *cmd);
-void	f_pwd(t_exec *pwd);
-void	f_unset(t_exec *cmd);
+int		f_echo(t_exec *cmd);
+int		f_cd(t_exec *cmd);
+int		f_env(t_exec *cmd);
+int		f_exit(t_exec *cmd);
+int		f_export(t_exec *cmd);
+int		f_pwd(t_exec *pwd);
+int		f_unset(t_exec *cmd);
 
 // PARSE
 // init.c

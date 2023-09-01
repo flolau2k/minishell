@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 14:32:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:07:52 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	f_echo(t_exec *cmd)
+int	f_echo(t_exec *cmd)
 {
 	int		i;
 	bool	nl;
@@ -32,5 +32,5 @@ void	f_echo(t_exec *cmd)
 	printf("%s", cmd->argv[i]);
 	if (nl)
 		printf("\n");
-	return ;
+	return (EXIT_SUCCESS);
 }

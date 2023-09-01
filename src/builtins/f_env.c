@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:54:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 15:16:14 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:13:08 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	f_env(t_exec *cmd)
+int	f_env(t_exec *cmd)
 {
 	int	i;
 
@@ -22,4 +22,5 @@ void	f_env(t_exec *cmd)
 		printf("%s\n", cmd->sh->env[i]);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }

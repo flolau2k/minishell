@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 12:52:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:04:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ void	rec_execute(t_cmd *cmd)
 
 void	do_pipe(t_pipe *cmd)
 {
-	pid_t	pid;
-
-	pid = create_pipe(&rec_execute, cmd->left);
+	create_pipe(&rec_execute, cmd->left);
 	rec_execute(cmd->right);
 }
 
