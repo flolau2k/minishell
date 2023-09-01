@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 15:57:59 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:21:47 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include "../libft/include/libft.h"
 
 # define HERE_DOC_PROMPT "(heredoc)> "
-# define MINISHELL_PROMPT "> "
+# define MINISHELL_PROMPT "minishell> "
 
 // see https://tldp.org/LDP/abs/html/exitcodes.html
 # define GENERAL_ERROR 1
