@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 12:28:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 13:16:30 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,17 @@
 # define P_CHAR "|"
 # define S_CHAR "<>|"
 
+// SRC
+// CORE
 // minishell.c
 int		main(int argc, char **argv, char **env);
 
-// init.c
-bool	init(t_shell *sh, int argc, char **argv, char **env);
+// pipe.c
+pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
 
-// environment.c
-char	**set_env(char **env, char *newval);
-char	**get_env_arr(char *env[], char *key);
-char	*get_env(char *env[], char *key);
-char	*get_cmd(char *name, char *env[]);
-char	*get_cmd_path(char *name, char *env[]);
-
-// helpers.c
-int		array_len(char **arr);
-void	free_arr(char ***arr);
-char	**get_env_arr(char *env[], char *key);
-void	print_str_arr(char **arr);
-
-void	wait_exit(void);
+// here_doc.c
+void	here_doc(t_redir *redir);
+void	hd_child(t_cmd *red);
 
 // executor.c
 int		execute(t_cmd *cmd);
@@ -72,20 +63,39 @@ void	do_exec(t_exec *exec);
 void	do_pipe(t_pipe *cmd);
 void	do_redir(t_redir *redir);
 
+// BUILTINS
+t_fcn_p	get_builtin(t_exec *exec);
+void	f_echo(t_exec *cmd);
+void	f_cd(t_exec *cmd);
+void	f_env(t_exec *cmd);
+void	f_exit(t_exec *cmd);
+void	f_export(t_exec *cmd);
+void	f_pwd(t_exec *pwd);
+void	f_unset(t_exec *cmd);
+
+// PARSE
+// init.c
+bool	init(t_shell *sh, int argc, char **argv, char **env);
+
+// environment.c
+char	**set_env(char **env, char *newval);
+char	*get_env(char *env[], char *key);
+char	*get_cmd(char *name, char *env[]);
+char	*get_cmd_path(char *name, char *env[]);
+
+// helpers.c
+int		array_len(char **arr);
+void	free_arr(char ***arr);
+void	wait_exit(void);
+
 // error.c
 void	ft_error(char *msg, int excode);
 
 // destructors.c
-void	free_carr(char **arr);
-void	free_exec(t_exec **arg);
-
-// core/pipe.c
-pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
-pid_t	create_pipe_c(void (f1)(char *), char *a1);
-
-// core/here_doc.c
-void	here_doc(t_redir *redir);
-void	hd_child(t_cmd *red);
+void	free_tree(t_cmd *cmd);
+void	free_exec(t_exec *arg);
+void	free_pipe(t_pipe *arg);
+void	free_redir(t_redir *arg);
 
 // parser.c
 void	do_parsing(t_cmd *str);
@@ -125,24 +135,6 @@ void	f_execute(t_cmd *cmd);
 // error.c
 void	ft_error(char *msg, int excode);
 
-// destructors.c
-void	free_carr(char **arr);
-void	free_exec(t_exec **arg);
-
 // BUILTINS
-// echo.c
-void	f_echo(t_exec *cmd);
-// cd.c
-void	f_cd(t_exec *cmd);
-// env.c
-void	f_env(t_exec *cmd);
-// exit.c
-void	f_exit(t_exec *cmd);
-// export.c
-void	f_export(t_exec *cmd);
-// pwd.c
-void	f_pwd(t_exec *pwd);
-// unset.c
-void	f_unset(t_exec *cmd);
 
 #endif

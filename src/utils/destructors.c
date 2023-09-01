@@ -6,44 +6,51 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 12:41:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 13:16:32 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	free_carr(char **arr)
+void	free_tree(t_cmd *cmd)
 {
-	int	i;
+	if (cmd->type == NODE_EXEC)
+		free_exec((t_exec *)cmd);
+	else if (cmd->type == NODE_PIPE)
+		free_pipe((t_pipe *)cmd);
+	else if (cmd->type == NODE_REDIRECT)
+		free_redir((t_redir *)cmd);
+	cmd = NULL;
+}
 
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
+void	free_exec(t_exec *arg)
+{
+	free(arg->argv);
+	free(arg->eargv);
+	free(arg);
+}
+
+void	free_pipe(t_pipe *arg)
+{
+	if (arg->left)
 	{
-		free(arr[i]);
-		++i;
+		free_tree(arg->left);
+		arg->left = NULL;
 	}
-	free(arr);
+	if (arg->right)
+	{
+		free_tree(arg->right);
+		arg->right = NULL;
+	}
+	free(arg);
 }
 
-void	free_exec(t_exec **arg)
+void	free_redir(t_redir *arg)
 {
-	free((*arg)->cmd);
-	free_carr((*arg)->argv);
-	free((*arg)->eargv);
-	free((*arg));
-	*arg = NULL;
+	if (arg->cmd)
+	{
+		free_tree(arg->cmd);
+		arg->cmd = NULL;
+	}
+	free(arg);
 }
-
-// void	free_pipe(t_pipe **arg)
-// {
-// 	free((*arg));
-// 	*arg = NULL;
-// }
-
-// void	free_redir(t_redir **arg)
-// {
-// 	free((*arg)->file);
-// 	free((*arg));
-// }
