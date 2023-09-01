@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/09/01 17:03:01 by flauer           ###   ########.fr        #
+#    Updated: 2023/09/01 17:05:28 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ re:	fclean all
 
 $(LIBFT):
 	@git submodule update --init --recursive
-	@make -C $(@D)
+	@$(MAKE) -C $(@D)
 
 $(TEST): $(LIBFT) $(T_OBJ) $(OBJ)
 	$(CC) $(OBJ) $(T_OBJ) $(LIBS) -o $(TEST)
