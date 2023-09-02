@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 16:52:14 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/02 10:15:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	main_loop(t_shell *sh)
 		root = do_lexing(sh);
 		do_parsing(root);
 		execute(root);
+		free_tree(root);
 	}
 	while (true)
 	{
@@ -32,6 +33,7 @@ void	main_loop(t_shell *sh)
 		root = do_lexing(sh);
 		do_parsing(root);
 		sh->ret = execute(root);
+		free_tree(root);
 		free(sh->line);
 	}
 }
