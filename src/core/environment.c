@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 16:17:11 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 10:32:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,12 @@ char	**unset_env(char **env, char *val)
 	}
 	env[i] = NULL;
 	return (env);
-}	
+}
+
+char	**get_default_env(void)
+{
+	char	**ret;
+
+	ret = ft_calloc(7, sizeof(char *));
+	ret[0] = ""
+}
