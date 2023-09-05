@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 14:41:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 12:31:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1)
 	pid = fork();
 	if (pid == -1)
 		ft_error("fork", GENERAL_ERROR);
-	a1->pid = pid;
 	if (pid == 0)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);
