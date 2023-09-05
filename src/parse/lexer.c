@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 15:39:39 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/05 11:47:01 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 			if (!instr[i])
 				break ;
 		}
-		if (ft_strchr(R_CHAR, instr[i]))
+		if (instr[i] && ft_strchr(R_CHAR, instr[i]))
 			i += redirect_token(&(instr[i]), tree);
 	}
 	command_token(sh, &array, tree);
