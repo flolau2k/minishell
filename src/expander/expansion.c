@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/05 17:47:55 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/05 22:15:12 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ char	*end_arg(char *s)
 	return (s+i);
 }
 
-bool	expand(char *arg, char **new)
+bool	expand(char *arg, char **new, t_shell *sh)
 {
 	int		i;
 	int		count;
 	char	*key;
+	char	*smth;
 
+	smth = NULL;
 	key = NULL;
 	count = 0;
 	i = 0;
@@ -45,8 +47,15 @@ bool	expand(char *arg, char **new)
 			while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
 				count++;
 			key = ft_calloc (count + 1, sizeof(char));
+			if (!key)
+				ft_error("ALLOCATION ERROR", GENERAL_ERROR);
 			ft_strcpy(key, arg[i], count);
-			get_env(env, key);
+			smth = get_env(sh->env, key);
+			free(key);
+			if (!*new)
+				*new = smth;
+			else if (*new)
+				ft_strjoin(new, smth);
 			if (*new)
 				free(*new);
 			
@@ -71,7 +80,7 @@ void	expand_redir(t_redir *arg, t_shell *sh)
 {
 	char	*new;
 
-	expand(arg->file, &new);
+	expand(arg->file, &new, sh);
 	arg->file = new;
 	arg->efile = end_arg(new);
 	if (arg->cmd)
