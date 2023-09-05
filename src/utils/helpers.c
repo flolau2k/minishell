@@ -6,28 +6,25 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 17:18:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:49:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 /// @brief free a string array and it's contents.
 /// @param arr array
-void	free_arr(char ***arr)
+void	free_arr(char **arr)
 {
 	int		i;
-	char	**a;
 
-	a = *arr;
 	i = 0;
-	while (a && a[i])
+	while (arr && arr[i])
 	{
-		free(a[i]);
+		free(arr[i]);
 		i++;
 	}
-	free(a);
-	*arr = NULL;
+	free(arr);
 }
 
 /// @brief get lenth of string array
@@ -43,32 +40,11 @@ int	array_len(char **arr)
 	return i;
 }
 
-/// @brief get the values of a given key from the environment
-/// @param env the environment
-/// @param key desired key
-/// @return string array with the values, NULL if the key is not in environment.
-/// return may be free'd if not NULL.
-char	**get_env_arr(char *env[], char *key)
+void	wait_exit(void)
 {
-	char	**ret;
-	char	*val;
+	pid_t	pid;
 
-	val = get_env(env, key);
-	if (!val)
-		return (NULL);
-	ret = ft_split(val, ':');
-	free(val);
-	return (ret);
-}
-
-void	print_str_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
+	pid = waitpid(0, NULL, 0);
+	while (pid != -1)
+		pid = waitpid(0, NULL, 0);
 }

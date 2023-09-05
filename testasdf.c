@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:02:08 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 11:20:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/08/31 17:36:55 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,28 +89,12 @@
 int	main(void)
 {
 	char	*line;
-	pid_t	pid;
-	int		fd[2];
 
-	pipe(fd);
-	pid = fork();
-	if (pid == 0)
+	while(true)
 	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		close(fd[0]);
 		line = readline("> ");
+		printf("line: %s\n", line);
+		free(line);
 	}
-	else
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		// line = get_next_line(STDIN_FILENO);
-		line = ft_strdup("linasdflkdlsfkdlskgjljsdlfa");
-		waitpid(pid, NULL, 0);
-	}
-	printf("line: %s\n", line);
-	free(line);
 	return (0);
 }

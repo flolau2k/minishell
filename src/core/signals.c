@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 11:01:52 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/29 16:15:23 by pcazac           ###   ########.fr       */
+/*   Created: 2023/09/01 17:01:15 by flauer            #+#    #+#             */
+/*   Updated: 2023/09/01 17:02:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	wait_exit(void)
+void	signal_handler(int signo)
 {
-	pid_t	pid;
-
-	pid = waitpid(0, NULL, 0);
-	while (pid != -1)
-		pid = waitpid(0, NULL, 0);
+	g_sig = signo;
 }
