@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 14:06:04 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 16:44:34 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,65 @@ char	*get_cmd(char *name, char **env)
 	else
 		return (get_cmd_path(name, env));
 }
+
+char	**increment_env_var(char **env, char *key)
+{
+	int		itmp;
+	char	*stmp[3];
+
+	if (!get_env(env, key) || !ft_isdigit(get_env(env, key)[0]))
+		return (env);
+	itmp = (int) ft_atoi(get_env(env, key));
+	stmp[0] = ft_itoa(itmp + 1);
+	stmp[1] = ft_strjoin(key, "=");
+	stmp[2] = ft_strjoin(stmp[1], stmp[0]);
+	free(stmp[0]);
+	free(stmp[1]);
+	replace_in_env(env, stmp[2]);
+	free(stmp[2]);
+	return (env);
+}
+
+char	**set_default_env(char **env)
+{
+	char	*tmp[2];
+
+	if (!get_env(env, "LS_COLORS"))
+		env = set_env(env, "LS_COLORS=");
+	if (!get_env(env, "LESSCLOSE"))
+		env = set_env(env, "LESSCLOSE=/usr/bin/lesspipe %s %s");
+	if (!get_env(env, "LESSOPEN"))
+		env = set_env(env, "LESSOPEN=| /usr/bin/lesspipe %s");
+	if (!get_env(env, "SHLVL"))
+		env = set_env(env, "SHLVL=1");
+	else
+		env = increment_env_var(env, "SHLVL");
+	if (!get_env(env, "PWD"))
+	{
+		tmp[0] = execute_command("/bin/pwd");
+		tmp[1] = ft_strjoin("PWD=", tmp[0]);
+		free(tmp[0]);
+		env = set_env(env, tmp[1]);
+		free(tmp[1]);
+	}
+	return (env);
+}
+
+// char	**set_default_env(char **env)
+// {
+// 	char	**ret;
+// 	char	*temp;
+
+// 	ret = ft_calloc(6, sizeof(char *));
+// 	ret[0] = ft_strdup("LS_COLORS=");
+// 	ret[1] = ft_strdup("LESSCLOSE=/usr/bin/lesspipe %s %s");
+// 	ret[2] = ft_strdup("LESSOPEN=| /usr/bin/lesspipe %s");
+// 	ret[3] = ft_strdup("SHLVL=1");
+// 	temp = execute_command("/bin/pwd");
+// 	if (temp)
+// 		ret[4] = ft_strjoin("PWD=", temp);
+// 	else
+// 		ret[4] = NULL;
+
+// 	return (ret);
+// }

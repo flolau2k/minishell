@@ -6,15 +6,35 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 14:47:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 16:21:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/// @brief add new value to internal env array. If newval is NULL, env will be
-/// copied and returned. The single values will be deep-copied. Old env
-/// pointer will be free'd if newval is not NULL.
+char	**copy_env(char **env)
+{
+	int		len;
+	int		i;
+	char	**ret;
+
+	i = 0;
+	len = array_len(env);
+	ret = malloc(sizeof(char *) * (len + 1));
+	if (!ret)
+		ft_error("malloc error!", GENERAL_ERROR);
+	ret[len] = NULL;
+	while (i < len)
+	{
+		ret[i] = ft_strdup(env[i]);
+		i++;
+	}
+	ret = set_default_env(ret);
+	return (ret);
+}
+
+/// @brief add new value to internal env array. Old env pointer will be free'd.
+/// if newval is NULL, env is returned.
 /// @param env old env pointer
 /// @param newval new string to put in
 /// @return new env pointer.
@@ -25,23 +45,22 @@ char	**set_env(char **env, char *newval)
 	char	**ret;
 
 	i = 0;
-	len = array_len(env);
-	if (newval)
-		len++;
+	if (!newval)
+		return (env);
+	len = array_len(env) + 1;
 	ret = malloc(sizeof(char *) * (len + 1));
 	if (!ret)
 		ft_error("malloc error!", GENERAL_ERROR);
 	ret[len] = NULL;
 	while (i < len)
 	{
-		if (newval && i == len - 1)
+		if (i == len - 1)
 			ret[i] = ft_strdup(newval);
 		else
 			ret[i] = ft_strdup(env[i]);
 		i++;
 	}
-	if (newval)
-		free_arr(env);
+	free_arr(env);
 	return (ret);
 }
 
@@ -113,12 +132,4 @@ char	**unset_env(char **env, char *val)
 	}
 	env[i] = NULL;
 	return (env);
-}
-
-char	**get_default_env(void)
-{
-	char	**ret;
-
-	ret = ft_calloc(7, sizeof(char *));
-	ret[0] = execute_command("/usr/")
 }

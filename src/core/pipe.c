@@ -6,11 +6,17 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 14:54:20 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 15:41:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	close_pipe(int *pipe_fd)
+{
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+}
 
 pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1)
 {
@@ -25,49 +31,62 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1)
 	if (pid == 0)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
+		close_pipe(pipe_fd);
 		if (f1)
 			f1(a1);
 	}
 	else
 	{
 		dup2(pipe_fd[0], STDIN_FILENO);
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
+		close_pipe(pipe_fd);
 	}
 	return (pid);
 }
 
-t_exec	*create_exec_node(char	*cmd)
+char	*execute_command(char *cmd)
 {
-	t_exec *ret;
+	pid_t	pid;
+	int		stat_loc;
+	int		tty[2];
+	char	*ret;
 
-	ret = malloc(sizeof(t_exec));
-	if (!ret)
-		ft_error("malloc error!", GENERAL_ERROR);
-	ret->type = NODE_EXEC;
-	ret->cmd = cmd;
-	ret->argv = ft_calloc(2, sizeof(char *));
-	if (!ret->argv)
-		ft_error("malloc error!", GENERAL_ERROR);
-	ret->argv[0] = cmd;
-	ret->eargv = NULL;
-	ret->sh = NULL;
+	tty[0] = dup(STDIN_FILENO);
+	tty[1] = dup(STDOUT_FILENO);
+	pid = execute_command_pipe(cmd);
+	waitpid(pid, &stat_loc, 0);
+	if (WEXITSTATUS(stat_loc) == 0)
+		ret = get_next_line(STDIN_FILENO);
+	else
+		ret = NULL;
+	dup2(STDIN_FILENO, tty[0]);
+	dup2(STDOUT_FILENO, tty[1]);
 	return (ret);
 }
 
-char	*execute_command(char *cmd)
+pid_t	execute_command_pipe(char *cmd)
 {
-	char	*ret;
 	pid_t	pid;
-	t_cmd	*tree;
+	int		pipe_fd[2];
 
-	tree = (t_cmd *)create_exec_node(cmd);
-	pid = create_pipe(&rec_execute, tree);
-	waitpid(pid, NULL, 0);
-	ret = get_next_line(STDIN_FILENO);
-	free(((t_exec *)tree)->argv);
-	free((t_exec *)tree);
-	return (ret);
+	if (pipe(pipe_fd) == -1)
+		ft_error("pipe", GENERAL_ERROR);
+	pid = fork();
+	if (pid == -1)
+		ft_error("fork", GENERAL_ERROR);
+	if (pid == 0)
+	{
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		close_pipe(pipe_fd);
+		if (execve(cmd, NULL, NULL) == -1)
+		{
+			printf("minishell: %s: %s\n", cmd, strerror(errno));
+			exit(GENERAL_ERROR);
+		}
+	}
+	else
+	{
+		dup2(pipe_fd[0], STDIN_FILENO);
+		close_pipe(pipe_fd);
+	}
+	return (pid);
 }
