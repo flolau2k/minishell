@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 14:19:10 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 14:46:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		main(int argc, char **argv, char **env);
 
 // pipe.c
 pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
+char	*execute_command(char *cmd);
 
 // here_doc.c
 void	here_doc(t_redir *redir);
