@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/02 10:15:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 10:07:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	main_loop(t_shell *sh)
 		sh->ret = execute(root);
 		free_tree(root);
 		free(sh->line);
+		printf("%s", NO_COLOR);
 	}
 }
 

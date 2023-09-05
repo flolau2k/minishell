@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 17:02:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 10:04:40 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
 # include "structs.h"
 # include "../libft/include/libft.h"
+
+# define NO_COLOR "\033[0m"
 
 # define HERE_DOC_PROMPT "(heredoc)> "
 # define MINISHELL_PROMPT "minishell> "
