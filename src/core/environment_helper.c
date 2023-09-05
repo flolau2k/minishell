@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 16:44:34 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 16:51:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,22 +106,3 @@ char	**set_default_env(char **env)
 	}
 	return (env);
 }
-
-// char	**set_default_env(char **env)
-// {
-// 	char	**ret;
-// 	char	*temp;
-
-// 	ret = ft_calloc(6, sizeof(char *));
-// 	ret[0] = ft_strdup("LS_COLORS=");
-// 	ret[1] = ft_strdup("LESSCLOSE=/usr/bin/lesspipe %s %s");
-// 	ret[2] = ft_strdup("LESSOPEN=| /usr/bin/lesspipe %s");
-// 	ret[3] = ft_strdup("SHLVL=1");
-// 	temp = execute_command("/bin/pwd");
-// 	if (temp)
-// 		ret[4] = ft_strjoin("PWD=", temp);
-// 	else
-// 		ret[4] = NULL;
-
-// 	return (ret);
-// }
