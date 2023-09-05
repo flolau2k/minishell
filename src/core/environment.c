@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 10:32:26 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 14:24:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,35 @@ char	**set_env(char **env, char *newval)
 	return (ret);
 }
 
+bool	replace_in_env(char **env, char *new)
+{
+	int		len;
+	int		i;
+	char	*name;
+
+	name = ft_substr(new, 0, ft_strchr(new, '=') - new + 1);
+	i = 0;
+	len = array_len(env);
+	while (i < len)
+	{
+		if (ft_strncmp(env[i], name, ft_strlen(name)) == 0)
+		{
+			ft_bzero(env[i], ft_strlen(env[i]));
+			free(env[i]);
+			free(name);
+			env[i] = ft_strdup(new);
+			return (true);
+		}
+		i++;
+	}
+	return (false);
+}
+
 /// @brief get a single value of a given key from the environment
 /// @param env the environment
 /// @param key desired key
 /// @return string with the value or NULL, if key is not in the environment.
-/// return may be free'd if not NULL.
+/// returned value points directly to the env, do not modify or free!
 char	*get_env(char **env, char *key)
 {
 	int		i;
@@ -63,8 +87,7 @@ char	*get_env(char **env, char *key)
 	{
 		if (ft_strnstr(env[i], key, ft_strlen(key)))
 		{
-			ret = ft_substr(env[i], ft_strlen(key) + 1, \
-				ft_strlen(env[i]) - ft_strlen(key) - 1);
+			ret = env[i] + ft_strlen(key) + 1;
 			return (ret);
 		}
 		++i;
@@ -92,10 +115,10 @@ char	**unset_env(char **env, char *val)
 	return (env);
 }
 
-char	**get_default_env(void)
-{
-	char	**ret;
+// char	**get_default_env(void)
+// {
+// 	char	**ret;
 
-	ret = ft_calloc(7, sizeof(char *));
-	ret[0] = ""
-}
+// 	ret = ft_calloc(7, sizeof(char *));
+// 	ret[0] = ""
+// }

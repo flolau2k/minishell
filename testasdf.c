@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:02:08 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 17:36:55 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 13:56:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,9 @@
 
 int	main(void)
 {
-	char	*line;
+	char	*line = "TEST=hadsf";
 
-	while(true)
-	{
-		line = readline("> ");
-		printf("line: %s\n", line);
-		free(line);
-	}
+	char	*test = ft_substr(line, 0, ft_strchr(line, '=') - line);
+	printf("%s\n", test);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 10:04:40 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 14:19:10 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ bool	init(t_shell *sh, int argc, char **argv, char **env);
 char	**set_env(char **env, char *newval);
 char	*get_env(char **env, char *key);
 char	**unset_env(char **env, char *val);
+bool	replace_in_env(char **env, char *new);
 
 // environment_helper.c
 char	*get_cmd_path(char *name, char **env);
