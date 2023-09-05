@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 15:41:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 17:27:29 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1)
 	return (pid);
 }
 
-char	*execute_command(char *cmd)
+char	*execute_command(char *cmd, char **argv)
 {
 	pid_t	pid;
 	int		stat_loc;
@@ -52,7 +52,7 @@ char	*execute_command(char *cmd)
 
 	tty[0] = dup(STDIN_FILENO);
 	tty[1] = dup(STDOUT_FILENO);
-	pid = execute_command_pipe(cmd);
+	pid = execute_command_pipe(cmd, argv);
 	waitpid(pid, &stat_loc, 0);
 	if (WEXITSTATUS(stat_loc) == 0)
 		ret = get_next_line(STDIN_FILENO);
@@ -63,7 +63,7 @@ char	*execute_command(char *cmd)
 	return (ret);
 }
 
-pid_t	execute_command_pipe(char *cmd)
+pid_t	execute_command_pipe(char *cmd, char **argv)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
@@ -77,7 +77,7 @@ pid_t	execute_command_pipe(char *cmd)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close_pipe(pipe_fd);
-		if (execve(cmd, NULL, NULL) == -1)
+		if (execve(cmd, argv, NULL) == -1)
 		{
 			printf("minishell: %s: %s\n", cmd, strerror(errno));
 			exit(GENERAL_ERROR);
