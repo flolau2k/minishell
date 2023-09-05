@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 14:41:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/04 16:50:46 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	do_execve(t_exec *exec)
 	}
 	if (execve(cmd, exec->argv, exec->sh->env) == -1)
 	{
+		//  Must free memory if execve fails ???
 		printf("minishell: %s: %s\n", cmd, strerror(errno));
 		exit(GENERAL_ERROR);
 	}
