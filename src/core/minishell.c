@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 11:12:39 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/05 11:54:19 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,13 @@ void	main_loop(t_shell *sh)
 	if (sh->line)
 	{
 		root = do_lexing(sh);
+		// ft_printf("<<<-----LEXING----->>>\n");
+		// ft_printf("\n");
+		// print_tree(&root);
 		do_parsing(root);
+		// ft_printf("<<<-----PARSING----->>>\n");
+		// ft_printf("\n");
+		// print_tree(&root);
 		execute(root);
 		free_tree(root);
 	}
@@ -31,11 +37,12 @@ void	main_loop(t_shell *sh)
 		if (ft_strlen(sh->line) == 0)
 			continue;
 		root = do_lexing(sh);
-		// printf("<<<------###TREE ROOT###----->>>\n\n");
+		// ft_printf("<<<-----LEXING----->>>\n");
+		// ft_printf("\n");
 		// print_tree(&root);
 		do_parsing(root);
-		// printf("\n\n");
-		// printf("<<<------###PARSED AST TREE###----->>>\n\n");
+		// ft_printf("<<<-----PARSING----->>>\n");
+		// ft_printf("\n");
 		// print_tree(&root);
 		sh->ret = execute(root);
 		free_tree(root);
