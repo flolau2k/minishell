@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 09:43:38 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 09:54:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ char	*execute_command(char *cmd, char **argv)
 	pid = execute_command_pipe(cmd, argv);
 	waitpid(pid, &stat_loc, 0);
 	if (WEXITSTATUS(stat_loc) == 0)
+	{
 		ret = get_next_line(STDIN_FILENO);
+		ret = ft_strtrim(ret, "\n");
+	}
 	else
 		ret = NULL;
 	dup2(tty[0],STDIN_FILENO);
