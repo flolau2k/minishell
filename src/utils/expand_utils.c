@@ -6,13 +6,13 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/06 18:47:06 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:48:33 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*realloc(char *new, char *s, int count)
+char	*ft_realloc(char *new, char *s, int count)
 {
 	char	*str;
 
@@ -24,6 +24,7 @@ char	*realloc(char *new, char *s, int count)
 	else
 		return (new);
 	str = ft_strjoin(new, s);
+	free(new);
 	return (str);
 }
 

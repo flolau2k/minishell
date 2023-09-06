@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/06 18:42:35 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:49:53 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*expand(char *arg, t_shell *sh)
 			else
 				new = NULL;
 			free(ret);
-			ret = realloc(new, s, count);
+			ret = ft_realloc(new, s, count);
 		}
 		else if (arg[i] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
 		{
@@ -61,7 +61,7 @@ char	*expand(char *arg, t_shell *sh)
 			else
 				new = NULL;
 			free(ret);
-			ret = realloc(new, s, count);
+			ret = ft_realloc(new, s, count);
 			free(s);
 		}
 		else if (arg[i] && arg[i] != '$' && arg[i + 1] != '?')
@@ -74,7 +74,7 @@ char	*expand(char *arg, t_shell *sh)
 			else
 				new = NULL;
 			free(ret);
-			ret = realloc(new, s, count);
+			ret = ft_realloc(new, s, count);
 			free(s);
 		}
 	}
@@ -91,7 +91,7 @@ void	expand_exec(t_exec *arg, t_shell *sh)
 	i = -1;
 	new = NULL;
 	while (arg->argv[++i])
-		arg->argv[i] = expand(arg->argv[i], sh, 0);
+		arg->argv[i] = expand(arg->argv[i], sh);
 	arg->cmd = arg->argv[0];
 }
 
@@ -99,7 +99,7 @@ void	expand_exec(t_exec *arg, t_shell *sh)
 /// @param arg Node of the redirect command
 void	expand_redir(t_redir *arg, t_shell *sh)
 {
-	arg->file = expand(arg->file, NULL, sh, 0);
+	arg->file = expand(arg->file, sh);
 	arg->efile = end_arg(arg->file);
 	if (arg->cmd)
 		expander(sh, arg->cmd);

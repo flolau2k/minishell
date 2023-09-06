@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 18:47:10 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:48:30 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
 void	expander(t_shell *sh, t_cmd *cmd);
 
 // expand_utils.c
-char	*realloc(char *ret, char *s, int count);
+char	*ft_realloc(char *ret, char *s, int count);
 int		is_special_variable(t_shell *sh, char **new);
 int		is_variable(t_shell *sh, char *arg, char **new);
 int		not_variable(char *arg, char **new);
