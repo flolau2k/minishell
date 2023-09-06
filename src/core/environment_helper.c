@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 16:26:13 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 08:54:00 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	**get_env_s(char **env, char *key)
 	if (!val)
 		return (NULL);
 	ret = ft_split(val, ':');
-	free(val);
 	return (ret);
 }
 

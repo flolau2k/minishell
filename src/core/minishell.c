@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 08:45:50 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 09:50:15 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	main_loop(t_shell *sh)
 		// ft_printf("\n");
 		// print_tree(&root);
 		do_parsing(root);
-		// expander(sh, sh->root);
-		// ft_printf("<<<-----PARSING----->>>\n");
-		// ft_printf("\n");
-		// print_tree(&root);
+		expander(sh, root);
+		ft_printf("<<<-----PARSING----->>>\n");
+		ft_printf("\n");
+		print_tree(&root);
 		execute(root);
 		free_tree(root);
 	}
@@ -42,10 +42,10 @@ void	main_loop(t_shell *sh)
 		// ft_printf("\n");
 		// print_tree(&root);
 		do_parsing(root);
-		// expander(sh, sh->root);
-		// ft_printf("<<<-----PARSING----->>>\n");
-		// ft_printf("\n");
-		// print_tree(&root);
+		expander(sh, root);
+		ft_printf("<<<-----PARSING----->>>\n");
+		ft_printf("\n");
+		print_tree(&root);
 		sh->ret = execute(root);
 		free_tree(root);
 		free(sh->line);

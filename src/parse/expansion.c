@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/06 08:39:45 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 10:24:34 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*end_arg(char *s)
 	return (s+i);
 }
 
-void	expand(char *arg, char **new, t_shell *sh)
+char	*expand(char *arg, char *new, t_shell *sh)
 {
 	int		i;
 	int		count;
@@ -46,37 +46,55 @@ void	expand(char *arg, char **new, t_shell *sh)
 		// }
 		if (arg[i] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
 		{
-			while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
+			while (arg[++i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
 				count++;
-			key = ft_calloc (count + 1, sizeof(char));
+			key = ft_substr(arg + i - count, 0, count);
 			if (!key)
 				ft_error("ALLOCATION ERROR", GENERAL_ERROR);
-			key = ft_substr(arg + i, 0, count);
 			smth = get_env(sh->env, key);
 			free(key);
-			if (!*new)
-				*new = smth;
-			else if (*new)
-				smth2 = ft_strjoin(*new, smth);
-			free(smth);
-			free(*new);
-			*new = smth2;
+			if (!new)
+			{
+				new = smth;
+				expand(arg + i, new, sh);
+			}
+			else if (new)
+				smth2 = ft_strjoin(new, smth);
+			// free(smth);
+			// free(new);
+			new = smth2;
+			expand(arg + i, new, sh);
 		}
 		else
 		{
 			count = 0;
-			while (arg[i] && !ft_isalnum(arg[i]) && arg[i] != '_')
+			while (arg[i])
 			{
-				if (arg[i] && arg[i] != '$')
+				if (arg[i] && arg[i] == '$')
 					break;
 				count++;
+				i++;
 			}
-			smth = ft_substr(arg + i, 0, count);
-			ft_strjoin(*new, smth);
-			free(smth);
+			smth = ft_substr(arg + i - count, 0, count);
+			if (!smth)
+				ft_error("ALLOCATION ERROR", GENERAL_ERROR);
+			if (!new)
+			{
+				new = smth;
+				expand(arg + i, new, sh);
+			}
+			else
+			{
+				smth2 = ft_strjoin(new, smth);
+				// free(new);
+				// free(smth);
+				new = smth2;
+			}
+				expand(arg + i, new, sh);
 		}
-		i++;
+		// i++;
 	}
+	return (new);
 }
 
 /// @brief ft_strdup the arguments and search for the environment expansions
@@ -87,8 +105,9 @@ void	expand_exec(t_exec *arg, t_shell *sh)
 	int		i;
 
 	i = -1;
+	new = NULL;
 	while (arg->argv[++i])
-		expand(arg->argv[i], &new, sh);
+		arg->argv[i] = expand(arg->argv[i], new, sh);
 	arg->cmd = arg->argv[0];
 }
 
@@ -98,7 +117,8 @@ void	expand_redir(t_redir *arg, t_shell *sh)
 {
 	char	*new;
 
-	expand(arg->file, &new, sh);
+	new = NULL;
+	new = expand(arg->file, new, sh);
 	arg->file = new;
 	arg->efile = end_arg(new);
 	if (arg->cmd)
