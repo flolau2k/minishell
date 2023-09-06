@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 10:04:40 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 17:27:38 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int		main(int argc, char **argv, char **env);
 
 // pipe.c
 pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
+pid_t	execute_command_pipe(char *cmd, char **argv);
+char	*execute_command(char *cmd, char **argv);
+void	close_pipe(int *pipe_fd);
 
 // here_doc.c
 void	here_doc(t_redir *redir);
@@ -88,11 +91,14 @@ bool	init(t_shell *sh, int argc, char **argv, char **env);
 char	**set_env(char **env, char *newval);
 char	*get_env(char **env, char *key);
 char	**unset_env(char **env, char *val);
+bool	replace_in_env(char **env, char *new);
+char	**copy_env(char **env);
 
 // environment_helper.c
 char	*get_cmd_path(char *name, char **env);
 char	**get_env_s(char **env, char *key);
 char	*get_cmd(char *name, char **env);
+char	**set_default_env(char **env);
 
 // helpers.c
 int		array_len(char **arr);
