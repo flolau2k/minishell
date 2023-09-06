@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 07:43:22 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 11:06:06 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,9 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
 
 // expansion.c
 void	expander(t_shell *sh, t_cmd *cmd);
+
+// expand_utils.c
+
 
 // executor.c
 void	f_execute(t_cmd *cmd);

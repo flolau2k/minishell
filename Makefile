@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+         #
+#    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/09/06 07:42:34 by pcazac           ###   ########.fr        #
+#    Updated: 2023/09/06 11:05:28 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ FILES +=	executor.c minishell.c environment.c here_doc.c pipe.c \
 FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c \
 			builtins.c
 #src/utils
-FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c
+FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c expand_utils.c
 #src/error
 FILES +=	error.c
 #src/test
