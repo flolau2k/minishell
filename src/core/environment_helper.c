@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 17:42:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 10:08:01 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_cmd_path(char *name, char **env)
 	i = 0;
 	cmd = NULL;
 	paths = get_env_s(env, "PATH");
-	while (paths[i])
+	while (paths && paths[i])
 	{
 		path = ft_strjoin(paths[i], "/");
 		cmd = ft_strjoin(path, name);
