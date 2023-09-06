@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:22:01 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/31 14:20:30 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/05 11:54:27 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,8 @@ void	print_tree(t_cmd **tree)
 		int i = -1;
 		while(exec->argv[++i])
 		{
-			printf("Exec Arrg: %s\n", exec->argv[i]);
-			printf("Exec End Arg: %s\n", exec->eargv[i]);
+			printf("Exec Arrg: ##%s##\n", exec->argv[i]);
+			printf("Exec End Arg: ##%s##\n", exec->eargv[i]);
 		}
 		return ;
 	}
