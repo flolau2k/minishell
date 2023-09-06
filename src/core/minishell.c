@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 14:20:09 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:23:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ void	main_loop(t_shell *sh)
 {
 	t_cmd	*root;
 
-	if (sh->line)
-	{
-		root = do_lexing(sh);
-		// ft_printf("<<<-----LEXING----->>>\n");
-		// ft_printf("\n");
-		// print_tree(&root);
-		do_parsing(root);
-		// ft_printf("<<<-----PARSING----->>>\n");
-		// ft_printf("\n");
-		// print_tree(&root);
-		execute(root);
-		free_tree(root);
-	}
 	while (true)
 	{
 		sh->line = readline(MINISHELL_PROMPT);
