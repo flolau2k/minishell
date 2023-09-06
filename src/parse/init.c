@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:26:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 14:27:06 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 16:08:32 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	init(t_shell *sh, int argc, char **argv, char **env)
 	*sh = (t_shell){};
 	if (argc == 2)
 		sh->line = argv[1];
-	sh->env = set_env(env, NULL);
+	sh->env = copy_env(env);
 	sh->ttyin = dup(STDIN_FILENO);
 	sh->ttyout = dup(STDOUT_FILENO);
 	return (true);

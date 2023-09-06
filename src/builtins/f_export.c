@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 16:20:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/05 14:21:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,23 @@
 
 int	f_export(t_exec *cmd)
 {
-	if (!cmd->argv[1])
+	char	*key;
+	char	*new;
+
+	new = cmd->argv[1];
+	if (!new)
 		f_env(cmd);
-	if (ft_strchr(cmd->argv[1], '='))
-		cmd->sh->env = set_env(cmd->sh->env, cmd->argv[1]);
+	if (ft_strchr(new, '='))
+	{
+		key = ft_substr(new, 0, ft_strchr(new, '=') - new);
+		if (get_env(cmd->sh->env, key))
+		{
+			if (!replace_in_env(cmd->sh->env, new))
+				ft_error("failure in replacing env!", GENERAL_ERROR);
+		}
+		else
+			cmd->sh->env = set_env(cmd->sh->env, new);
+		free(key);
+	}
 	return (EXIT_SUCCESS);
 }
