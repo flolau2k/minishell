@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 10:08:01 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 11:06:18 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,13 @@ char	**set_default_env(char **env)
 	if (!get_env(env, "PWD"))
 	{
 		tmp[0] = execute_command("/bin/pwd", (char *[]){"/bin/pwd", NULL});
-		tmp[1] = ft_strjoin("PWD=", tmp[0]);
-		free(tmp[0]);
-		env = set_env(env, tmp[1]);
-		free(tmp[1]);
+		if (tmp[0])
+		{
+			tmp[1] = ft_strjoin("PWD=", tmp[0]);
+			free(tmp[0]);
+			env = set_env(env, tmp[1]);
+			free(tmp[1]);
+		}
 	}
 	return (env);
 }
