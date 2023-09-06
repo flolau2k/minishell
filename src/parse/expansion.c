@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/06 10:24:34 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 11:46:28 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,71 +28,22 @@ char	*end_arg(char *s)
 char	*expand(char *arg, char *new, t_shell *sh)
 {
 	int		i;
-	int		count;
-	char	*key;
-	char	*smth;
-	char	*smth2;
 
-	smth = NULL;
-	smth2 = NULL;
-	key = NULL;
-	count = 0;
 	i = 0;
-	while (arg[i])
+	if (arg[i] && arg[i] == '$' && arg[i + 1] == '?')
 	{
-		// if (arg[i] && arg[i] == '$' && arg[i + 1] == '?')
-		// {
-			
-		// }
-		if (arg[i] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
-		{
-			while (arg[++i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
-				count++;
-			key = ft_substr(arg + i - count, 0, count);
-			if (!key)
-				ft_error("ALLOCATION ERROR", GENERAL_ERROR);
-			smth = get_env(sh->env, key);
-			free(key);
-			if (!new)
-			{
-				new = smth;
-				expand(arg + i, new, sh);
-			}
-			else if (new)
-				smth2 = ft_strjoin(new, smth);
-			// free(smth);
-			// free(new);
-			new = smth2;
-			expand(arg + i, new, sh);
-		}
-		else
-		{
-			count = 0;
-			while (arg[i])
-			{
-				if (arg[i] && arg[i] == '$')
-					break;
-				count++;
-				i++;
-			}
-			smth = ft_substr(arg + i - count, 0, count);
-			if (!smth)
-				ft_error("ALLOCATION ERROR", GENERAL_ERROR);
-			if (!new)
-			{
-				new = smth;
-				expand(arg + i, new, sh);
-			}
-			else
-			{
-				smth2 = ft_strjoin(new, smth);
-				// free(new);
-				// free(smth);
-				new = smth2;
-			}
-				expand(arg + i, new, sh);
-		}
-		// i++;
+		i = is_special_variable(sh, &new);
+		expand(arg + i, new, sh);
+	}
+	if (arg[i] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
+	{
+		i = is_variable(sh, arg, &new);
+		expand(arg + i, new, sh);
+	}
+	else if (arg[i] && arg[i] != '$' && arg[i + 1] != '?')
+	{
+		i = not_variable(arg, &new);
+		expand(arg + i, new, sh);
 	}
 	return (new);
 }
