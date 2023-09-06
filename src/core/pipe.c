@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 17:27:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 09:43:38 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ char	*execute_command(char *cmd, char **argv)
 		ret = get_next_line(STDIN_FILENO);
 	else
 		ret = NULL;
-	dup2(STDIN_FILENO, tty[0]);
-	dup2(STDOUT_FILENO, tty[1]);
+	dup2(tty[0],STDIN_FILENO);
+	dup2(tty[1], STDOUT_FILENO);
 	return (ret);
 }
 
