@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/05 22:15:12 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 07:41:33 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ bool	expand(char *arg, char **new, t_shell *sh)
 	int		count;
 	char	*key;
 	char	*smth;
+	char	*smth2;
 
 	smth = NULL;
+	smth2 = NULL;
 	key = NULL;
 	count = 0;
 	i = 0;
@@ -49,30 +51,40 @@ bool	expand(char *arg, char **new, t_shell *sh)
 			key = ft_calloc (count + 1, sizeof(char));
 			if (!key)
 				ft_error("ALLOCATION ERROR", GENERAL_ERROR);
-			ft_strcpy(key, arg[i], count);
+			key = ft_substr(arg[i], 0, count);
 			smth = get_env(sh->env, key);
 			free(key);
 			if (!*new)
 				*new = smth;
 			else if (*new)
-				ft_strjoin(new, smth);
-			if (*new)
-				free(*new);
-			
+				smth2 = ft_strjoin(*new, smth);
+			free(smth);
+			free(*new);
+			*new = smth2;
 		}
-		expand_var();
+		else
+		{
+			count = 0;
+			while (arg[i] && !ft_isalnum(arg[i]) && arg[i] != '_')
+			{
+				if (arg[i] && arg[i] != '$')
+					break;
+				count++
+			}
+			smth = ft_substr(arg[i], 0, count);
+			ft_strjoin(new, smth);
+			free(smth);
+		}
 		i++;
 	}
-	if (arg[i])
-		is_var(arg + i, new);
 }
 
-/// @brief ft_strdup the arguments and search for the environment expansions
-/// @param arg Node of the exec command
-void	expand_exec(t_exec *arg, t_shell *sh)
-{
+// /// @brief ft_strdup the arguments and search for the environment expansions
+// /// @param arg Node of the exec command
+// void	expand_exec(t_exec *arg, t_shell *sh)
+// {
 	
-}
+// }
 
 /// @brief ft_strdup the arguments and search for the environment expansions
 /// @param arg Node of the redirect command
@@ -99,9 +111,9 @@ void	travel_pipe(t_pipe *arg, t_shell *sh)
 /// @param cmd Root node of the AST
 void	expander(t_shell *sh, t_cmd *cmd)
 {
-	if (cmd->type == NODE_EXEC)
-		expand_exec((t_exec *)cmd, sh);
-	else if (cmd->type == NODE_PIPE)
+	// if (cmd->type == NODE_EXEC)
+	// 	expand_exec((t_exec *)cmd, sh);
+	if (cmd->type == NODE_PIPE)
 		travel_pipe((t_pipe *)cmd, sh);
 	else if (cmd->type == NODE_REDIRECT)
 		expand_redir((t_redir *)cmd, sh);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 10:04:40 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 07:43:22 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,9 @@ void	print_tree(t_cmd **tree); // Test function
 t_cmd	*pipe_token(t_cmd **tree);
 int		redirect_token(char *instr, t_cmd **tree);
 int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
+
+// expansion.c
+void	expander(t_shell *sh, t_cmd *cmd);
 
 // executor.c
 void	f_execute(t_cmd *cmd);
