@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 11:54:19 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/06 13:34:44 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	main_loop(t_shell *sh)
 		sh->line = readline(MINISHELL_PROMPT);
 		if (ft_strlen(sh->line) == 0)
 			continue;
+		add_history(sh->line);
 		root = do_lexing(sh);
 		// ft_printf("<<<-----LEXING----->>>\n");
 		// ft_printf("\n");
