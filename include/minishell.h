@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 17:27:38 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 13:47:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,5 @@ void	print_tree(t_cmd **tree); // Test function
 t_cmd	*pipe_token(t_cmd **tree);
 int		redirect_token(char *instr, t_cmd **tree);
 int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
-
-// executor.c
-void	f_execute(t_cmd *cmd);
-
-// error.c
-void	ft_error(char *msg, int excode);
-
-// BUILTINS
 
 #endif

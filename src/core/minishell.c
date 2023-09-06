@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 13:34:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/06 14:20:09 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_shell	sh;
 
+	signal(SIGINT, &signal_handler);
 	init(&sh, argc, argv, env);
 	// signals()
 	main_loop(&sh);
