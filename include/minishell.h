@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 15:52:41 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/07 17:46:58 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		f_exit(t_exec *cmd);
 int		f_export(t_exec *cmd);
 int		f_pwd(t_exec *pwd);
 int		f_unset(t_exec *cmd);
+void	f_exit2(char *msg, int code);
 
 // PARSE
 // init.c
@@ -153,12 +154,6 @@ int		not_variable(char *arg, char **new);
 int	get_special_var(t_shell *sh, char **ret);
 int	get_variable(t_shell *sh, char *arg, char **ret);
 int	get_non_variable(char *arg, char **ret);
-
-// executor.c
-void	f_execute(t_cmd *cmd);
-
-// error.c
-void	ft_error(char *msg, int excode);
 
 // BUILTINS
 
