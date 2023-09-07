@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/06 18:49:53 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/07 09:06:05 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ char	*expand(char *arg, t_shell *sh)
 	count = 0;
 	s = NULL;
 	new = NULL;
+	ret = NULL;
 	while (arg[i])
 	{
 		if (arg[i] && arg[i] == '$' && arg[i + 1] == '?')
 		{
-			i = is_special_variable(sh, &s);
+			i += is_special_variable(sh, &s);
 			if (s)
 				count += ft_strlen(s);
 			if (ret)
@@ -53,7 +54,7 @@ char	*expand(char *arg, t_shell *sh)
 		}
 		else if (arg[i] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
 		{
-			i = is_variable(sh, arg, &s);
+			i += is_variable(sh, arg + i, &s);
 			if (s)
 				count += ft_strlen(s);
 			if (ret)
@@ -62,18 +63,18 @@ char	*expand(char *arg, t_shell *sh)
 				new = NULL;
 			free(ret);
 			ret = ft_realloc(new, s, count);
-			free(s);
+			// free(s);
 		}
 		else if (arg[i] && arg[i] != '$' && arg[i + 1] != '?')
 		{
-			i = not_variable(arg, &s);
+			i += not_variable(arg + i, &s);
 			if (s)
 				count += ft_strlen(s);
 			if (ret)
 				new = ft_strdup(ret);
 			else
 				new = NULL;
-			free(ret);
+			// free(ret);
 			ret = ft_realloc(new, s, count);
 			free(s);
 		}
