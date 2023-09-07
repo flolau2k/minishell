@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:26:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 15:21:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/07 10:08:25 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 bool	init(t_shell *sh, int argc, char **argv, char **env)
 {
-	(void) argv;
-	if (argc > 1)
-	{
-		printf("minishel: This program does not take args!\n");
-		exit(GENERAL_ERROR);
-	}
+	// (void) argv;
+	// if (argc > 1)
+	// {
+	// 	printf("minishel: This program does not take args!\n");
+	// 	exit(GENERAL_ERROR);
+	// }
 	*sh = (t_shell){};
+	if (argc == 2)
+		sh->line = argv[1];
 	sh->env = copy_env(env);
 	sh->ttyin = dup(STDIN_FILENO);
 	sh->ttyout = dup(STDOUT_FILENO);

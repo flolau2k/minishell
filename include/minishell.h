@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 18:48:30 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/07 15:52:41 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,11 @@ char	*ft_realloc(char *ret, char *s, int count);
 int		is_special_variable(t_shell *sh, char **new);
 int		is_variable(t_shell *sh, char *arg, char **new);
 int		not_variable(char *arg, char **new);
+
+// expand2_utils.c
+int	get_special_var(t_shell *sh, char **ret);
+int	get_variable(t_shell *sh, char *arg, char **ret);
+int	get_non_variable(char *arg, char **ret);
 
 // executor.c
 void	f_execute(t_cmd *cmd);
