@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 13:47:11 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/07 11:04:28 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		f_exit(t_exec *cmd);
 int		f_export(t_exec *cmd);
 int		f_pwd(t_exec *pwd);
 int		f_unset(t_exec *cmd);
+void	f_exit2(char *msg, int code);
 
 // PARSE
 // init.c

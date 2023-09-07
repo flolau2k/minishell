@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 15:23:37 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/07 11:04:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	main_loop(t_shell *sh)
 	while (true)
 	{
 		sh->line = readline(MINISHELL_PROMPT);
+		if (!sh->line)
+			f_exit2("exit", EXIT_SUCCESS);
 		if (ft_strlen(sh->line) == 0)
 			continue;
 		add_history(sh->line);
@@ -50,6 +52,5 @@ int	main(int argc, char **argv, char **env)
 
 	signal(SIGINT, &signal_handler);
 	init(&sh, argc, argv, env);
-	// signals()
 	main_loop(&sh);
 }
