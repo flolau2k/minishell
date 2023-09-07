@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 12:40:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/07 14:50:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	hd_child(t_cmd *redir)
 	nlim = ft_strjoin((char *)red->file, "\n");
 	write(red->ttyout, HERE_DOC_PROMPT, ft_strlen(HERE_DOC_PROMPT));
 	line = get_next_line(red->ttyin);
-	while (ft_strncmp(line, nlim, ft_strlen(nlim)))
+	while (line && ft_strncmp(line, nlim, ft_strlen(nlim)))
 	{
 		printf("%s", line);
 		free(line);

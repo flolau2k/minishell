@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 11:13:02 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/07 14:50:47 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	execute(t_cmd *cmd)
 		exit(GENERAL_ERROR);
 	}
 	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
 		rec_execute(cmd);
+	}
 	waitpid(pid, &stat_loc, 0);
 	return (WEXITSTATUS(stat_loc));
 }
