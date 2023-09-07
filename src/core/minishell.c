@@ -6,11 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 14:12:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:10:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	g_sig = 0;
 
 void	main_loop(t_shell *sh)
 {
@@ -18,7 +20,11 @@ void	main_loop(t_shell *sh)
 
 	while (true)
 	{
-		sh->line = readline(MINISHELL_PROMPT);
+		if (!g_sig)
+			sh->line = readline(MINISHELL_PROMPT);
+		else
+			sh->line = readline("");
+		g_sig = 0;
 		if (!sh->line)
 			f_exit2("exit", EXIT_SUCCESS);
 		if (ft_strlen(sh->line) == 0)
