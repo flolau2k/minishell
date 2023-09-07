@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 17:47:05 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/07 17:48:46 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,6 @@ void	main_loop(t_shell *sh)
 {
 	t_cmd	*root;
 
-	if (sh->line)
-	{
-		root = do_lexing(sh);
-		do_parsing(root);
-		expander(sh, root);
-		ft_printf("<<<-----PARSING----->>>\n");
-		ft_printf("\n");
-		print_tree(&root);
-		execute(root);
-		free_tree(root);
-	}
 	while (true)
 	{
 		if (!g_sig)
