@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/07 15:57:44 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/07 17:44:27 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ char	*end_arg(char *s)
 	return (s+i);
 }
 
+/// @brief Expands each string passed
+/// @param arg String from the token
+/// @param sh Shell struct pointer
+/// @return The string of expanded command
 char	*expand(char *arg, t_shell *sh)
 {
 	int		i;
@@ -32,6 +36,12 @@ char	*expand(char *arg, t_shell *sh)
 
 	i = 0;
 	ret = NULL;
+	// if (precheck(arg) == true)
+	// {
+	// 	ret = ft_strdup(arg);
+	// 	return (ret);
+	// }
+	
 	while (arg[i])
 	{
 		if (arg[i] && arg[i + 1] && arg[i] == '$' && arg[i + 1] == '?')

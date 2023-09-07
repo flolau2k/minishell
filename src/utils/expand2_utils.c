@@ -6,13 +6,16 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:20:22 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/07 15:55:39 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/07 17:44:32 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-
+/// @brief Returns malloced the special variable
+/// @param sh Shell struct pointer
+/// @param ret Return expanded string
+/// @return Returns expanded variable
 int	get_special_var(t_shell *sh, char **ret)
 {
 	int		count;
@@ -38,6 +41,11 @@ int	get_special_var(t_shell *sh, char **ret)
 	return (i);
 }
 
+/// @brief Returns malloced expanded variable
+/// @param sh Shell struct pointer
+/// @param arg Argument passed to be expanded
+/// @param ret Return expanded string
+/// @return Returns a malloced string with the expanded variable
 int	get_variable(t_shell *sh, char *arg, char **ret)
 {
 	int		count;
@@ -63,6 +71,10 @@ int	get_variable(t_shell *sh, char *arg, char **ret)
 	return (i);
 }
 
+/// @brief Returns malloced non variable
+/// @param arg Argument passed to be copied
+/// @param ret Return non-expanded string
+/// @return Returns a malloced string with the non-expanded variable
 int	get_non_variable(char *arg, char **ret)
 {
 	int		count;
@@ -87,3 +99,12 @@ int	get_non_variable(char *arg, char **ret)
 	}
 	return (i);
 }
+
+// bool	precheck(char *arg)
+// {
+// 	while ()
+// 	{
+
+// 	}
+// 	ft_error("Quotes not closed", GENERAL_ERROR);
+// }
