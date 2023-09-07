@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
+#    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/09/01 17:05:28 by flauer           ###   ########.fr        #
+#    Updated: 2023/09/07 15:19:25 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ INCLUDES =	-I$(INCDIR) -I$(LIBFTDIR)/include
 HEADERS =	include/minishell.h
 
 #src/parse
-FILES =		lexer.c parser.c init.c tree.c tokenizer.c
+FILES =		lexer.c parser.c init.c tree.c tokenizer.c expansion.c
 #src/core
 FILES +=	executor.c minishell.c environment.c here_doc.c pipe.c \
 			environment_helper.c signals.c
@@ -38,7 +38,8 @@ FILES +=	executor.c minishell.c environment.c here_doc.c pipe.c \
 FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c \
 			builtins.c
 #src/utils
-FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c
+FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c expand_utils.c \
+			expand2_utils.c
 #src/error
 FILES +=	error.c
 #src/test

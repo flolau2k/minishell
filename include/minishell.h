@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 15:59:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/07 17:46:58 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,21 @@ void	print_tree(t_cmd **tree); // Test function
 t_cmd	*pipe_token(t_cmd **tree);
 int		redirect_token(char *instr, t_cmd **tree);
 int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
+
+// expansion.c
+void	expander(t_shell *sh, t_cmd *cmd);
+
+// expand_utils.c
+char	*ft_realloc(char *ret, char *s, int count);
+int		is_special_variable(t_shell *sh, char **new);
+int		is_variable(t_shell *sh, char *arg, char **new);
+int		not_variable(char *arg, char **new);
+
+// expand2_utils.c
+int	get_special_var(t_shell *sh, char **ret);
+int	get_variable(t_shell *sh, char *arg, char **ret);
+int	get_non_variable(char *arg, char **ret);
+
+// BUILTINS
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 16:10:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/07 17:48:46 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ void	main_loop(t_shell *sh)
 		// ft_printf("\n");
 		// print_tree(&root);
 		do_parsing(root);
-		// ft_printf("<<<-----PARSING----->>>\n");
-		// ft_printf("\n");
-		// print_tree(&root);
+		expander(sh, root);
+		ft_printf("<<<-----PARSING----->>>\n");
+		ft_printf("\n");
+		print_tree(&root);
 		sh->ret = execute(root);
 		free_tree(root);
 		free(sh->line);

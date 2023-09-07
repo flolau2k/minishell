@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destructors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 13:16:32 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/07 11:28:58 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	free_tree(t_cmd *cmd)
 
 void	free_exec(t_exec *arg)
 {
-	free(arg->argv);
-	free(arg->eargv);
+	free_arr(arg->argv);
 	free(arg);
 }
 
@@ -51,6 +50,7 @@ void	free_redir(t_redir *arg)
 	{
 		free_tree(arg->cmd);
 		arg->cmd = NULL;
+		free(arg->file);
 	}
 	free(arg);
 }
