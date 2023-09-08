@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 11:37:54 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 15:03:38 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,9 @@ void	free_tree(t_cmd *cmd);
 void	free_exec(t_exec *arg);
 void	free_pipe(t_pipe *arg);
 void	free_redir(t_redir *arg);
+
+// non_alloc_destructors.c
+void	free_init_tree(t_cmd *cmd);
 
 // parser.c
 void	do_parsing(t_cmd *str);
