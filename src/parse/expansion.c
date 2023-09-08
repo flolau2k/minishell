@@ -48,7 +48,7 @@ char	*expand(char *arg, t_shell *sh)
 			i += get_special_var(sh, &ret);
 		else if (arg[i] && arg[i + 1] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
 			i += get_variable(sh, arg + i, &ret);
-		else if (arg[i] && arg[i + 1] && arg[i] != '$' && arg[i + 1] != '?')
+		else
 			i += get_non_variable(arg + i, &ret);
 	}
 	return (ret);
