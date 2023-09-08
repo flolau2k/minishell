@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:27:08 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/08 14:24:51 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 17:24:39 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,25 @@ bool	precheck(char *arg)
 	closed = true;
 	while (arg[i])
 	{
+		if (arg[i] == '\\')
+			i++;
 		if (arg[i] == '\'')
 		{
+			i++;
 			closed = false;
 			while (arg[i] && arg[i] != '\'')
 				i++;
 			if (arg[i] != '\'')
-				return (ft_printf("Quotes not closed"), false);
+				return (ft_printf("Quotes not closed\n"), false);
 		}
 		if (arg[i] == '"')
 		{
+			i++;
 			closed = false;
 			while (arg[i] && arg[i] != '"')
 				i++;
 			if (arg[i] != '"')
-				return (ft_printf("Quotes not closed"), false);
+				return (ft_printf("Quotes not closed\n"), false);
 		}
 		i++;
 	}

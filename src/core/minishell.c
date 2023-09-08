@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 11:51:16 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 17:17:56 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	main_loop(t_shell *sh)
 		do_parsing(root);
 		if (!quote_check(root))
 		{
-			free_tree(root);
+			free_init_tree(root);
 			free(sh->line);
 			continue;
 		}
