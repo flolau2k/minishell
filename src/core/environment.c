@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 11:11:40 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 10:18:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*get_env(char **env, char *key)
 	{
 		if (ft_strnstr(env[i], key, ft_strlen(key)))
 		{
-			ret = env[i] + ft_strlen(key) + 1;
+			ret = env[i] + ft_strlen(key);
 			return (ret);
 		}
 		++i;
