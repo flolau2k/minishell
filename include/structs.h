@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 12:18:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/08 13:30:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_redir
 	int			ttyout;
 }	t_redir;
 
-typedef int	(*t_fcn_p)(t_exec *);
+typedef int			(*t_fcn_p)(t_exec *);
+typedef struct stat	t_stat;
 
 #endif

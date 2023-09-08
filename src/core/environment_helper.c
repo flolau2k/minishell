@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   environment_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 11:11:33 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 13:30:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static bool	is_file(char *name)
+{
+	bool	ret;
+
+	t_stat	statbuf;
+	if (stat(name, &statbuf) != 0)
+		return 0;
+	ret = S_ISDIR(statbuf.st_mode);
+	return (ret);
+}
 
 char	*get_cmd_path(char *name, char **env)
 {
@@ -27,7 +38,7 @@ char	*get_cmd_path(char *name, char **env)
 		path = ft_strjoin(paths[i], "/");
 		cmd = ft_strjoin(path, name);
 		free(path);
-		if (!access(cmd, X_OK))
+		if (!is_file(cmd) && !access(cmd, X_OK))
 			break ;
 		free(cmd);
 		cmd = NULL;
