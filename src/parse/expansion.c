@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/07 17:44:27 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 09:39:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	travel_pipe(t_pipe *arg, t_shell *sh)
 /// @param cmd Root node of the AST
 void	expander(t_shell *sh, t_cmd *cmd)
 {
+	if (!cmd)
+		return ;
 	if (cmd->type == NODE_EXEC)
 		expand_exec((t_exec *)cmd, sh);
 	else if (cmd->type == NODE_PIPE)

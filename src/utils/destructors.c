@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destructors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 11:28:58 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 09:39:41 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_tree(t_cmd *cmd)
 {
+	if (!cmd)
+		return ;
 	if (cmd->type == NODE_EXEC)
 		free_exec((t_exec *)cmd);
 	else if (cmd->type == NODE_PIPE)
