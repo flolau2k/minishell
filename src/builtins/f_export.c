@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 10:15:08 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/08 10:30:29 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	f_export(t_exec *cmd)
 		f_env(cmd);
 	if (ft_strchr(new, '='))
 	{
-		key = ft_substr(new, 0, (ft_strchr(new, '=') - new) + 1);
+		key = ft_substr(new, 0, ft_strchr(new, '=') - new);
 		if (get_env(cmd->sh->env, key))
 		{
 			if (!replace_in_env(cmd->sh->env, new))

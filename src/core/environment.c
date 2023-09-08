@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 10:18:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/08 10:38:14 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,33 +97,39 @@ char	*get_env(char **env, char *key)
 {
 	int		i;
 	char	*ret;
+	char	*ekey;
 
 	i = 0;
 	ret = NULL;
 	if (ft_strlen(key) == 0)
 		return (NULL);
+	ekey = ft_strjoin(key, "=");
 	while (env[i])
 	{
-		if (ft_strnstr(env[i], key, ft_strlen(key)))
+		if (ft_strnstr(env[i], ekey, ft_strlen(ekey)))
 		{
-			ret = env[i] + ft_strlen(key);
+			ret = env[i] + ft_strlen(ekey);
+			free(ekey);
 			return (ret);
 		}
 		++i;
 	}
+	free(ekey);
 	return (NULL);
 }
 
 char	**unset_env(char **env, char *val)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
+	char	*key;
 
 	i = 0;
 	len = array_len(env);
 	if (!val || len == 0 || ft_strlen(val) == 0)
 		return (env);
-	while (i < len && ft_strncmp(val, env[i], ft_strlen(val)))
+	key = ft_strjoin(val, "=");
+	while (i < len && ft_strncmp(key, env[i], ft_strlen(key)))
 		i++;
 	while (i < (len - 1))
 	{
@@ -131,5 +137,6 @@ char	**unset_env(char **env, char *val)
 		i++;
 	}
 	env[i] = NULL;
+	free(key);
 	return (env);
 }
