@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/01 12:31:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/08 09:37:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	t_exec	*node;
 	int		i;
 
+	if (!array->start && !array->end)
+		return (*tree = NULL, 0);
 	i = 0;
 	node = ft_calloc(1, sizeof(t_exec));
 	if (!node)

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 14:50:47 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/08 09:36:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	execute(t_cmd *cmd)
 	pid_t	pid;
 	int		stat_loc;
 
+	if (!cmd)
+		return (0);
 	if (cmd->type == NODE_EXEC)
 	{
 		fcn = get_builtin((t_exec *)cmd);
