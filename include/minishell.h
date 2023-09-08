@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 17:46:58 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 11:37:54 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
 // expansion.c
 void	expander(t_shell *sh, t_cmd *cmd);
 
+// quote_check.c
+bool	quote_check(t_cmd *cmd);
+
 // expand_utils.c
 char	*ft_realloc(char *ret, char *s, int count);
 int		is_special_variable(t_shell *sh, char **new);
@@ -158,3 +161,4 @@ int	get_non_variable(char *arg, char **ret);
 // BUILTINS
 
 #endif
+

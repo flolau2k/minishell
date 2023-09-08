@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 17:48:46 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 11:51:16 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ void	main_loop(t_shell *sh)
 			continue;
 		add_history(sh->line);
 		root = do_lexing(sh);
-		// ft_printf("<<<-----LEXING----->>>\n");
-		// ft_printf("\n");
-		// print_tree(&root);
 		do_parsing(root);
+		if (!quote_check(root))
+		{
+			free_tree(root);
+			free(sh->line);
+			continue;
+		}
 		expander(sh, root);
 		ft_printf("<<<-----PARSING----->>>\n");
 		ft_printf("\n");
