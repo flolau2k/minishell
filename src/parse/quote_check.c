@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:27:08 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/08 17:24:39 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/08 20:29:59 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 bool	precheck(char *arg)
 {
-	bool	closed;
+	// bool	closed;
 	int		i;
 
 	i = 0;
-	closed = true;
+	// closed = true;
 	while (arg[i])
 	{
 		if (arg[i] == '\\')
@@ -26,7 +26,6 @@ bool	precheck(char *arg)
 		if (arg[i] == '\'')
 		{
 			i++;
-			closed = false;
 			while (arg[i] && arg[i] != '\'')
 				i++;
 			if (arg[i] != '\'')
@@ -35,7 +34,6 @@ bool	precheck(char *arg)
 		if (arg[i] == '"')
 		{
 			i++;
-			closed = false;
 			while (arg[i] && arg[i] != '"')
 				i++;
 			if (arg[i] != '"')
@@ -43,7 +41,7 @@ bool	precheck(char *arg)
 		}
 		i++;
 	}
-	return (closed);
+	return (true);
 }
 
 /// @brief ft_strdup the arguments and search for the environment expansions
