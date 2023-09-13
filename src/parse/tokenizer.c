@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/08 09:37:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:52:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	node->cmd = array->start[0];
 	node->argv = array->start;
 	node->eargv = array->end;
+	node->flag = array->flag;
 	node->sh = sh;
 	arrange_command_tree(tree, node);
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/13 14:04:31 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/13 17:47:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,15 @@ bool	check_char(char c)
 			return (true);
 	}
 	else if (is_squotes && c == '\'')
+	{
 		is_squotes = false;
+		return (true);
+	}
 	else if (is_dquotes && c == '"')
+	{
 		is_dquotes = false;
+		return (true);
+	}
 	return (false);
 }
 
@@ -70,6 +76,7 @@ int	get_word(t_word *word, t_word block, int i)
 		{
 			word->start = &(block.start[cts]);
 			word->end = &(block.start[i]);
+			i++;
 			return (i);
 		}
 		i++;
@@ -88,7 +95,7 @@ int	get_word(t_word *word, t_word block, int i)
 /// @return Returns the pointer to the end of the expression
 void	get_args(t_array *array, t_word block, int i, int count)
 {
-	t_word		word;
+	t_word	word;
 
 	word = (t_word){};
 	i = get_word(&word, block, i);

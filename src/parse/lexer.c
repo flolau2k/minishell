@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 14:03:03 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/13 17:18:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 	{
 		while (instr[i] && ft_isspace(instr[i]))
 			i++;
-		if (!ft_strchr(R_CHAR, instr[i]))
+		if (instr[i] && !ft_strchr(R_CHAR, instr[i]))
 		{
 			word.start = instr + i;
-			if (instr[i] == '\'')
-				
-			while (instr[i] && !ft_strchr(S_CHAR, instr[i]) && !ft_isspace(instr[i]))
+			while (instr[i] && !ft_strchr(S_CHAR, instr[i]))
 				i++;
 			word.end = instr + i;
 			get_args(&array, word, 0, 0);
@@ -78,13 +76,9 @@ void	get_tree(t_shell *sh, char *instr, t_cmd **tree, int i)
 /// @return AST root node
 t_cmd	*do_lexing(t_shell *sh)
 {
-	// int		i;
 	t_cmd	*tree;
-	
+
 	tree = NULL;
-	// tree = ft_calloc (1, sizeof(t_cmd));
-	// if (!tree)
-	// 	ft_error("Allocation error", GENERAL_ERROR);
 	get_tree(sh, sh->line, &tree, 0);
 	return (tree);
 }

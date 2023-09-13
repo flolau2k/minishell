@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 15:27:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:52:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_array
 {
 	char	**start;
 	char	**end;
+	bool	*flag;
 }	t_array;
 
 typedef struct s_var
