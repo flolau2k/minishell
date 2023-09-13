@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 16:13:42 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:44:08 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,15 @@ void	ft_error(char *msg, int excode);
 void	free_exec(t_exec *arg);
 void	free_pipe(t_pipe *arg);
 void	free_redir(t_redir *arg);
-void	free_shell(t_shell *sh);
 
 // non_alloc_destructors.c
 void	free_init_tree(t_cmd *cmd);
+
+// destructors_single.c
+void	free_shell(t_shell *sh);
+void	free_exec_single(t_exec *arg);
+void	free_pipe_single(t_pipe *arg);
+void	free_redir_single(t_redir *arg);
 
 // parser.c
 void	do_parsing(t_cmd *str);
