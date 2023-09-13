@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:27:08 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/08 20:29:59 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/13 11:14:01 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ bool	precheck(char *arg)
 	// closed = true;
 	while (arg[i])
 	{
-		if (arg[i] == '\\')
+		if (arg[i] && arg[i] == '\\')
 			i++;
-		if (arg[i] == '\'')
+		if (arg[i] && arg[i] == '\'')
 		{
 			i++;
 			while (arg[i] && arg[i] != '\'')
@@ -31,10 +31,10 @@ bool	precheck(char *arg)
 			if (arg[i] != '\'')
 				return (ft_printf("Quotes not closed\n"), false);
 		}
-		if (arg[i] == '"')
+		if (arg[i] && arg[i] == '\"')
 		{
 			i++;
-			while (arg[i] && arg[i] != '"')
+			while (arg[i] && arg[i] != '\"')
 				i++;
 			if (arg[i] != '"')
 				return (ft_printf("Quotes not closed\n"), false);
