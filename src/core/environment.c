@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 10:38:14 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:20:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ char	**unset_env(char **env, char *val)
 	key = ft_strjoin(val, "=");
 	while (i < len && ft_strncmp(key, env[i], ft_strlen(key)))
 		i++;
+	free(env[i]);
 	while (i < (len - 1))
 	{
 		env[i] = env[i + 1];
