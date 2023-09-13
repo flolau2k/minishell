@@ -9,3 +9,4 @@ test_minishell
 out
 text
 .devcontainer/
+src/parse/handle_quotes.c

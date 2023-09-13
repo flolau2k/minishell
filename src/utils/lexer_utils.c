@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/31 15:33:04 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/13 14:04:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ bool	check_char(char c)
 			return (true);
 		else if (c == '|')
 			return (true);
-		// else if (c == '<')
-		// 	return (true);
-		// else if (c == '>')
-		// 	return (true);
 	}
 	else if (is_squotes && c == '\'')
 		is_squotes = false;
@@ -73,8 +69,6 @@ int	get_word(t_word *word, t_word block, int i)
 		if (check_char(block.start[i]))
 		{
 			word->start = &(block.start[cts]);
-			// while (block.start[i] && ft_isspace(block.start[i]))
-			// 	i++;
 			word->end = &(block.start[i]);
 			return (i);
 		}

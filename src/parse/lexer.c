@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 11:47:01 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/13 14:03:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 		if (!ft_strchr(R_CHAR, instr[i]))
 		{
 			word.start = instr + i;
+			if (instr[i] == '\'')
+				
 			while (instr[i] && !ft_strchr(S_CHAR, instr[i]) && !ft_isspace(instr[i]))
 				i++;
 			word.end = instr + i;

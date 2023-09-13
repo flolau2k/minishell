@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 13:30:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:27:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_exec
 	char		*cmd;
 	char		**argv;
 	char		**eargv;
+	bool		*flag;
 	t_shell		*sh;
 }	t_exec;
 
@@ -75,6 +76,7 @@ typedef struct s_redir
 	t_cmd		*cmd;
 	char		*file;
 	char		*efile;
+	bool		*flag;
 	int			mode;
 	int			fd;
 	int			ttyin;
