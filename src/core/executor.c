@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 09:36:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 10:56:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,22 @@ void	do_redir(t_redir *redir)
 void	do_exec(t_exec *exec)
 {
 	char	*cmd;
+	t_fcn_p	fcn;
 
+	fcn = get_builtin(exec);
+		if (fcn)
+			exit(fcn(exec));
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
 	{
+		dup2(STDERR_FILENO, STDOUT_FILENO);
 		printf("minishell: %s: command not found!\n", exec->cmd);
 		exit(GENERAL_ERROR);
 	}
 	if (execve(cmd, exec->argv, exec->sh->env) == -1)
 	{
 		//  Must free memory if execve fails ???
+		dup2(STDERR_FILENO, STDOUT_FILENO);
 		printf("minishell: %s: %s\n", cmd, strerror(errno));
 		exit(GENERAL_ERROR);
 	}
