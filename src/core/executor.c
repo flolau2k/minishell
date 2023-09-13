@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 10:56:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 17:04:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	execute(t_cmd *cmd)
 	pid = fork();
 	if (pid == -1)
 	{
+		free_tree(cmd);
 		printf("minishell: fork: %s\n", strerror(errno));
 		exit(GENERAL_ERROR);
 	}
@@ -37,6 +38,7 @@ int	execute(t_cmd *cmd)
 		signal(SIGINT, SIG_DFL);
 		rec_execute(cmd);
 	}
+	free_tree(cmd);
 	waitpid(pid, &stat_loc, 0);
 	return (WEXITSTATUS(stat_loc));
 }
@@ -58,8 +60,9 @@ void	do_pipe(t_pipe *cmd)
 
 	left = cmd->left;
 	right = cmd->right;
-	free_pipe(cmd);
-	create_pipe(&rec_execute, left);
+	free_pipe_single(cmd);
+	create_pipe(&rec_execute, left, right);
+	free_tree(left);
 	rec_execute(right);
 }
 
@@ -82,7 +85,7 @@ void	do_redir(t_redir *redir)
 			dup2(redir->fd, STDIN_FILENO);
 		close(redir->fd);
 	}
-	free_redir(redir);
+	free_redir_single(redir);
 	return (rec_execute(redir->cmd));
 }
 

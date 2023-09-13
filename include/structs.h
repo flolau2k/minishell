@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 13:30:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:22:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ typedef struct s_var
 typedef struct s_exec
 {
 	t_nodetype	type;
-	char		*cmd;
-	char		**argv;
-	char		**eargv;
+	char		*cmd; // not allocated
+	char		**argv; // elements allocated
+	char		**eargv; // allocated 
 	t_shell		*sh;
 }	t_exec;
 
@@ -72,9 +72,9 @@ typedef struct s_pipe
 typedef struct s_redir
 {
 	t_nodetype	type;
-	t_cmd		*cmd;
-	char		*file;
-	char		*efile;
+	t_cmd		*cmd; // not allocated
+	char		*file; // allocated
+	char		*efile; // not allocated
 	int			mode;
 	int			fd;
 	int			ttyin;

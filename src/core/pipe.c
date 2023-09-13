@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 09:54:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:49:38 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	close_pipe(int *pipe_fd)
 	close(pipe_fd[1]);
 }
 
-pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1)
+pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
@@ -32,6 +32,8 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close_pipe(pipe_fd);
+		if (tofree)
+			free_tree(tofree);
 		if (f1)
 			f1(a1);
 	}

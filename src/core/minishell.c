@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 16:15:20 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:35:34 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	main_loop(t_shell *sh)
 			continue;
 		}
 		expander(sh, root);
-		// ft_printf("<<<-----PARSING----->>>\n");
-		// ft_printf("\n");
-		// print_tree(&root);
+		ft_printf("<<<-----PARSING----->>>\n");
+		ft_printf("\n");
+		print_tree(&root);
 		free(sh->line);
 		sh->ret = execute(root);
 		printf("%s", NO_COLOR);

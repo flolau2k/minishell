@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 16:44:08 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:49:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ extern int	g_sig;
 int		main(int argc, char **argv, char **env);
 
 // pipe.c
-pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
+pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree);
 pid_t	execute_command_pipe(char *cmd, char **argv);
 char	*execute_command(char *cmd, char **argv);
 void	close_pipe(int *pipe_fd);
@@ -112,7 +112,7 @@ void	wait_exit(void);
 void	ft_error(char *msg, int excode);
 
 // destructors.c
-// void	free_tree(t_cmd *cmd);
+void	free_tree(t_cmd *cmd);
 void	free_exec(t_exec *arg);
 void	free_pipe(t_pipe *arg);
 void	free_redir(t_redir *arg);
@@ -122,7 +122,6 @@ void	free_init_tree(t_cmd *cmd);
 
 // destructors_single.c
 void	free_shell(t_shell *sh);
-void	free_exec_single(t_exec *arg);
 void	free_pipe_single(t_pipe *arg);
 void	free_redir_single(t_redir *arg);
 
