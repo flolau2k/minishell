@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 13:28:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 10:56:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,11 @@ void	do_redir(t_redir *redir)
 void	do_exec(t_exec *exec)
 {
 	char	*cmd;
+	t_fcn_p	fcn;
 
+	fcn = get_builtin(exec);
+		if (fcn)
+			exit(fcn(exec));
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
 	{
