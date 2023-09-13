@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/08 09:39:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 13:16:23 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ char	*expand(char *arg, t_shell *sh)
 
 	i = 0;
 	ret = NULL;
-	// if (precheck(arg) == true)
-	// {
-	// 	ret = ft_strdup(arg);
-	// 	return (ret);
-	// }
-	
 	while (arg[i])
 	{
 		if (arg[i] && arg[i + 1] && arg[i] == '$' && arg[i + 1] == '?')
@@ -58,13 +52,13 @@ char	*expand(char *arg, t_shell *sh)
 /// @param arg Node of the exec command
 void	expand_exec(t_exec *arg, t_shell *sh)
 {
-	int		i;
-	char	*new;
+	int	i;
 
 	i = -1;
-	new = NULL;
 	while (arg->argv[++i])
+	{
 		arg->argv[i] = expand(arg->argv[i], sh);
+	}
 	arg->cmd = arg->argv[0];
 }
 
