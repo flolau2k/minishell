@@ -53,8 +53,14 @@ void	rec_execute(t_cmd *cmd)
 
 void	do_pipe(t_pipe *cmd)
 {
-	create_pipe(&rec_execute, cmd->left);
-	rec_execute(cmd->right);
+	t_cmd	*left;
+	t_cmd	*right;
+
+	left = cmd->left;
+	right = cmd->right;
+	free_pipe(cmd);
+	create_pipe(&rec_execute, left);
+	rec_execute(right);
 }
 
 void	do_redir(t_redir *redir)
@@ -67,6 +73,7 @@ void	do_redir(t_redir *redir)
 		if (redir->fd == -1)
 		{
 			printf("minishell: %s: %s\n", redir->file, strerror(errno));
+			free_redir(redir);
 			exit(GENERAL_ERROR);
 		}
 		if (redir->mode & O_WRONLY)
@@ -75,6 +82,7 @@ void	do_redir(t_redir *redir)
 			dup2(redir->fd, STDIN_FILENO);
 		close(redir->fd);
 	}
+	free_redir(redir);
 	return (rec_execute(redir->cmd));
 }
 
@@ -91,6 +99,7 @@ void	do_exec(t_exec *exec)
 	{
 		dup2(STDERR_FILENO, STDOUT_FILENO);
 		printf("minishell: %s: command not found!\n", exec->cmd);
+		free_exec(exec);
 		exit(GENERAL_ERROR);
 	}
 	if (execve(cmd, exec->argv, exec->sh->env) == -1)
@@ -98,6 +107,7 @@ void	do_exec(t_exec *exec)
 		//  Must free memory if execve fails ???
 		dup2(STDERR_FILENO, STDOUT_FILENO);
 		printf("minishell: %s: %s\n", cmd, strerror(errno));
+		free_exec(exec);
 		exit(GENERAL_ERROR);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 20:28:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:15:20 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	main_loop(t_shell *sh)
 			sh->line = readline("");
 		g_sig = 0;
 		if (!sh->line)
+		{
+			free_shell(sh);
 			f_exit2("exit", EXIT_SUCCESS);
+		}
 		if (ft_strlen(sh->line) == 0)
 			continue;
 		add_history(sh->line);
@@ -39,12 +42,11 @@ void	main_loop(t_shell *sh)
 			continue;
 		}
 		expander(sh, root);
-		ft_printf("<<<-----PARSING----->>>\n");
-		ft_printf("\n");
-		print_tree(&root);
-		sh->ret = execute(root);
-		free_tree(root);
+		// ft_printf("<<<-----PARSING----->>>\n");
+		// ft_printf("\n");
+		// print_tree(&root);
 		free(sh->line);
+		sh->ret = execute(root);
 		printf("%s", NO_COLOR);
 	}
 }

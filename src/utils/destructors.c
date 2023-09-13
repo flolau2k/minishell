@@ -6,53 +6,44 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 09:39:41 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:14:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	free_tree(t_cmd *cmd)
+// void	free_tree(t_cmd *cmd)
+// {
+// 	if (!cmd)
+// 		return ;
+// 	if (cmd->type == NODE_EXEC)
+// 		free_exec((t_exec *)cmd);
+// 	else if (cmd->type == NODE_PIPE)
+// 		free_pipe((t_pipe *)cmd);
+// 	else if (cmd->type == NODE_REDIRECT)
+// 		free_redir((t_redir *)cmd);
+// 	cmd = NULL;
+// }
+
+void	free_shell(t_shell *sh)
 {
-	if (!cmd)
-		return ;
-	if (cmd->type == NODE_EXEC)
-		free_exec((t_exec *)cmd);
-	else if (cmd->type == NODE_PIPE)
-		free_pipe((t_pipe *)cmd);
-	else if (cmd->type == NODE_REDIRECT)
-		free_redir((t_redir *)cmd);
-	cmd = NULL;
+	free_arr(sh->env);
 }
 
 void	free_exec(t_exec *arg)
 {
 	free_arr(arg->argv);
+	free(arg->eargv);
 	free(arg);
 }
 
 void	free_pipe(t_pipe *arg)
 {
-	if (arg->left)
-	{
-		free_tree(arg->left);
-		arg->left = NULL;
-	}
-	if (arg->right)
-	{
-		free_tree(arg->right);
-		arg->right = NULL;
-	}
 	free(arg);
 }
 
 void	free_redir(t_redir *arg)
 {
-	if (arg->cmd)
-	{
-		free_tree(arg->cmd);
-		arg->cmd = NULL;
-		free(arg->file);
-	}
+	free(arg->file);
 	free(arg);
 }

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/07 11:04:09 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:15:08 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	f_exit(t_exec *cmd)
 	code = 0;
 	if (cmd->argv[1])
 		code = ft_atoi(cmd->argv[1]);
+	free_shell(cmd->sh);
+	free_exec(cmd);
 	exit(code);
 }
 

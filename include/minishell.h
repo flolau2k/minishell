@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 11:27:06 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:13:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,11 @@ void	wait_exit(void);
 void	ft_error(char *msg, int excode);
 
 // destructors.c
-void	free_tree(t_cmd *cmd);
+// void	free_tree(t_cmd *cmd);
 void	free_exec(t_exec *arg);
 void	free_pipe(t_pipe *arg);
 void	free_redir(t_redir *arg);
+void	free_shell(t_shell *sh);
 
 // non_alloc_destructors.c
 void	free_init_tree(t_cmd *cmd);
