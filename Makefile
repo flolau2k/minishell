@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/09/13 16:41:28 by flauer           ###   ########.fr        #
+#    Updated: 2023/09/14 13:26:21 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c \
 			builtins.c
 #src/utils
 FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c expand_utils.c \
-			expand2_utils.c non_alloc_destructors.c destructors_single.c
+			expand2_utils.c non_alloc_destructors.c destructors_single.c \
+			destructors_shell.c
 #src/error
 FILES +=	error.c
 #src/test

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 16:57:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 13:17:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	hd_child(t_cmd *redir)
 	}
 	free(line);
 	free(nlim);
-	free_redir(red);
+	free_tree_shell(redir);
 	exit(0);
 }
 
@@ -40,6 +40,5 @@ void	here_doc(t_redir *redir)
 	pid_t	pid;
 
 	pid = create_pipe(&hd_child, (t_cmd *)redir, NULL);
-	free_redir(redir);
 	waitpid(pid, NULL, 0);
 }

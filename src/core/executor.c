@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/14 10:57:57 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 13:21:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	execute(t_cmd *cmd)
 	pid = fork();
 	if (pid == -1)
 	{
-		free_tree(cmd);
+		free_tree_shell(cmd);
 		printf("minishell: fork: %s\n", strerror(errno));
 		exit(GENERAL_ERROR);
 	}
@@ -68,6 +68,9 @@ void	do_pipe(t_pipe *cmd)
 
 void	do_redir(t_redir *redir)
 {
+	t_cmd	*cmd;
+
+	cmd = redir->cmd;
 	if (redir->mode & O_HEREDOC)
 		here_doc(redir);
 	else
@@ -76,7 +79,7 @@ void	do_redir(t_redir *redir)
 		if (redir->fd == -1)
 		{
 			printf("minishell: %s: %s\n", redir->file, strerror(errno));
-			free_redir(redir);
+			free_tree_shell((t_cmd *)redir);
 			exit(GENERAL_ERROR);
 		}
 		if (redir->mode & O_WRONLY)
@@ -86,7 +89,7 @@ void	do_redir(t_redir *redir)
 		close(redir->fd);
 	}
 	free_redir_single(redir);
-	return (rec_execute(redir->cmd));
+	return (rec_execute(cmd));
 }
 
 void	do_builtin(t_fcn_p fcn, t_exec *exec)

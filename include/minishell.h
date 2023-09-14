@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 16:49:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 13:26:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,12 @@ void	free_init_tree(t_cmd *cmd);
 void	free_shell(t_shell *sh);
 void	free_pipe_single(t_pipe *arg);
 void	free_redir_single(t_redir *arg);
+
+// destructors_shell.c
+void	free_tree_shell(t_cmd *cmd);
+void	free_exec_shell(t_exec *arg);
+void	free_pipe_shell(t_pipe *arg);
+void	free_redir_shell(t_redir *arg);
 
 // parser.c
 void	do_parsing(t_cmd *str);
