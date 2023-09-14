@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/14 14:12:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 15:50:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	node->argv = array->start;
 	node->eargv = array->end;
 	node->sh = sh;
+	node->pid = -1;
 	arrange_command_tree(tree, node);
 	return (i);
 }

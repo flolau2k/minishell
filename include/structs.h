@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 15:22:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 15:50:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_exec
 	char		**argv; // elements allocated
 	char		**eargv; // allocated 
 	t_shell		*sh;
+	pid_t		pid; //init with -1
 }	t_exec;
 
 typedef struct s_pipe
