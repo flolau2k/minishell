@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/14 10:24:39 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 10:57:57 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,25 @@ void	do_redir(t_redir *redir)
 	return (rec_execute(redir->cmd));
 }
 
+void	do_builtin(t_fcn_p fcn, t_exec *exec)
+{
+	int		ret;
+	t_shell	*sh;
+
+	sh = exec->sh;
+	ret = fcn(exec);
+	free_shell(sh);
+	exit(ret);
+}
+
 void	do_exec(t_exec *exec)
 {
 	char	*cmd;
 	t_fcn_p	fcn;
 
 	fcn = get_builtin(exec);
-		if (fcn)
-			exit(fcn(exec));
+	if (fcn)
+		do_builtin(fcn, exec);
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
 	{
@@ -108,7 +119,6 @@ void	do_exec(t_exec *exec)
 	}
 	if (execve(cmd, exec->argv, exec->sh->env) == -1)
 	{
-		//  Must free memory if execve fails ???
 		dup2(STDERR_FILENO, STDOUT_FILENO);
 		printf("minishell: %s: %s\n", cmd, strerror(errno));
 		free_shell(exec->sh);
