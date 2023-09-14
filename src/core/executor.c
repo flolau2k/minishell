@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 17:04:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 10:24:39 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	do_exec(t_exec *exec)
 	{
 		dup2(STDERR_FILENO, STDOUT_FILENO);
 		printf("minishell: %s: command not found!\n", exec->cmd);
+		free_shell(exec->sh);
 		free_exec(exec);
 		exit(GENERAL_ERROR);
 	}
@@ -110,6 +111,7 @@ void	do_exec(t_exec *exec)
 		//  Must free memory if execve fails ???
 		dup2(STDERR_FILENO, STDOUT_FILENO);
 		printf("minishell: %s: %s\n", cmd, strerror(errno));
+		free_shell(exec->sh);
 		free_exec(exec);
 		exit(GENERAL_ERROR);
 	}

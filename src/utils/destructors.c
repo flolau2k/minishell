@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 17:04:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 10:22:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	free_tree(t_cmd *cmd)
 
 void	free_exec(t_exec *arg)
 {
-	free_shell(arg->sh);
 	free_arr(arg->argv);
 	free(arg->eargv);
 	free(arg);
