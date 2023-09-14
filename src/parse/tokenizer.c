@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/08 09:37:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 14:12:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_cmd	*pipe_token(t_cmd **tree)
 /// @brief Creates, initializes and returns a redirect node for the AST
 /// @param root Pointer to the command position
 /// @return The pointer to the node
-int		redirect_token(char *instr, t_cmd **tree)
+int		redirect_token(char *instr, t_cmd **tree, t_shell *sh)
 {
 	t_redir	*node;
 	t_word	word;
@@ -49,6 +49,8 @@ int		redirect_token(char *instr, t_cmd **tree)
 	node->efile = word.end;
 	node->mode = redirect_type(instr);
 	node->fd = 0;
+	node->ttyin = sh->ttyin;
+	node->ttyout = sh->ttyout;
 	arrange_redir_tree(tree, node);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/14 13:26:56 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/14 14:12:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	print_tree(t_cmd **tree); // Test function
 
 // tokenizer.c
 t_cmd	*pipe_token(t_cmd **tree);
-int		redirect_token(char *instr, t_cmd **tree);
+int		redirect_token(char *instr, t_cmd **tree, t_shell *sh);
 int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
 
 // expansion.c
