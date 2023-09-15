@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:19:26 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:23:10 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	do_exec(t_exec *exec)
 		waitpid(npid, &stat_loc, 0);
 		exec->sh->ret = WEXITSTATUS(stat_loc);
 		close(STDIN_FILENO);
+		free_exec(exec);
 		wait_exit();
 	}
 }
