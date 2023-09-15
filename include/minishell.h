@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:35:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:51:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	wait_exit(void);
 
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
-void	ft_error2(char *msg, int excode);
 
 // destructors.c
 void	free_tree(t_cmd *cmd);
