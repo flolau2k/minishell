@@ -1,0 +1,12 @@
+Makefile
+README.md
+README_md
+include
+libft
+minishell
+minishell.dSYM
+obj
+pcazac.txt
+smth.md
+src
+test.txt

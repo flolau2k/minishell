@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 15:34:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/15 17:51:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,23 @@ void	free_init_tree(t_cmd *cmd);
 void	do_parsing(t_cmd *str);
 
 // lexer_utils.c
-void	get_args(t_array *array, t_word block, int i, int count);
+void	get_args(t_array *array, t_word *block, int *i, int count);
+int		end_expression(char *instr, t_array *array);
+void	join_array(t_array *array, char *file);
+
+// lexer_helper.c
 int		redirect_type(char *instr);
-int		end_expression(char *instr, t_word *word);
-bool	check_char(char c);
+int		set_flag(char c);
+void	allocate_array(t_array *array, int count);
+void	fill_array(t_array *array, t_word *word, int count, int flag);
+bool	inside_quotes(char c);
 
 // lexer.c
 t_cmd	*do_lexing(t_shell *sh);
 
 // token_utils.c
 int		new_arr(t_array *array, int count);
+int		arr_add_back(t_array *array, int count);
 
 // tree.c
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 17:18:29 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/15 16:58:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 {
 	int		i;
+	int		c;
 	t_word	word;
 	t_array	array;
 
 	i = 0;
+	c = 0;
 	word = (t_word){};
 	array = (t_array){};
 	while (instr[i] && instr[i] != '|')
@@ -35,7 +37,7 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 			while (instr[i] && !ft_strchr(S_CHAR, instr[i]))
 				i++;
 			word.end = instr + i;
-			get_args(&array, word, 0, 0);
+			get_args(&array, &word, &c, 0);
 			if (!instr[i])
 				break ;
 		}

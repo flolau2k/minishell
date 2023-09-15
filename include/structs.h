@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 16:52:42 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/15 12:03:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ typedef struct s_redir
 	t_nodetype	type;
 	t_cmd		*cmd;
 	char		*file;
-	char		*efile;
+	char		**argv;
+	char		**eargv;
 	bool		*flag;
 	int			mode;
 	int			fd;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/13 16:52:31 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/15 15:06:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,20 @@ t_cmd	*pipe_token(t_cmd **tree)
 int		redirect_token(char *instr, t_cmd **tree)
 {
 	t_redir	*node;
-	t_word	word;
+	t_array	array;
 	int		i;
 
+	array = (t_array){};
 	node = ft_calloc(1, sizeof(t_redir));
 	if (!node)
 		ft_error("Allocation error", GENERAL_ERROR);
-	i = end_expression(instr, &word);
+	i = end_expression(instr, &array);
 	node->type = NODE_REDIRECT;
 	node->cmd = NULL;
-	node->file = word.start;
-	node->efile = word.end;
+	node->file = NULL;
+	node->argv = array.start;
+	node->eargv = array.end;
+	node->flag = array.flag;
 	node->mode = redirect_type(instr);
 	node->fd = 0;
 	arrange_redir_tree(tree, node);

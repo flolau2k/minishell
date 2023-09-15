@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:20:22 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/07 17:44:32 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/15 16:40:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,3 @@ int	get_non_variable(char *arg, char **ret)
 	}
 	return (i);
 }
-
-// bool	precheck(char *arg)
-// {
-// 	while ()
-// 	{
-
-// 	}
-// 	ft_error("Quotes not closed", GENERAL_ERROR);
-// }

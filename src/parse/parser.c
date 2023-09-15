@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:54:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/08/31 14:42:05 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/15 12:04:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	do_parsing(t_cmd *tree)
 	else if ( tree && (tree)->type == NODE_REDIRECT)
 	{
 		redir = (t_redir *)(tree);
-		redir->efile[0] = '\0';
+		redir->eargv[0] = '\0';
 		if (redir->cmd)
 			do_parsing(redir->cmd);
 		return ;

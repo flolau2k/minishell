@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:22:01 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/05 11:54:27 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/15 12:03:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,13 @@ void	print_tree(t_cmd **tree)
 		printf("---START REDIRECT---\n");
 		printf("Redir Type: %i\n", redir->type);
 		printf("Redir Mode: %i\n", redir->mode);
-		printf("Redir Arg: %s\n",redir->file);
-		printf("Redir End Arg: %s\n",redir->efile);
+		int	i = -1;
+		while(redir->argv[++i])
+		{
+			printf("Exec Arrg: ##%s##\n", redir->argv[i]);
+			printf("Exec End Arg: ##%s##\n", redir->eargv[i]);
+			printf("Exec FLAG Arg: ##%d##\n", redir->flag[i]);
+		}
 		if (redir->cmd)
 			print_tree(&(redir->cmd));
 		return ;
@@ -171,11 +176,12 @@ void	print_tree(t_cmd **tree)
 		printf("---START COMMAND---\n");
 		printf("Exec Type: %i\n", exec->type);
 		printf("Exec Command: %s\n", exec->cmd);
-		int i = -1;
+		int	i = -1;
 		while(exec->argv[++i])
 		{
 			printf("Exec Arrg: ##%s##\n", exec->argv[i]);
 			printf("Exec End Arg: ##%s##\n", exec->eargv[i]);
+			printf("Exec FLAG Arg: ##%d##\n", exec->flag[i]);
 		}
 		return ;
 	}
