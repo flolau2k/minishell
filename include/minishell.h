@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:54:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:15:27 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ void	rec_execute(t_cmd *cmd);
 void	do_exec(t_exec *exec);
 void	do_pipe(t_pipe *cmd);
 void	do_redir(t_redir *redir);
+void	do_execve(t_exec *exec);
+
+// executor_helper.c
 void	do_builtin(t_fcn_p fcn, t_exec *exec);
 void	exec_error(t_exec *exec, char *msg, char *error);
-void	do_execve(t_exec *exec);
 
 // signals.c
 void	signal_handler(int signo);
