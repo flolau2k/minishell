@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 15:49:50 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:24:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	array_len(char **arr)
 	i = 0;
 	while (arr && arr[i])
 		i++;
-	return i;
+	return (i);
 }
 
 void	wait_exit(void)
