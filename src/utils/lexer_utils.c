@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/13 17:47:03 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/15 08:27:51 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	redirect_type(char *instr)
 /// @brief Checks for the delimiter and special characters
 /// @param c character passed from the argument string
 /// @return True if it is the researched char, false if not
-bool	check_char(char c)
+bool	inside_quotes(char c)
 {
 	static bool	is_dquotes;
 	static bool	is_squotes;
@@ -63,20 +63,27 @@ bool	check_char(char c)
 /// @brief Creates a linked list with each of the arguments
 /// @param instr input argument
 /// @return linked list pointer to the unprocessed tokens
-int	get_word(t_word *word, t_word block, int i)
+int	get_word(t_word *word, t_word block, int i, bool *flag)
 {
 	int		cts;
 
 	while (block.start[i] && ft_isspace(block.start[i]))
 		i++;
 	cts = i;
+	if (ft_strchr("\'\"", block.start[i]))
+		*flag = true;
 	while (block.start[i] && block.start + i <= block.end)
 	{
-		if (check_char(block.start[i]))
+		if (*flag && inside_quotes(block.start[i]) )
 		{
 			word->start = &(block.start[cts]);
 			word->end = &(block.start[i]);
-			i++;
+			return (++i);
+		}
+		else if(!*flag && (ft_strchr("\'\"|<>", block.start[i]) || ft_isspace(block.start[i])))
+		{
+			word->start = &(block.start[cts]);
+			word->end = &(block.start[i]);
 			return (i);
 		}
 		i++;
@@ -96,15 +103,17 @@ int	get_word(t_word *word, t_word block, int i)
 void	get_args(t_array *array, t_word block, int i, int count)
 {
 	t_word	word;
+	bool	flag;
 
+	flag = false;
 	word = (t_word){};
-	i = get_word(&word, block, i);
+	i = get_word(&word, block, i, &flag);
 	if (i == 0)
 		return ;
 	count++;
-	if (word.end < block.end)
+	if (block.start + i < block.end)
 		get_args(array, block, i, count);
-	if (word.end == block.end && !array->start && !array->end)
+	if (block.start + i == block.end && !array->start && !array->end)
 	{
 			array->start = ft_calloc(count + 1, sizeof(char *));
 		if (!(array->start))
@@ -112,11 +121,16 @@ void	get_args(t_array *array, t_word block, int i, int count)
 		array->end = ft_calloc(count + 1, sizeof(char *));
 		if (!(array->end))
 			ft_error("Allocation erorr", GENERAL_ERROR);
+		array->flag = ft_calloc(count + 1, sizeof(bool));
+		if (!(array->flag))
+			ft_error("Allocation erorr", GENERAL_ERROR);
 	}
-	else if (word.end == block.end)
+	else if (block.start + i == block.end)
 		count = new_arr(array, count);
+	ft_printf("#%s#\n", word.start);
 	(array->start)[count - 1] = word.start;
 	(array->end)[count - 1] = word.end;
+	(array->flag)[count - 1] = flag;
 	count--;
 }
 
