@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 14:03:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 14:06:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	main_loop(t_shell *sh)
 		if (g_sig)
 		{
 			sh->ret = 128 + g_sig;
-			g_sig = 0;	
+			g_sig = 0;
 		}
 		if (!sh->line)
 			f_exit2(sh, "exit", EXIT_SUCCESS);
