@@ -6,13 +6,20 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:16:28 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:54:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 int	g_sig = 0;
+
+void	reset_shell(t_shell *sh)
+{
+	dup2(sh->ttyin, STDIN_FILENO);
+	dup2(sh->ttyout, STDOUT_FILENO);
+	printf("%s", NO_COLOR);
+}
 
 void	main_loop(t_shell *sh)
 {
@@ -26,10 +33,7 @@ void	main_loop(t_shell *sh)
 			sh->line = readline("");
 		g_sig = 0;
 		if (!sh->line)
-		{
-			free_shell(sh);
-			f_exit2("exit", EXIT_SUCCESS);
-		}
+			f_exit2(sh, "exit", EXIT_SUCCESS);
 		if (ft_strlen(sh->line) == 0)
 			continue;
 		add_history(sh->line);
@@ -48,9 +52,7 @@ void	main_loop(t_shell *sh)
 		free(sh->line);
 		sh->line = NULL;
 		rec_execute(root);
-		dup2(sh->ttyin, STDIN_FILENO);
-		dup2(sh->ttyout, STDOUT_FILENO);
-		printf("%s", NO_COLOR);
+		reset_shell(sh);
 	}
 }
 

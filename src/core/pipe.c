@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:45:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:57:20 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ pid_t	execute_command_pipe(char *cmd, char **argv)
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close_pipe(pipe_fd);
 		if (execve(cmd, argv, NULL) == -1)
-		{
-			printf("minishell: %s: %s\n", cmd, strerror(errno));
-			exit(GENERAL_ERROR);
-		}
+			ft_error(cmd, strerror(errno), GENERAL_ERROR);
 	}
 	else
 	{

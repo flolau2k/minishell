@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:51:16 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:54:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ extern int	g_sig;
 // CORE
 // minishell.c
 int		main(int argc, char **argv, char **env);
+void	reset_shell(t_shell *sh);
+void	main_loop(t_shell *sh);
 
 // pipe.c
 pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree);
@@ -86,7 +88,7 @@ int		f_exit(t_exec *cmd);
 int		f_export(t_exec *cmd);
 int		f_pwd(t_exec *pwd);
 int		f_unset(t_exec *cmd);
-void	f_exit2(char *msg, int code);
+void	f_exit2(t_shell *sh, char *msg, int code);
 
 // PARSE
 // init.c
