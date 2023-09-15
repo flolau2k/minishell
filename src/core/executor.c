@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:30:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 13:30:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ void	do_exec(t_exec *exec)
 	{
 		npid = fork();
 		if (npid == 0)
+		{
+			signal(SIGINT, SIG_DFL);
 			do_execve(exec);
+		}
 		waitpid(npid, &stat_loc, 0);
 		exec->sh->ret = WEXITSTATUS(stat_loc);
 		close(STDIN_FILENO);
