@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:14:52 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:30:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	do_redir(t_redir *redir)
 		redir->fd = open(redir->file, redir->mode, 0644);
 		if (redir->fd == -1)
 		{
+			dup2(STDERR_FILENO, STDOUT_FILENO);
 			printf("minishell: %s: %s\n", redir->file, strerror(errno));
 			free_tree_shell((t_cmd *)redir);
 			exit(GENERAL_ERROR);
