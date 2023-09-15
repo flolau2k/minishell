@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 09:31:28 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:23:25 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef enum e_nodetype
 typedef struct s_cmd
 {
 	t_nodetype	type;
-	pid_t		pid; //init with -1
+	pid_t		pid;
 }	t_cmd;
 
 typedef struct s_shell
@@ -57,17 +57,17 @@ typedef struct s_var
 typedef struct s_exec
 {
 	t_nodetype	type;
-	pid_t		pid; //init with -1
-	char		*cmd; // not allocated
-	char		**argv; // elements allocated
-	char		**eargv; // allocated 
+	pid_t		pid;
+	char		*cmd;
+	char		**argv;
+	char		**eargv;
 	t_shell		*sh;
 }	t_exec;
 
 typedef struct s_pipe
 {
 	t_nodetype	type;
-	pid_t		pid; //init with -1
+	pid_t		pid;
 	t_cmd		*left;
 	t_cmd		*right;
 }	t_pipe;
@@ -75,10 +75,10 @@ typedef struct s_pipe
 typedef struct s_redir
 {
 	t_nodetype	type;
-	pid_t		pid; //init with -1
-	t_cmd		*cmd; // not allocated
-	char		*file; // allocated
-	char		*efile; // not allocated
+	pid_t		pid;
+	t_cmd		*cmd;
+	char		*file;
+	char		*efile;
 	int			mode;
 	int			fd;
 	int			ttyin;

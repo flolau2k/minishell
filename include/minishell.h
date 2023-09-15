@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:19:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:22:55 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,11 +177,8 @@ int		is_variable(t_shell *sh, char *arg, char **new);
 int		not_variable(char *arg, char **new);
 
 // expand2_utils.c
-int	get_special_var(t_shell *sh, char **ret);
-int	get_variable(t_shell *sh, char *arg, char **ret);
-int	get_non_variable(char *arg, char **ret);
-
-// BUILTINS
+int		get_special_var(t_shell *sh, char **ret);
+int		get_variable(t_shell *sh, char *arg, char **ret);
+int		get_non_variable(char *arg, char **ret);
 
 #endif
-
