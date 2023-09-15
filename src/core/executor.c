@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:05:24 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:19:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,11 @@ void	do_exec(t_exec *exec)
 {
 	int		stat_loc;
 	pid_t	npid;
-	
+	t_fcn_p	fcn;
+
+	fcn = get_builtin(exec);
+	if (fcn && exec->pid == -1)
+		return (do_builtin(fcn, exec));
 	if (exec->pid == 0)
 		do_execve(exec);
 	else

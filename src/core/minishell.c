@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 09:47:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:16:28 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	main_loop(t_shell *sh)
 		rec_execute(root);
 		dup2(sh->ttyin, STDIN_FILENO);
 		dup2(sh->ttyout, STDOUT_FILENO);
-		// printf("%s", NO_COLOR);
+		printf("%s", NO_COLOR);
 	}
 }
 
