@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/14 15:50:24 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 09:31:28 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_nodetype
 typedef struct s_cmd
 {
 	t_nodetype	type;
+	pid_t		pid; //init with -1
 }	t_cmd;
 
 typedef struct s_shell
@@ -56,16 +57,17 @@ typedef struct s_var
 typedef struct s_exec
 {
 	t_nodetype	type;
+	pid_t		pid; //init with -1
 	char		*cmd; // not allocated
 	char		**argv; // elements allocated
 	char		**eargv; // allocated 
 	t_shell		*sh;
-	pid_t		pid; //init with -1
 }	t_exec;
 
 typedef struct s_pipe
 {
 	t_nodetype	type;
+	pid_t		pid; //init with -1
 	t_cmd		*left;
 	t_cmd		*right;
 }	t_pipe;
@@ -73,6 +75,7 @@ typedef struct s_pipe
 typedef struct s_redir
 {
 	t_nodetype	type;
+	pid_t		pid; //init with -1
 	t_cmd		*cmd; // not allocated
 	char		*file; // allocated
 	char		*efile; // not allocated

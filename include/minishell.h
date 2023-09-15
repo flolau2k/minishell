@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/14 15:39:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:05:29 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	here_doc(t_redir *redir);
 void	hd_child(t_cmd *red);
 
 // executor.c
-int		execute(t_cmd *cmd);
 void	rec_execute(t_cmd *cmd);
 void	do_exec(t_exec *exec);
 void	do_pipe(t_pipe *cmd);
