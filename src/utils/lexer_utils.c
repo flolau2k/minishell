@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/08/31 15:33:04 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:50:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ void	get_args(t_array *array, t_word block, int i, int count)
 	{
 			array->start = ft_calloc(count + 1, sizeof(char *));
 		if (!(array->start))
-			ft_error("Allocation erorr", GENERAL_ERROR);
+			ft_error("malloc", strerror(errno), GENERAL_ERROR);
 		array->end = ft_calloc(count + 1, sizeof(char *));
 		if (!(array->end))
-			ft_error("Allocation erorr", GENERAL_ERROR);
+			ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	}
 	else if (word.end == block.end)
 		count = new_arr(array, count);

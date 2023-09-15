@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 09:35:47 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:45:23 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree)
 	pid_t	pid;
 	int		pipe_fd[2];
 
-	if (f1 && a1->type == NODE_PIPE)
-		ft_error2("Error: Pipe in child!\n", 1);
 	if (pipe(pipe_fd) == -1)
-		ft_error("pipe", GENERAL_ERROR);
+		ft_error("pipe", strerror(errno), GENERAL_ERROR);
 	pid = fork();
 	if (pid == -1)
-		ft_error("fork", GENERAL_ERROR);
+		ft_error("fork", strerror(errno), GENERAL_ERROR);
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -78,10 +76,10 @@ pid_t	execute_command_pipe(char *cmd, char **argv)
 	int		pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
-		ft_error("pipe", GENERAL_ERROR);
+		ft_error("pipe", strerror(errno), GENERAL_ERROR);
 	pid = fork();
 	if (pid == -1)
-		ft_error("fork", GENERAL_ERROR);
+		ft_error("fork", strerror(errno), GENERAL_ERROR);
 	if (pid == 0)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);

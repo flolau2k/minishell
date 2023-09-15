@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 16:20:59 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:49:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**copy_env(char **env)
 	len = array_len(env);
 	ret = malloc(sizeof(char *) * (len + 1));
 	if (!ret)
-		ft_error("malloc error!", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	ret[len] = NULL;
 	while (i < len)
 	{
@@ -50,7 +50,7 @@ char	**set_env(char **env, char *newval)
 	len = array_len(env) + 1;
 	ret = malloc(sizeof(char *) * (len + 1));
 	if (!ret)
-		ft_error("malloc error!", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	ret[len] = NULL;
 	while (i < len)
 	{

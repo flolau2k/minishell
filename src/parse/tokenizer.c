@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/14 15:50:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 10:49:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cmd	*pipe_token(t_cmd **tree)
 
 	node = ft_calloc(1, sizeof(t_pipe));
 	if (!node)
-		ft_error("Allocation error", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_PIPE;
 	node->left = NULL;
 	node->right = NULL;
@@ -41,7 +41,7 @@ int		redirect_token(char *instr, t_cmd **tree, t_shell *sh)
 
 	node = ft_calloc(1, sizeof(t_redir));
 	if (!node)
-		ft_error("Allocation error", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	i = end_expression(instr, &word);
 	node->type = NODE_REDIRECT;
 	node->cmd = NULL;
@@ -68,7 +68,7 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	i = 0;
 	node = ft_calloc(1, sizeof(t_exec));
 	if (!node)
-		ft_error("Allocation error", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_EXEC;
 	node->cmd = array->start[0];
 	node->argv = array->start;
