@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:17:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:19:43 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,19 @@ void	do_pipe(t_pipe *cmd);
 void	do_redir(t_redir *redir);
 void	do_execve(t_exec *exec);
 
+// environment.c
+char	**set_env(char **env, char *newval);
+char	*get_env(char **env, char *key);
+char	**unset_env(char **env, char *val);
+bool	replace_in_env(char **env, char *new);
+char	**copy_env(char **env);
+
+// environment_helper.c
+char	*get_cmd_path(char *name, char **env);
+char	**get_env_s(char **env, char *key);
+char	*get_cmd(char *name, char **env);
+char	**set_default_env(char **env);
+
 // helper.c
 bool	is_file(char *name);
 void	do_builtin(t_fcn_p fcn, t_exec *exec);
@@ -96,19 +109,6 @@ void	f_exit2(t_shell *sh, char *msg, int code);
 // PARSE
 // init.c
 bool	init(t_shell *sh, int argc, char **argv, char **env);
-
-// environment.c
-char	**set_env(char **env, char *newval);
-char	*get_env(char **env, char *key);
-char	**unset_env(char **env, char *val);
-bool	replace_in_env(char **env, char *new);
-char	**copy_env(char **env);
-
-// environment_helper.c
-char	*get_cmd_path(char *name, char **env);
-char	**get_env_s(char **env, char *key);
-char	*get_cmd(char *name, char **env);
-char	**set_default_env(char **env);
 
 // helpers.c
 int		array_len(char **arr);

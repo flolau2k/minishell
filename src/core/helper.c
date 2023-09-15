@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor_helper.c                                  :+:      :+:    :+:   */
+/*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:14:37 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:17:26 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:21:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 bool	is_file(char *name)
 {
 	bool	ret;
-
 	t_stat	statbuf;
+
 	if (stat(name, &statbuf) != 0)
-		return 0;
+		return (0);
 	ret = S_ISDIR(statbuf.st_mode);
 	return (ret);
 }
