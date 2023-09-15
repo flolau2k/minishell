@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:17:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 16:46:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,6 @@ char	**set_default_env(char **env)
 {
 	char	*tmp[2];
 
-	if (!get_env(env, "LS_COLORS"))
-		env = set_env(env, "LS_COLORS=");
-	if (!get_env(env, "LESSCLOSE"))
-		env = set_env(env, "LESSCLOSE=/usr/bin/lesspipe %s %s");
-	if (!get_env(env, "LESSOPEN"))
-		env = set_env(env, "LESSOPEN=| /usr/bin/lesspipe %s");
 	if (!get_env(env, "SHLVL"))
 		env = set_env(env, "SHLVL=1");
 	else
