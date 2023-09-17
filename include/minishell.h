@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 17:51:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/17 00:55:16 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ void	free_redir(t_redir *arg);
 void	free_init_tree(t_cmd *cmd);
 
 // parser.c
-void	do_parsing(t_cmd *str);
+char	*ft_copystr(char *start, char *end);
+void	do_parsing(t_cmd *tree);
 
 // lexer_utils.c
 void	get_args(t_array *array, t_word *block, int *i, int count);
@@ -130,7 +131,7 @@ void	join_array(t_array *array, char *file);
 
 // lexer_helper.c
 int		redirect_type(char *instr);
-int		set_flag(char c);
+int		set_flag(char *c, int *i, int *offset);
 void	allocate_array(t_array *array, int count);
 void	fill_array(t_array *array, t_word *word, int count, int flag);
 bool	inside_quotes(char c);

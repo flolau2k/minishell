@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:40:14 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/15 17:51:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/17 01:31:18 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,28 @@ int	redirect_type(char *instr)
 	return (0);
 }
 
-int	set_flag(char c)
+int	set_flag(char *array, int *i, int *offset)
 {
-	if (ft_strchr("\'", c))
+	if (array[*i] && ft_strchr("\'", array[*i]))
+	{
+		while (ft_strchr("\'", array[*i]))
+		{
+			(*i)++;
+			(*offset)++;
+		}
+		(*i)--;
 		return (2);
-	else if (ft_strchr("\"", c))
+	}
+	else if (array[*i] && ft_strchr("\"", array[*i]))
+	{
+		while (ft_strchr("\"", array[*i]))
+		{
+			(*i)++;
+			(*offset)++;
+		}
+		(*i)--;
 		return (1);
+	}
 	else
 		return (0);
 }

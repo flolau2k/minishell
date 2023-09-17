@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/15 18:51:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/17 01:44:51 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,33 @@ int	get_word(t_word *word, t_word *block, int *i, int *flag)
 {
 	int		cts;
 	int		count;
+	int		offset;
 
 	count = 0;
+	offset = 0;
 	while (block->start[*i] && ft_isspace(block->start[*i]))
 		(*i)++;
 	cts = *i;
-	*flag = set_flag(block->start[*i]);
+	*flag = set_flag(block->start, i, &offset);
 	while (block->start[*i] && block->start + *i < block->end)
 	{
 		if (*flag != 0 && inside_quotes(block->start[*i]))
 		{
-			word->start = &block->start[cts];
-			word->end = &block->start[*i];
+			word->start = ft_copystr(&block->start[cts + offset], &block->start[*i - offset]);
 			(*i)++;
 			return (count);
 		}
 		else if(*flag == 0 && (ft_strchr("\'\"|<>", block->start[*i]) || \
 				ft_isspace(block->start[*i])))
 		{
-			word->start = &block->start[cts];
-			word->end = &block->start[*i];
-			return (count);
-		}
-		else if(*flag == 0 && ft_strchr("\'\"|<>", block->start[*i + 1]))
-		{
-			word->start = &block->start[cts];
-			word->end = &block->start[*i];
-			(*i)++;
+			word->start = ft_copystr(&block->start[cts], &block->start[*i - 1]);
 			return (count);
 		}
 		(*i)++;
 		count++;
 		if (!block->start[*i])
 		{
-			word->start = &block->start[cts];
-			word->end = &block->start[*i];
+			word->start = ft_copystr(&block->start[cts], &block->start[*i - 1]);
 			return (count);
 		}
 	}

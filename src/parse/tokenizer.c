@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/15 15:06:31 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/17 01:40:59 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		redirect_token(char *instr, t_cmd **tree)
 	node->cmd = NULL;
 	node->file = NULL;
 	node->argv = array.start;
-	node->eargv = array.end;
 	node->flag = array.flag;
 	node->mode = redirect_type(instr);
 	node->fd = 0;
@@ -64,7 +63,7 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	t_exec	*node;
 	int		i;
 
-	if (!array->start && !array->end)
+	if (!array->start)
 		return (*tree = NULL, 0);
 	i = 0;
 	node = ft_calloc(1, sizeof(t_exec));
@@ -73,7 +72,6 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	node->type = NODE_EXEC;
 	node->cmd = array->start[0];
 	node->argv = array->start;
-	node->eargv = array->end;
 	node->flag = array->flag;
 	node->sh = sh;
 	arrange_command_tree(tree, node);

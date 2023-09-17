@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:22:01 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/15 12:03:10 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/17 01:47:32 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ void	print_tree(t_cmd **tree)
 		while(redir->argv[++i])
 		{
 			printf("Exec Arrg: ##%s##\n", redir->argv[i]);
-			printf("Exec End Arg: ##%s##\n", redir->eargv[i]);
 			printf("Exec FLAG Arg: ##%d##\n", redir->flag[i]);
 		}
 		if (redir->cmd)
@@ -180,7 +179,6 @@ void	print_tree(t_cmd **tree)
 		while(exec->argv[++i])
 		{
 			printf("Exec Arrg: ##%s##\n", exec->argv[i]);
-			printf("Exec End Arg: ##%s##\n", exec->eargv[i]);
 			printf("Exec FLAG Arg: ##%d##\n", exec->flag[i]);
 		}
 		return ;
