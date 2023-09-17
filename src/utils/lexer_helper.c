@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:40:14 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/17 01:31:18 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/17 19:28:07 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,10 @@ void	allocate_array(t_array *array, int count)
 void	fill_array(t_array *array, t_word *word, int count, int flag)
 {
 	(array->start)[count - 1] = word->start;
-	(array->end)[count - 1] = word->end;
 	if (flag == 2)
-		(array->flag)[count - 1] = true;
-	else
 		(array->flag)[count - 1] = false;
+	else
+		(array->flag)[count - 1] = true;
 }
 
 /// @brief Checks for the delimiter and special characters

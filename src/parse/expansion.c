@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/17 02:02:09 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/17 20:56:56 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ char	*expand(char *arg, t_shell *sh, bool flag)
 	ret = NULL;
 	while (arg[i])
 	{
-		if (!flag && arg[i] && arg[i + 1] && arg[i] == '$' && arg[i + 1] == '?')
+		if (flag && arg[i] && arg[i + 1] && arg[i] == '$' && arg[i + 1] == '?')
 			i += get_special_var(sh, &ret);
-		else if (!flag && arg[i] && arg[i + 1] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
+		else if (flag && arg[i] && arg[i + 1] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
 			i += get_variable(sh, arg + i, &ret);
-		else if (flag)
-			break ;
+		else
+			i += get_non_variable(arg + i, &ret);
 	}
 	return (ret);
- }
+}
 
 /// @brief ft_strdup the arguments and search for the environment expansions
 /// @param arg Node of the exec command
@@ -56,7 +56,10 @@ void	expand_exec(t_exec *arg, t_shell *sh)
 
 	i = -1;
 	while (arg->argv[++i])
-		arg->argv[i] = expand(arg->argv[i], sh, arg->flag[i]);
+	{
+		if (arg->flag[i] == true)
+			arg->argv[i] = expand(arg->argv[i], sh, arg->flag[i]);
+	}
 	arg->cmd = arg->argv[0];
 }
 
