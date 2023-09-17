@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/17 01:35:54 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/17 22:04:22 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	main_loop(t_shell *sh)
 		ft_printf("<<<-----PARSING----->>>\n");
 		ft_printf("\n");
 		print_tree(&root);
-		// do_parsing(root);
 		expander(sh, root);
 		ft_printf("<<<-----EXPANDING----->>>\n");
 		ft_printf("\n");

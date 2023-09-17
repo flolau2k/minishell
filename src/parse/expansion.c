@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/17 20:56:56 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/17 21:06:27 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	expand_redir(t_redir *arg, t_shell *sh)
 	int	i;
 
 	i = -1;
-	while (arg->file[++i])
+	while (arg->argv[++i])
 		arg->argv[i] = expand(arg->argv[i], sh, arg->flag[i]);
 	if (arg->cmd)
 		expander(sh, arg->cmd);

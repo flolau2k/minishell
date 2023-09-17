@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/17 14:08:03 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/17 22:36:01 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	get_args(t_array *array, t_word *block, int *i, int count)
 int	end_expression(char *instr, t_array *array)
 {
 	int		i;
+	int		j;
 	int		start;
 	t_word	word;
 
@@ -92,8 +93,8 @@ int	end_expression(char *instr, t_array *array)
 		i++;
 	word.start = ft_substr(instr, start, i - start);
 	word.end = word.start + (i - start);
-	i = 0;
-	get_args(array, &word, &i, 0);
+	j = 0;
+	get_args(array, &word, &j, 0);
 	return (i);
 }
 
