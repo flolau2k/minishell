@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 19:00:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 19:06:26 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,35 @@ bool	parser(t_list *token_str, t_cmd **root, t_shell *sh)
 	}
 }
 
+bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh)
+{
+	t_list	*tmp;
+	t_list	*next;
+	t_token	*content;
+
+	tmp = token_str;
+	content = (t_token *) tmp->content;
+	while (tmp)
+	{
+		content = (t_token *) tmp->content;
+		if (content->type == PIPE)
+			break ;
+		else
+		{
+			if (!command_token(&tmp, root, sh))
+				return (false);
+			if (tmp == token_str)
+				token_str = tmp->next->next;
+			next = tmp->next;
+			free_token(next);
+			free(tmp);
+			tmp = next->next;
+			free_token(next);
+			free(next);
+		}
+	}
+}
+
 bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 {
 	t_list	*tmp;
@@ -48,10 +77,10 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 		{
 			if (!redirect_token(&tmp, root, sh))
 				return (false);
-			if (temp == token_str)
-				token_str = temp->next->next;
-			next = temp->next;
-			free(temp);
+			if (tmp == token_str)
+				token_str = tmp->next->next;
+			next = tmp->next;
+			free(tmp);
 			tmp = next->next;
 			free_token(next);
 		}
