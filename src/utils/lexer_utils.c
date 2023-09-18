@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/17 22:36:01 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:29:01 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,16 @@ void	join_array(t_array *array, char *file)
 			temp = file;
 		}
 	}
+}
+
+char	*ft_copystr(char *start, char *end)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (start + i <= end)
+		i++;
+	tmp = ft_substr(start, 0, i);
+	return (tmp);
 }
