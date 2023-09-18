@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/17 00:55:16 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:14:54 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void	free_init_tree(t_cmd *cmd);
 
 // parser.c
 char	*ft_copystr(char *start, char *end);
-void	do_parsing(t_cmd *tree);
 
 // lexer_utils.c
 void	get_args(t_array *array, t_word *block, int *i, int count);
