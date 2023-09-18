@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/08 09:39:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 10:33:40 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ char	*expand(char *arg, t_shell *sh)
 void	expand_exec(t_exec *arg, t_shell *sh)
 {
 	int		i;
-	char	*new;
 
 	i = -1;
-	new = NULL;
 	while (arg->argv[++i])
 		arg->argv[i] = expand(arg->argv[i], sh);
 	arg->cmd = arg->argv[0];
