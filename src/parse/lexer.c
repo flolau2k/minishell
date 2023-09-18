@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 09:27:41 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:41:52 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 				break ;
 		}
 		if (instr[i] && ft_strchr(R_CHAR, instr[i]))
-			i += redirect_token(&(instr[i]), tree);
+			i += redirect_token(&(instr[i]), tree, sh);
 	}
 	command_token(sh, &array, tree);
 }

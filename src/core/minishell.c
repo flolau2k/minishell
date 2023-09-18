@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 09:27:25 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:41:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,41 @@
 
 int	g_sig = 0;
 
+void	reset_shell(t_shell *sh)
+{
+	dup2(sh->ttyin, STDIN_FILENO);
+	dup2(sh->ttyout, STDOUT_FILENO);
+	printf("%s", NO_COLOR);
+}
+
 void	main_loop(t_shell *sh)
 {
 	t_cmd	*root;
 
 	while (true)
 	{
-		if (!g_sig)
-			sh->line = readline(MINISHELL_PROMPT);
-		else
-			sh->line = readline("");
-		g_sig = 0;
+		sh->line = readline(MINISHELL_PROMPT);
+		if (g_sig)
+		{
+			sh->ret = 128 + g_sig;
+			g_sig = 0;
+		}
 		if (!sh->line)
-			f_exit2("exit", EXIT_SUCCESS);
+			f_exit2(sh, "exit", EXIT_SUCCESS);
 		if (ft_strlen(sh->line) == 0)
-			continue;
+			continue ;
 		add_history(sh->line);
 		if (!quote_check(sh->line))
 		{
 			free(sh->line);
-			continue;
+			continue ;
 		}
 		root = do_lexing(sh);
-		ft_printf("<<<-----PARSING----->>>\n");
-		ft_printf("\n");
-		print_tree(&root);
 		expander(sh, root);
-		ft_printf("<<<-----EXPANDING----->>>\n");
-		ft_printf("\n");
-		print_tree(&root);
-		sh->ret = execute(root);
-		free_tree(root);
 		free(sh->line);
-		printf("%s", NO_COLOR);
+		sh->line = NULL;
+		rec_execute(root);
+		reset_shell(sh);
 	}
 }
 

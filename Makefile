@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+         #
+#    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/09/18 09:29:34 by pcazac           ###   ########.fr        #
+#    Updated: 2023/09/18 09:37:32 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,13 +33,14 @@ HEADERS =	include/minishell.h
 FILES =		lexer.c init.c tree.c tokenizer.c expansion.c quote_check.c
 #src/core
 FILES +=	executor.c minishell.c environment.c here_doc.c pipe.c \
-			environment_helper.c signals.c
+			environment_helper.c signals.c helper.c
 #src/builtins
 FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c \
 			builtins.c
 #src/utils
 FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c expand_utils.c \
-			expand2_utils.c non_alloc_destructors.c lexer_helper.c
+			expand2_utils.c non_alloc_destructors.c destructors_single.c \
+			destructors_shell.c lexer_helper.c
 #src/error
 FILES +=	error.c
 #src/test

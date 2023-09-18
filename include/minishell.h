@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 09:29:22 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:39:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ extern int	g_sig;
 // CORE
 // minishell.c
 int		main(int argc, char **argv, char **env);
+void	reset_shell(t_shell *sh);
+void	main_loop(t_shell *sh);
 
 // pipe.c
-pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1);
+pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree);
 pid_t	execute_command_pipe(char *cmd, char **argv);
 char	*execute_command(char *cmd, char **argv);
 void	close_pipe(int *pipe_fd);
@@ -66,29 +68,11 @@ void	here_doc(t_redir *redir);
 void	hd_child(t_cmd *red);
 
 // executor.c
-int		execute(t_cmd *cmd);
 void	rec_execute(t_cmd *cmd);
 void	do_exec(t_exec *exec);
 void	do_pipe(t_pipe *cmd);
 void	do_redir(t_redir *redir);
-
-// signals.c
-void	signal_handler(int signo);
-
-// BUILTINS
-t_fcn_p	get_builtin(t_exec *exec);
-int		f_echo(t_exec *cmd);
-int		f_cd(t_exec *cmd);
-int		f_env(t_exec *cmd);
-int		f_exit(t_exec *cmd);
-int		f_export(t_exec *cmd);
-int		f_pwd(t_exec *pwd);
-int		f_unset(t_exec *cmd);
-void	f_exit2(char *msg, int code);
-
-// PARSE
-// init.c
-bool	init(t_shell *sh, int argc, char **argv, char **env);
+void	do_execve(t_exec *exec);
 
 // environment.c
 char	**set_env(char **env, char *newval);
@@ -103,13 +87,36 @@ char	**get_env_s(char **env, char *key);
 char	*get_cmd(char *name, char **env);
 char	**set_default_env(char **env);
 
+// helper.c
+bool	is_file(char *name);
+void	do_builtin(t_fcn_p fcn, t_exec *exec);
+void	exec_error(t_exec *exec, char *msg, char *error);
+
+// signals.c
+void	signal_handler(int signo);
+
+// BUILTINS
+t_fcn_p	get_builtin(t_exec *exec);
+int		f_echo(t_exec *cmd);
+int		f_cd(t_exec *cmd);
+int		f_env(t_exec *cmd);
+int		f_exit(t_exec *cmd);
+int		f_export(t_exec *cmd);
+int		f_pwd(t_exec *pwd);
+int		f_unset(t_exec *cmd);
+void	f_exit2(t_shell *sh, char *msg, int code);
+
+// PARSE
+// init.c
+bool	init(t_shell *sh, int argc, char **argv, char **env);
+
 // helpers.c
 int		array_len(char **arr);
 void	free_arr(char **arr);
 void	wait_exit(void);
 
 // error.c
-void	ft_error(char *msg, int excode);
+void	ft_error(char *msg, char *errmsg, int excode);
 
 // destructors.c
 void	free_tree(t_cmd *cmd);
@@ -119,6 +126,17 @@ void	free_redir(t_redir *arg);
 
 // non_alloc_destructors.c
 void	free_init_tree(t_cmd *cmd);
+
+// destructors_single.c
+void	free_shell(t_shell *sh);
+void	free_pipe_single(t_pipe *arg);
+void	free_redir_single(t_redir *arg);
+
+// destructors_shell.c
+void	free_tree_shell(t_cmd *cmd);
+void	free_exec_shell(t_exec *arg);
+void	free_pipe_shell(t_pipe *arg);
+void	free_redir_shell(t_redir *arg);
 
 // lexer_utils.c
 void	get_args(t_array *array, t_word *block, int *i, int count);
@@ -148,7 +166,7 @@ void	print_tree(t_cmd **tree); // Test function
 
 // tokenizer.c
 t_cmd	*pipe_token(t_cmd **tree);
-int		redirect_token(char *instr, t_cmd **tree);
+int		redirect_token(char *instr, t_cmd **tree, t_shell *sh);
 int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
 
 // expansion.c
@@ -164,11 +182,8 @@ int		is_variable(t_shell *sh, char *arg, char **new);
 int		not_variable(char *arg, char **new);
 
 // expand2_utils.c
-int	get_special_var(t_shell *sh, char **ret);
-int	get_variable(t_shell *sh, char *arg, char **ret);
-int	get_non_variable(char *arg, char **ret);
-
-// BUILTINS
+int		get_special_var(t_shell *sh, char **ret);
+int		get_variable(t_shell *sh, char *arg, char **ret);
+int		get_non_variable(char *arg, char **ret);
 
 #endif
-

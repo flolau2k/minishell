@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:40:14 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 09:33:15 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:43:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void	allocate_array(t_array *array, int count)
 {
 	array->start = ft_calloc(count + 1, sizeof(char *));
 	if (!(array->start))
-		ft_error("Allocation erorr", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	array->end = ft_calloc(count + 1, sizeof(char *));
 	if (!(array->end))
-		ft_error("Allocation erorr", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	array->flag = ft_calloc(count + 1, sizeof(bool));
 	if (!(array->flag))
-		ft_error("Allocation erorr", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 }
 
 void	fill_array(t_array *array, t_word *word, int count, int flag)
