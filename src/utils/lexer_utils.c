@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 09:46:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 10:53:51 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_word(t_word *word, t_word *block, int *i, int *flag)
 	{
 		if (*flag != 0 && inside_quotes(block->start[*i]))
 		{
-			word->start = ft_copystr(&block->start[cts + offset], &block->start[*i - offset]);
+			word->start = ft_copystr(&block->start[cts + offset], &block->start[*i - 1]);
 			(*i)++;
 			return (count);
 		}
