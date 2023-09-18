@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:24:42 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:51:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,22 @@ void	free_tree(t_cmd *cmd)
 void	free_exec(t_exec *arg)
 {
 	free_arr(arg->argv);
-	free(arg->eargv);
+	free(arg->flag);
 	free(arg);
 }
 
 void	free_pipe(t_pipe *arg)
 {
-	if (arg->left)
-	{
-		free_tree(arg->left);
-		arg->left = NULL;
-	}
-	if (arg->right)
-	{
-		free_tree(arg->right);
-		arg->right = NULL;
-	}
+	free_tree(arg->left);
+	free_tree(arg->right);
 	free(arg);
 }
 
 void	free_redir(t_redir *arg)
 {
-	if (arg->cmd)
-	{
-		free_tree(arg->cmd);
-		arg->cmd = NULL;
-		free(arg->file);
-	}
+	free_tree(arg->cmd);
+	free(arg->file);
+	free_arr(arg->argv);
+	free(arg->flag);
 	free(arg);
 }

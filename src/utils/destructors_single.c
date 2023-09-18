@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:41:36 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/14 13:25:13 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:52:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ void	free_pipe_single(t_pipe *arg)
 void	free_redir_single(t_redir *arg)
 {
 	free(arg->file);
+	free_arr(arg->argv);
+	free(arg->flag);
 	free(arg);
 }
