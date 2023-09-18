@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/08 09:37:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:42:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cmd	*pipe_token(t_cmd **tree)
 
 	node = ft_calloc(1, sizeof(t_pipe));
 	if (!node)
-		ft_error("Allocation error", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_PIPE;
 	node->left = NULL;
 	node->right = NULL;
@@ -33,22 +33,26 @@ t_cmd	*pipe_token(t_cmd **tree)
 /// @brief Creates, initializes and returns a redirect node for the AST
 /// @param root Pointer to the command position
 /// @return The pointer to the node
-int		redirect_token(char *instr, t_cmd **tree)
+int		redirect_token(char *instr, t_cmd **tree, t_shell *sh)
 {
 	t_redir	*node;
-	t_word	word;
+	t_array	array;
 	int		i;
 
+	array = (t_array){};
 	node = ft_calloc(1, sizeof(t_redir));
 	if (!node)
-		ft_error("Allocation error", GENERAL_ERROR);
-	i = end_expression(instr, &word);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
+	i = end_expression(instr, &array);
 	node->type = NODE_REDIRECT;
 	node->cmd = NULL;
-	node->file = word.start;
-	node->efile = word.end;
+	node->file = NULL;
+	node->argv = array.start;
+	node->flag = array.flag;
 	node->mode = redirect_type(instr);
 	node->fd = 0;
+	node->ttyin = sh->ttyin;
+	node->ttyout = sh->ttyout;
 	arrange_redir_tree(tree, node);
 	return (i);
 }
@@ -61,17 +65,18 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree)
 	t_exec	*node;
 	int		i;
 
-	if (!array->start && !array->end)
+	if (!array->start)
 		return (*tree = NULL, 0);
 	i = 0;
 	node = ft_calloc(1, sizeof(t_exec));
 	if (!node)
-		ft_error("Allocation error", GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_EXEC;
 	node->cmd = array->start[0];
 	node->argv = array->start;
-	node->eargv = array->end;
+	node->flag = array->flag;
 	node->sh = sh;
+	node->pid = -1;
 	arrange_command_tree(tree, node);
 	return (i);
 }

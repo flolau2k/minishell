@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 10:33:40 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 10:38:44 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,18 @@ char	*end_arg(char *s)
 /// @param arg String from the token
 /// @param sh Shell struct pointer
 /// @return The string of expanded command
-char	*expand(char *arg, t_shell *sh)
+char	*expand(char *arg, t_shell *sh, bool flag)
 {
 	int		i;
 	char	*ret;
 
 	i = 0;
 	ret = NULL;
-	// if (precheck(arg) == true)
-	// {
-	// 	ret = ft_strdup(arg);
-	// 	return (ret);
-	// }
-	
 	while (arg[i])
 	{
-		if (arg[i] && arg[i + 1] && arg[i] == '$' && arg[i + 1] == '?')
+		if (flag && arg[i] && arg[i + 1] && arg[i] == '$' && arg[i + 1] == '?')
 			i += get_special_var(sh, &ret);
-		else if (arg[i] && arg[i + 1] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
+		else if (flag && arg[i] && arg[i + 1] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
 			i += get_variable(sh, arg + i, &ret);
 		else
 			i += get_non_variable(arg + i, &ret);
@@ -58,11 +52,14 @@ char	*expand(char *arg, t_shell *sh)
 /// @param arg Node of the exec command
 void	expand_exec(t_exec *arg, t_shell *sh)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	while (arg->argv[++i])
-		arg->argv[i] = expand(arg->argv[i], sh);
+	{
+		if (arg->flag[i] == true)
+			arg->argv[i] = expand(arg->argv[i], sh, arg->flag[i]);
+	}
 	arg->cmd = arg->argv[0];
 }
 
@@ -70,8 +67,11 @@ void	expand_exec(t_exec *arg, t_shell *sh)
 /// @param arg Node of the redirect command
 void	expand_redir(t_redir *arg, t_shell *sh)
 {
-	arg->file = expand(arg->file, sh);
-	arg->efile = end_arg(arg->file);
+	int	i;
+
+	i = -1;
+	while (arg->argv[++i])
+		arg->argv[i] = expand(arg->argv[i], sh, arg->flag[i]);
 	if (arg->cmd)
 		expander(sh, arg->cmd);
 }

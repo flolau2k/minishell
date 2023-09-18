@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/05 11:47:01 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:41:52 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,30 @@
 void	add_command(t_shell *sh, char *instr, t_cmd **tree)
 {
 	int		i;
+	int		c;
 	t_word	word;
 	t_array	array;
 
 	i = 0;
+	c = 0;
 	word = (t_word){};
 	array = (t_array){};
 	while (instr[i] && instr[i] != '|')
 	{
 		while (instr[i] && ft_isspace(instr[i]))
 			i++;
-		if (!ft_strchr(R_CHAR, instr[i]))
+		if (instr[i] && !ft_strchr(R_CHAR, instr[i]))
 		{
 			word.start = instr + i;
-			while (instr[i] && !ft_strchr(S_CHAR, instr[i]) && !ft_isspace(instr[i]))
+			while (instr[i] && !ft_strchr(S_CHAR, instr[i]))
 				i++;
 			word.end = instr + i;
-			get_args(&array, word, 0, 0);
+			get_args(&array, &word, &c, 0);
 			if (!instr[i])
 				break ;
 		}
 		if (instr[i] && ft_strchr(R_CHAR, instr[i]))
-			i += redirect_token(&(instr[i]), tree);
+			i += redirect_token(&(instr[i]), tree, sh);
 	}
 	command_token(sh, &array, tree);
 }
@@ -76,13 +78,9 @@ void	get_tree(t_shell *sh, char *instr, t_cmd **tree, int i)
 /// @return AST root node
 t_cmd	*do_lexing(t_shell *sh)
 {
-	// int		i;
 	t_cmd	*tree;
-	
+
 	tree = NULL;
-	// tree = ft_calloc (1, sizeof(t_cmd));
-	// if (!tree)
-	// 	ft_error("Allocation error", GENERAL_ERROR);
 	get_tree(sh, sh->line, &tree, 0);
 	return (tree);
 }

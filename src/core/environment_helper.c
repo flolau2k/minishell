@@ -6,22 +6,11 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 13:30:26 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 16:46:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static bool	is_file(char *name)
-{
-	bool	ret;
-
-	t_stat	statbuf;
-	if (stat(name, &statbuf) != 0)
-		return 0;
-	ret = S_ISDIR(statbuf.st_mode);
-	return (ret);
-}
 
 char	*get_cmd_path(char *name, char **env)
 {
@@ -97,12 +86,6 @@ char	**set_default_env(char **env)
 {
 	char	*tmp[2];
 
-	if (!get_env(env, "LS_COLORS"))
-		env = set_env(env, "LS_COLORS=");
-	if (!get_env(env, "LESSCLOSE"))
-		env = set_env(env, "LESSCLOSE=/usr/bin/lesspipe %s %s");
-	if (!get_env(env, "LESSOPEN"))
-		env = set_env(env, "LESSOPEN=| /usr/bin/lesspipe %s");
 	if (!get_env(env, "SHLVL"))
 		env = set_env(env, "SHLVL=1");
 	else

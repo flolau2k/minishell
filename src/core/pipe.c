@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/06 09:54:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:21:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,24 @@ void	close_pipe(int *pipe_fd)
 	close(pipe_fd[1]);
 }
 
-pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1)
+pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
-		ft_error("pipe", GENERAL_ERROR);
+		ft_error("pipe", strerror(errno), GENERAL_ERROR);
 	pid = fork();
 	if (pid == -1)
-		ft_error("fork", GENERAL_ERROR);
+		ft_error("fork", strerror(errno), GENERAL_ERROR);
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close_pipe(pipe_fd);
+		if (tofree)
+			free_tree(tofree);
+		a1->pid = pid;
 		if (f1)
 			f1(a1);
 	}
@@ -61,7 +65,7 @@ char	*execute_command(char *cmd, char **argv)
 	}
 	else
 		ret = NULL;
-	dup2(tty[0],STDIN_FILENO);
+	dup2(tty[0], STDIN_FILENO);
 	dup2(tty[1], STDOUT_FILENO);
 	return (ret);
 }
@@ -72,19 +76,16 @@ pid_t	execute_command_pipe(char *cmd, char **argv)
 	int		pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
-		ft_error("pipe", GENERAL_ERROR);
+		ft_error("pipe", strerror(errno), GENERAL_ERROR);
 	pid = fork();
 	if (pid == -1)
-		ft_error("fork", GENERAL_ERROR);
+		ft_error("fork", strerror(errno), GENERAL_ERROR);
 	if (pid == 0)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close_pipe(pipe_fd);
 		if (execve(cmd, argv, NULL) == -1)
-		{
-			printf("minishell: %s: %s\n", cmd, strerror(errno));
-			exit(GENERAL_ERROR);
-		}
+			ft_error(cmd, strerror(errno), GENERAL_ERROR);
 	}
 	else
 	{

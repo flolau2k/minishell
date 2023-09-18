@@ -6,40 +6,11 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 13:28:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/15 13:30:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	execute(t_cmd *cmd)
-{
-	t_fcn_p	fcn;
-	pid_t	pid;
-	int		stat_loc;
-
-	if (!cmd)
-		return (0);
-	if (cmd->type == NODE_EXEC)
-	{
-		fcn = get_builtin((t_exec *)cmd);
-		if (fcn)
-			return (fcn((t_exec *)cmd));
-	}
-	pid = fork();
-	if (pid == -1)
-	{
-		printf("minishell: fork: %s\n", strerror(errno));
-		exit(GENERAL_ERROR);
-	}
-	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		rec_execute(cmd);
-	}
-	waitpid(pid, &stat_loc, 0);
-	return (WEXITSTATUS(stat_loc));
-}
 
 void	rec_execute(t_cmd *cmd)
 {
@@ -53,12 +24,25 @@ void	rec_execute(t_cmd *cmd)
 
 void	do_pipe(t_pipe *cmd)
 {
-	create_pipe(&rec_execute, cmd->left);
-	rec_execute(cmd->right);
+	pid_t	pid;
+	t_cmd	*left;
+	t_cmd	*right;
+
+	left = cmd->left;
+	right = cmd->right;
+	free_pipe_single(cmd);
+	pid = create_pipe(&rec_execute, left, right);
+	free_tree(left);
+	right->pid = pid;
+	return (rec_execute(right));
 }
 
 void	do_redir(t_redir *redir)
 {
+	t_cmd	*cmd;
+
+	cmd = redir->cmd;
+	cmd->pid = redir->pid;
 	if (redir->mode & O_HEREDOC)
 		here_doc(redir);
 	else
@@ -66,7 +50,9 @@ void	do_redir(t_redir *redir)
 		redir->fd = open(redir->file, redir->mode, 0644);
 		if (redir->fd == -1)
 		{
+			dup2(STDERR_FILENO, STDOUT_FILENO);
 			printf("minishell: %s: %s\n", redir->file, strerror(errno));
+			free_tree_shell((t_cmd *)redir);
 			exit(GENERAL_ERROR);
 		}
 		if (redir->mode & O_WRONLY)
@@ -75,25 +61,50 @@ void	do_redir(t_redir *redir)
 			dup2(redir->fd, STDIN_FILENO);
 		close(redir->fd);
 	}
-	return (rec_execute(redir->cmd));
+	free_redir_single(redir);
+	return (rec_execute(cmd));
 }
 
-void	do_exec(t_exec *exec)
+void	do_execve(t_exec *exec)
 {
 	char	*cmd;
+	t_fcn_p	fcn;
 
+	fcn = get_builtin(exec);
+	if (fcn)
+		return (do_builtin(fcn, exec));
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
-	{
-		dup2(STDERR_FILENO, STDOUT_FILENO);
-		printf("minishell: %s: command not found!\n", exec->cmd);
-		exit(GENERAL_ERROR);
-	}
+		exec_error(exec, "command not found!", exec->cmd);
 	if (execve(cmd, exec->argv, exec->sh->env) == -1)
+		exec_error(exec, cmd, strerror(errno));
+}
+
+/// @brief Execute exec node.
+/// @param exec Node to execute
+void	do_exec(t_exec *exec)
+{
+	int		stat_loc;
+	pid_t	npid;
+	t_fcn_p	fcn;
+
+	fcn = get_builtin(exec);
+	if (fcn && exec->pid == -1)
+		return (do_builtin(fcn, exec));
+	if (exec->pid == 0)
+		do_execve(exec);
+	else
 	{
-		//  Must free memory if execve fails ???
-		dup2(STDERR_FILENO, STDOUT_FILENO);
-		printf("minishell: %s: %s\n", cmd, strerror(errno));
-		exit(GENERAL_ERROR);
+		npid = fork();
+		if (npid == 0)
+		{
+			signal(SIGINT, SIG_DFL);
+			do_execve(exec);
+		}
+		waitpid(npid, &stat_loc, 0);
+		exec->sh->ret = WEXITSTATUS(stat_loc);
+		close(STDIN_FILENO);
+		free_exec(exec);
+		wait_exit();
 	}
 }

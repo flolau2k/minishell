@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   destructors_single.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/10 10:15:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:51:12 by flauer           ###   ########.fr       */
+/*   Created: 2023/09/13 16:41:36 by flauer            #+#    #+#             */
+/*   Updated: 2023/09/18 09:52:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_error(char *msg, char *errmsg, int excode)
+void	free_shell(t_shell *sh)
 {
-	dup2(STDERR_FILENO, STDOUT_FILENO);
-	if (msg)
-		printf("minishell: %s: %s\n", msg, errmsg);
-	else
-		printf("minishell: %s\n", errmsg);
-	exit(excode);
+	free_arr(sh->env);
+}
+
+void	free_pipe_single(t_pipe *arg)
+{
+	free(arg);
+}
+
+void	free_redir_single(t_redir *arg)
+{
+	free(arg->file);
+	free_arr(arg->argv);
+	free(arg->flag);
+	free(arg);
 }

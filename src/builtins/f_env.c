@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:54:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/01 15:52:21 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:35:44 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	f_env(t_exec *cmd)
 			printf("%s\n", cmd->sh->env[i]);
 		i++;
 	}
+	free_exec(cmd);
 	return (EXIT_SUCCESS);
 }
