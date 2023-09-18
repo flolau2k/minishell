@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 11:27:06 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:29:22 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,20 +120,25 @@ void	free_redir(t_redir *arg);
 // non_alloc_destructors.c
 void	free_init_tree(t_cmd *cmd);
 
-// parser.c
-void	do_parsing(t_cmd *str);
-
 // lexer_utils.c
-void	get_args(t_array *array, t_word block, int i, int count);
+void	get_args(t_array *array, t_word *block, int *i, int count);
+int		end_expression(char *instr, t_array *array);
+void	join_array(t_array *array, char *file);
+char	*ft_copystr(char *start, char *end);
+
+// lexer_helper.c
 int		redirect_type(char *instr);
-int		end_expression(char *instr, t_word *word);
-bool	check_char(char c);
+int		set_flag(char *c, int *i, int *offset);
+void	allocate_array(t_array *array, int count);
+void	fill_array(t_array *array, t_word *word, int count, int flag);
+bool	inside_quotes(char c);
 
 // lexer.c
 t_cmd	*do_lexing(t_shell *sh);
 
 // token_utils.c
 int		new_arr(t_array *array, int count);
+int		arr_add_back(t_array *array, int count);
 
 // tree.c
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
@@ -150,7 +155,7 @@ int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
 void	expander(t_shell *sh, t_cmd *cmd);
 
 // quote_check.c
-bool	quote_check(t_cmd *cmd);
+bool	quote_check(char *arg);
 
 // expand_utils.c
 char	*ft_realloc(char *ret, char *s, int count);

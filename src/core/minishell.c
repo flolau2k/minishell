@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 20:28:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:27:25 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@ void	main_loop(t_shell *sh)
 		if (ft_strlen(sh->line) == 0)
 			continue;
 		add_history(sh->line);
-		root = do_lexing(sh);
-		do_parsing(root);
-		if (!quote_check(root))
+		if (!quote_check(sh->line))
 		{
-			free_init_tree(root);
 			free(sh->line);
 			continue;
 		}
-		expander(sh, root);
+		root = do_lexing(sh);
 		ft_printf("<<<-----PARSING----->>>\n");
+		ft_printf("\n");
+		print_tree(&root);
+		expander(sh, root);
+		ft_printf("<<<-----EXPANDING----->>>\n");
 		ft_printf("\n");
 		print_tree(&root);
 		sh->ret = execute(root);
