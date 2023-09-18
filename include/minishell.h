@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 11:14:49 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 17:40:34 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define R_CHAR "<>"
 # define P_CHAR "|"
 # define S_CHAR "<>|"
+# define A_CHAR "\'\"<>|"
 
 extern int	g_sig;
 
@@ -145,18 +146,24 @@ void	join_array(char **array, char *file);
 char	*ft_copystr(char *start, char *end);
 
 // lexer_helper.c
-int		redirect_type(char *instr);
+int		redirect_type(t_token *token);
 int		set_flag(char *c, int *i);
 void	allocate_array(t_array *array, int count);
 void	fill_array(t_array *array, t_word *word, int count, int flag);
 bool	inside_quotes(char c);
 
 // lexer.c
-t_cmd	*do_lexing(t_shell *sh);
+t_list	*do_lexing(char *arg);
+
+// parser.c
+t_cmd	*parser(t_list	*token_str);
+void	copy_expand(void *arg, t_shell *sh);
+
 
 // token_utils.c
-int		new_arr(t_array *array, int count);
-int		arr_add_back(t_array *array, int count);
+char	**array_addback(char **arr, char *new);
+char	**make_array(t_list **elm);
+
 
 // tree.c
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
@@ -165,12 +172,12 @@ void	arrange_command_tree(t_cmd **tree, t_exec *node);
 void	print_tree(t_cmd **tree); // Test function
 
 // tokenizer.c
-t_cmd	*pipe_token(t_cmd **tree);
-int		redirect_token(char *instr, t_cmd **tree, t_shell *sh);
-int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
+bool	pipe_token(t_cmd **tree);
+bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh);
+bool	command_token(t_list **elm, t_cmd **tree, t_shell *sh);
 
 // expansion.c
-void	expander(t_shell *sh, t_cmd *cmd);
+char	*expand(char *arg, t_shell *sh);
 
 // quote_check.c
 bool	quote_check(char *arg);
@@ -185,5 +192,18 @@ int		not_variable(char *arg, char **new);
 int		get_special_var(t_shell *sh, char **ret);
 int		get_variable(t_shell *sh, char *arg, char **ret);
 int		get_non_variable(char *arg, char **ret);
+
+// lexer_redirects.c
+int		l_dless(t_list **ret, char *arg);
+int		l_dgreater(t_list **ret, char *arg);
+int		l_greater(t_list **ret, char *arg);
+int		l_less(t_list **ret, char *arg);
+
+// lexer_misc.c
+int	l_word(t_list **ret, char *arg);
+int	l_squote(t_list **ret, char *arg);
+int	l_dquote(t_list **ret, char *arg);
+int	l_pipe(t_list **ret, char *arg);
+void	free_token(t_list *elm);
 
 #endif

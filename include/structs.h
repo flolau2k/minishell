@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 09:39:20 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 17:02:53 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,26 @@ typedef enum e_nodetype
 	NODE_REDIRECT
 }	t_nodetype;
 
+typedef enum e_tokentype
+{
+	LESS,
+	DLESS,
+	GREATER,
+	DGREATER,
+	SQUOTE,
+	DQUOTE,
+	PIPE,
+	WORD
+}	t_tokentype;
+
+typedef struct s_token
+{
+	t_tokentype	type;
+	char		*start;
+	size_t		length;
+	bool		flag;
+}	t_token;
+
 typedef struct s_cmd
 {
 	t_nodetype	type;
@@ -30,6 +50,7 @@ typedef struct s_shell
 {
 	char	**env;
 	t_cmd	*root;
+	t_list	*token;
 	char	*line;
 	int		ret;
 	int		ttyin;
@@ -79,15 +100,13 @@ typedef struct s_redir
 	pid_t		pid;
 	t_cmd		*cmd;
 	char		*file;
-	char		**argv;
-	bool		*flag;
 	int			mode;
 	int			fd;
 	int			ttyin;
 	int			ttyout;
 }	t_redir;
 
-typedef int			(*t_fcn_p)(t_exec *);
+typedef int		(*t_fcn_p)(t_exec *);
 typedef struct stat	t_stat;
 
 #endif

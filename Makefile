@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
+#    By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/09/18 09:37:32 by flauer           ###   ########.fr        #
+#    Updated: 2023/09/18 14:47:48 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ FILES +=	f_cd.c f_echo.c f_env.c f_exit.c f_export.c f_pwd.c f_unset.c \
 #src/utils
 FILES +=	destructors.c helpers.c lexer_utils.c token_utils.c expand_utils.c \
 			expand2_utils.c non_alloc_destructors.c destructors_single.c \
-			destructors_shell.c lexer_helper.c
+			destructors_shell.c lexer_helper.c lexer_redirects.c lexer_misc.c
 #src/error
 FILES +=	error.c
 #src/test

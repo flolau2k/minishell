@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 11:32:18 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 16:04:27 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,18 @@ char	*ft_realloc(char *new, char *s, int count)
 	return (str);
 }
 
-int	is_special_variable(t_shell *sh, char **new)
-{
-	*new = ft_itoa(sh->ret);
-	if (!*new)
-		*new = ft_strdup("");
-	return (2);
-}
-
 int	is_variable(t_shell *sh, char *arg, char **new)
 {
 	int		i;
-	int		count;
 	char	*key;
 	char	*temp;
 
 	key = NULL;
 	temp = NULL;
-	count = 0;
 	i = 0;
-	while (arg[++i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
-				count++;
-	key = ft_substr(arg + i - count, 0, count);
+	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
+				i++;
+	key = ft_substr(arg, 0, i);
 	if (!key)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	temp = get_env(sh->env, key);
@@ -70,19 +60,13 @@ int	is_variable(t_shell *sh, char *arg, char **new)
 int	not_variable(char *arg, char **new)
 {
 	int		i;
-	int		count;
 
-	count = 0;
 	i = 0;
-	count = 0;
-	while (arg[i])
-	{
-		if (arg[i] && arg[i] == '$')
-			break;
-		count++;
+	while (arg[i] && arg[i] != '$' )
 		i++;
-	}
-	*new = ft_substr(arg + i - count, 0, count);
+	if (i > 0 && arg[i] && arg[i] == '$')
+		i--;
+	*new = ft_substr(arg, 0, i);
 	if (!*new)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	return (i);
