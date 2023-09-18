@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 09:39:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:14:49 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,12 @@ void	free_redir_shell(t_redir *arg);
 // lexer_utils.c
 void	get_args(t_array *array, t_word *block, int *i, int count);
 int		end_expression(char *instr, t_array *array);
-void	join_array(t_array *array, char *file);
+void	join_array(char **array, char *file);
 char	*ft_copystr(char *start, char *end);
 
 // lexer_helper.c
 int		redirect_type(char *instr);
-int		set_flag(char *c, int *i, int *offset);
+int		set_flag(char *c, int *i);
 void	allocate_array(t_array *array, int count);
 void	fill_array(t_array *array, t_word *word, int count, int flag);
 bool	inside_quotes(char c);

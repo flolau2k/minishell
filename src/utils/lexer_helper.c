@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:40:14 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 09:43:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:14:22 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,19 @@ int	redirect_type(char *instr)
 	return (0);
 }
 
-int	set_flag(char *array, int *i, int *offset)
+int	set_flag(char *array, int *i)
 {
 	if (array[*i] && ft_strchr("\'", array[*i]))
 	{
 		while (ft_strchr("\'", array[*i]))
-		{
 			(*i)++;
-			(*offset)++;
-		}
 		(*i)--;
 		return (2);
 	}
 	else if (array[*i] && ft_strchr("\"", array[*i]))
 	{
 		while (ft_strchr("\"", array[*i]))
-		{
 			(*i)++;
-			(*offset)++;
-		}
 		(*i)--;
 		return (1);
 	}

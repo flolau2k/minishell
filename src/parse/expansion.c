@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 10:38:44 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:27:40 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*expand(char *arg, t_shell *sh, bool flag)
 			i += get_variable(sh, arg + i, &ret);
 		else
 			i += get_non_variable(arg + i, &ret);
+		i++;
 	}
 	return (ret);
 }
@@ -72,6 +73,7 @@ void	expand_redir(t_redir *arg, t_shell *sh)
 	i = -1;
 	while (arg->argv[++i])
 		arg->argv[i] = expand(arg->argv[i], sh, arg->flag[i]);
+	join_array(arg->argv, arg->file);
 	if (arg->cmd)
 		expander(sh, arg->cmd);
 }

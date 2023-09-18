@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 10:53:51 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:13:33 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,17 @@ int	get_word(t_word *word, t_word *block, int *i, int *flag)
 {
 	int		cts;
 	int		count;
-	int		offset;
 
 	count = 0;
-	offset = 0;
 	while (block->start[*i] && ft_isspace(block->start[*i]))
 		(*i)++;
 	cts = *i;
-	*flag = set_flag(block->start, i, &offset);
+	*flag = set_flag(block->start, i);
 	while (block->start[*i] && block->start + *i < block->end)
 	{
 		if (*flag != 0 && inside_quotes(block->start[*i]))
 		{
-			word->start = ft_copystr(&block->start[cts + offset], &block->start[*i - 1]);
+			word->start = ft_copystr(&block->start[cts + 1], &block->start[*i - 1]);
 			(*i)++;
 			return (count);
 		}
@@ -98,22 +96,22 @@ int	end_expression(char *instr, t_array *array)
 	return (i);
 }
 
-void	join_array(t_array *array, char *file)
+void	join_array(char **array, char *file)
 {
 	int		i;
 	char	*temp;
 
 	i = -1;
 	temp = NULL;
-	while(array->start[++i])
+	while(array[++i])
 	{
 		if (temp)
-			temp = array->start[i];
+			temp = array[i];
 		else
 		{
 			if (file)
 				free(file);
-			file = ft_strjoin(array->start[i], temp);
+			file = ft_strjoin(array[i], temp);
 			if (!file)
 			{
 				// ERROR MANAGEMENT
