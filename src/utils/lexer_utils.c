@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 09:43:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/18 09:46:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	join_array(t_array *array, char *file)
 			if (!file)
 			{
 				// ERROR MANAGEMENT
-				ft_error("ALLOCATION ERROR", GENERAL_ERROR);
+				ft_error("malloc", strerror(errno), GENERAL_ERROR);
 			}
 			temp = file;
 		}
