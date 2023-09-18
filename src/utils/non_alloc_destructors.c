@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:13:10 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/08 15:01:58 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/17 01:47:49 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	free_init_exec(t_exec *arg)
 {
 	free(arg->argv);
-	free(arg->eargv);
 	arg->argv = NULL;
-	arg->eargv = NULL;
 	free(arg);
 }
 
