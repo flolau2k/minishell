@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 10:37:56 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:32:18 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	is_variable(t_shell *sh, char *arg, char **new)
 	int		i;
 	int		count;
 	char	*key;
+	char	*temp;
 
 	key = NULL;
+	temp = NULL;
 	count = 0;
 	i = 0;
 	while (arg[++i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
@@ -53,7 +55,14 @@ int	is_variable(t_shell *sh, char *arg, char **new)
 	key = ft_substr(arg + i - count, 0, count);
 	if (!key)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
-	*new = ft_strdup(get_env(sh->env, key));
+	temp = get_env(sh->env, key);
+	if (!temp)
+	{	
+		free(key);
+		*new = ft_strdup("");
+		return (i);
+	}
+	*new = ft_strdup(temp);
 	free(key);
 	return (i);
 }
