@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 17:02:53 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:14:49 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_exec
 	pid_t		pid;
 	char		*cmd;
 	char		**argv;
-	bool		*flag;
+	// bool		*flag;
 	t_shell		*sh;
 }	t_exec;
 

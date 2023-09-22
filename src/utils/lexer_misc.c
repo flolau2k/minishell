@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:48:06 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 16:46:24 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:51:45 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	free_token(t_list *elm)
 
 	cont = (t_token *) elm->content;
 	free(cont->start);
+	free(cont);
 	free(elm);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 16:04:27 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:09:51 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	is_variable(t_shell *sh, char *arg, char **new)
 	return (i);
 }
 
-int	not_variable(char *arg, char **new)
+int	not_variable(char *arg, char **val)
 {
 	int		i;
 
@@ -66,8 +66,8 @@ int	not_variable(char *arg, char **new)
 		i++;
 	if (i > 0 && arg[i] && arg[i] == '$')
 		i--;
-	*new = ft_substr(arg, 0, i);
-	if (!*new)
+	*val = ft_substr(arg, 0, i);
+	if (!*val)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	return (i);
 }

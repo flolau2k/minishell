@@ -6,35 +6,24 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 10:46:19 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 17:43:02 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 13:43:10 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**make_array(t_list **elm)
+char	**create_arr(char *new)
 {
-	t_token	*conts;
-	char	**arr;
-	char	*new;
+	char **ret;
 
-	new = NULL;
-	arr = NULL;
-	conts = (t_token *)(*elm)->content;
-	while ((*elm) && (conts->type == WORD || conts->type == DQUOTE
-			|| conts->type == SQUOTE))
-	{
-		new = ft_strdup(conts->start);
-		if (new)
-		arr	= array_addback(arr, new);
-		(*elm) = (*elm)->next;
-		if (*elm)
-			conts = (t_token *)(*elm)->content;
-	}
-	return (new);
+	ret = ft_calloc(2, sizeof(char *));
+	if (!ret)
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
+	ret[0] = ft_strdup(new);
+	return (ret);
 }
 
-char	**array_addback(char **arr, char *new)
+char	**array_addback(char **argv, char *new)
 {
 	int		len;
 	int		i;
@@ -42,8 +31,10 @@ char	**array_addback(char **arr, char *new)
 
 	i = 0;
 	if (!new)
-		return (arr);
-	len = array_len(arr) + 1;
+		return (argv);
+	if (!argv)
+		return (create_arr(new));
+	len = array_len(argv) + 1;
 	ret = ft_calloc((len + 1), sizeof(char *));
 	if (!ret)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
@@ -52,9 +43,10 @@ char	**array_addback(char **arr, char *new)
 		if (i == len - 1)
 			ret[i] = ft_strdup(new);
 		else
-			ret[i] = ft_strdup(arr[i]);
+			ret[i] = ft_strdup(argv[i]);
 		i++;
 	}
-	free_arr(arr);
+	if (argv)
+		free_arr(argv);
 	return (ret);
 }

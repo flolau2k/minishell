@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 17:45:51 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 17:34:54 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// @param instr The pointer to the instruction
 /// @param tree The tree structure to be filled
 /// @return The length of the instruction
-bool	pipe_token(t_list **elm, t_cmd **tree)
+bool	pipe_token(t_cmd **tree)
 {
 	t_pipe	*node;
 
@@ -24,6 +24,7 @@ bool	pipe_token(t_list **elm, t_cmd **tree)
 	if (!node)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_PIPE;
+	node->pid = -1;
 	node->left = NULL;
 	node->right = NULL;
 	arrange_pipe_tree(tree, node);
@@ -48,6 +49,7 @@ bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh)
 	if (!node)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_REDIRECT;
+	node->pid = -1;
 	node->cmd = NULL;
 	node->file = ft_strdup(conts[1]->start);
 	node->mode = redirect_type(conts[0]);
@@ -62,18 +64,19 @@ bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh)
 /// @brief Creates, initializes and returns a command node for the AST
 /// @param root Pointer to the command position
 /// @return The pointer to the node
-bool	command_token(t_list **elm, t_cmd **tree, t_shell *sh)
+bool	command_token(char **argv, t_cmd **tree, t_shell *sh)
 {
 	t_exec	*node;
-	t_token	*conts;
 
-	conts = (t_token *)(*elm)->content;
+	if (!argv || !argv[0])
+		return (false);
 	node = ft_calloc(1, sizeof(t_exec));
 	if (!node)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_EXEC;
-	node->argv = make_array(elm);
-	node->cmd = node->argv[0];
+	node->pid = -1;
+	node->argv = argv;
+	node->cmd = argv[0];
 	node->sh = sh;
 	node->pid = -1;
 	arrange_command_tree(tree, node);

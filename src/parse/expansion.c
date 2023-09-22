@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 15:49:00 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:11:18 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*expand(char *arg, t_shell *sh)
 			i += get_variable(sh, arg + i, &ret);
 		else
 			i += get_non_variable(arg + i, &ret);
-		i++;
+		// i++;
 	}
 	return (ret);
 }

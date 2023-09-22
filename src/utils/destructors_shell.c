@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destructors_shell.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 13:24:43 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 09:53:59 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:15:09 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	free_exec_shell(t_exec *arg)
 {
 	free_arr(arg->argv);
 	free_shell(arg->sh);
-	free(arg->flag);
 	free(arg);
 }
 
@@ -44,7 +43,5 @@ void	free_redir_shell(t_redir *arg)
 {
 	free_tree_shell(arg->cmd);
 	free(arg->file);
-	free_arr(arg->argv);
-	free(arg->flag);
 	free(arg);
 }

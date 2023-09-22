@@ -1,0 +1,13 @@
+Makefile
+README.md
+include
+libft
+minishell
+minishell.dSYM
+o
+obj
+out
+out.c
+readline.supp
+src
+test.out

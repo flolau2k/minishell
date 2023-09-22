@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 17:40:34 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 13:57:53 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include "structs.h"
 # include "../libft/include/libft.h"
+# include "structs.h"
 
 # define NO_COLOR "\033[0m"
 
@@ -156,9 +156,13 @@ bool	inside_quotes(char c);
 t_list	*do_lexing(char *arg);
 
 // parser.c
-t_cmd	*parser(t_list	*token_str);
+bool	parser(t_list *token_str, t_cmd **root, t_shell *sh);
 void	copy_expand(void *arg, t_shell *sh);
-
+t_list	*unite_tokens(t_list *token_str);
+bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh);
+bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh);
+bool	get_pipe(t_list **token_str, t_cmd **root);
+void	check_and_unite(t_list *tmp);
 
 // token_utils.c
 char	**array_addback(char **arr, char *new);
@@ -174,7 +178,7 @@ void	print_tree(t_cmd **tree); // Test function
 // tokenizer.c
 bool	pipe_token(t_cmd **tree);
 bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh);
-bool	command_token(t_list **elm, t_cmd **tree, t_shell *sh);
+bool	command_token(char **argv, t_cmd **tree, t_shell *sh);
 
 // expansion.c
 char	*expand(char *arg, t_shell *sh);
