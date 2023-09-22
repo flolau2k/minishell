@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/22 14:09:51 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 18:13:47 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int	not_variable(char *arg, char **val)
 	i = 0;
 	while (arg[i] && arg[i] != '$' )
 		i++;
-	if (i > 0 && arg[i] && arg[i] == '$')
-		i--;
 	*val = ft_substr(arg, 0, i);
+	if (i > 0)
+		i--;
 	if (!*val)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/22 17:35:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 18:15:16 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void	main_loop(t_shell *sh)
 		token_str = do_lexing(sh->line);
 		// print_token_list(token_str);
 		parser(token_str, &root, sh);
-		print_tree(&root);
+		// print_tree(&root);
 		free(sh->line);
 		sh->line = NULL;
-		print_tree(&root);
+		// print_tree(&root);
 		rec_execute(root);
 		reset_shell(sh);
 	}

@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:20:22 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 16:04:41 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 18:20:27 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	get_special_var(t_shell *sh, char **ret)
 	if (!tmp)
 	{
 		*ret = val;
-		return (2);
+		return (1);
 	}
 	*ret = ft_strjoin(tmp, val);
 	free(tmp);
-	return (2);
+	return (1);
 }
 
 /// @brief Returns malloced expanded variable
