@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 11:14:49 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 10:35:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	exec_error(t_exec *exec, char *msg, char *error);
 
 // signals.c
 void	signal_handler(int signo);
+void	apply_signal(t_shell *sh);
 
 // BUILTINS
 t_fcn_p	get_builtin(t_exec *exec);

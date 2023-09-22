@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 11:37:30 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/22 10:36:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,7 @@ void	main_loop(t_shell *sh)
 			free(line);
 		}
 		// sh->line = readline(MINISHELL_PROMPT);
-		if (g_sig)
-		{
-			sh->ret = 128 + g_sig;
-			g_sig = 0;
-		}
+		apply_signal(sh);
 		if (!sh->line)
 			f_exit2(sh, NULL, EXIT_SUCCESS);
 		if (ft_strlen(sh->line) == 0)
