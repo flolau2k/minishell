@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/22 18:13:47 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/25 18:01:13 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int	not_variable(char *arg, char **val)
 	int		i;
 
 	i = 0;
-	while (arg[i] && arg[i] != '$' )
+	while (arg[i] && arg[i] != '$')
+		i++;
+	if (arg[i] == '$' && (!ft_isalnum(arg[i + 1]) || !ft_strchr("\'\"", arg[i + 1])))
 		i++;
 	*val = ft_substr(arg, 0, i);
 	if (i > 0)
