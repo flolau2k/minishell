@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/25 11:48:34 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:54:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	do_pipe(t_pipe *cmd)
 	t_cmd	*left;
 	t_cmd	*right;
 
+	pid = -1;
 	left = cmd->left;
 	right = cmd->right;
 	free_pipe_single(cmd);
@@ -75,7 +76,10 @@ void	do_execve(t_exec *exec)
 
 	fcn = get_builtin(exec);
 	if (fcn)
-		return (do_builtin(fcn, exec));
+	{	
+		do_builtin(fcn, exec);
+		exit(EXIT_SUCCESS);
+	}
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
 		exec_error(exec, "command not found!", exec->cmd);

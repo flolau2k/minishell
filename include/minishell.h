@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/25 10:13:37 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/25 17:30:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	wait_exit(void);
 
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
+void	ft_error2(char *msg, char *errmsg);
 
 // destructors.c
 void	free_tree(t_cmd *cmd);
@@ -162,7 +163,8 @@ t_list	*unite_tokens(t_list *token_str);
 bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_pipe(t_list **token_str, t_cmd **root);
-void	unite(t_list *tmp);
+bool	unite(t_list *tmp);
+bool	is_redir(t_list *lst);
 
 // token_utils.c
 char	**array_addback(char **arr, char *new);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:22:01 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/22 15:16:07 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:06:29 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,12 @@ void	arrange_redir_tree(t_cmd **tree, t_redir *node)
 	{
 		pipe = (t_pipe *)*tree;
 		if (!pipe->right)
-			pipe->right = (t_cmd *)node;
-		else
 		{
-			temp = pipe->right;
 			pipe->right = (t_cmd *)node;
-			node->cmd = temp;
+			return ;
 		}
+		else
+			arrange_redir_tree(&pipe->right, node);
 	}
 	else if ((*tree)->type == NODE_REDIRECT)
 	{
@@ -104,23 +103,19 @@ void	arrange_command_tree(t_cmd **tree, t_exec *node)
 	{
 		pipe = (t_pipe *)*tree;
 		if (!pipe->right)
-			pipe->right = (t_cmd *)node;
-		else if (pipe->right->type == NODE_REDIRECT)
 		{
-			redir = (t_redir *)pipe->right;
-			while (redir->cmd && redir->cmd->type == NODE_REDIRECT)
-				redir = (t_redir *)redir->cmd;
-			if (redir) // Useless condition
-				redir->cmd = (t_cmd *)node;
+			pipe->right = (t_cmd *)node;
+			return ;
 		}
+		else
+			arrange_command_tree(&pipe->right, node);
 	}
 	else if ((*tree)->type == NODE_REDIRECT)
 	{
 		redir = (t_redir *)*tree;
-		while (redir && redir->cmd)
+		while (redir->cmd && redir->cmd->type == NODE_REDIRECT)
 			redir = (t_redir *)redir->cmd;
-		if (redir)
-			redir->cmd = (t_cmd *)node;
+		redir->cmd = (t_cmd *)node;
 	}
 }
 

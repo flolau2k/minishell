@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/25 10:59:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/25 17:31:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	reset_shell(t_shell *sh)
 {
 	dup2(sh->ttyin, STDIN_FILENO);
 	dup2(sh->ttyout, STDOUT_FILENO);
-	printf("%s", NO_COLOR);
+	// printf("%s", NO_COLOR);
 }
 
 void	main_loop(t_shell *sh)
@@ -80,8 +80,8 @@ void	main_loop(t_shell *sh)
 		}
 		token_str = do_lexing(sh->line);
 		// print_token_list(token_str);
-		parser(token_str, &root, sh);
-		// print_tree(&root);
+ 		if (!parser(token_str, &root, sh))
+			continue ;
 		free(sh->line);
 		sh->line = NULL;
 		// print_tree(&root);
