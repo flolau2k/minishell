@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/22 16:19:31 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:48:34 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	rec_execute(t_cmd *cmd)
 {
+	if (!cmd)
+		return ;
 	if (cmd->type == NODE_EXEC)
 		return (do_exec((t_exec *)cmd));
 	else if (cmd->type == NODE_PIPE)
@@ -42,7 +44,8 @@ void	do_redir(t_redir *redir)
 	t_cmd	*cmd;
 
 	cmd = redir->cmd;
-	cmd->pid = redir->pid;
+	if (cmd)
+		cmd->pid = redir->pid;
 	if (redir->mode & O_HEREDOC)
 		here_doc(redir);
 	else

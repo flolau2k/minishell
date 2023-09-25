@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_misc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:48:06 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/22 14:51:45 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:10:39 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,18 @@ int	l_dquote(t_list **ret, char *arg)
 	int		i;
 
 	i = 1;
-	token = ft_calloc(1, sizeof(t_token));
-	token->type = DQUOTE;
-	token->start = arg + i;
 	while (arg[i] && arg[i] != '\"')
 		i++;
+	if (i == 1)
+		return (++i);
+	token = ft_calloc(1, sizeof(t_token));
 	if (arg[i + 1] && !ft_isspace(arg[i +1]))
 		token->flag = true;
+	token->type = DQUOTE;
+	token->start = arg + 1;
 	token->length = i - 1;
 	ft_lstadd_back(ret, ft_lstnew(token));
-	return (i++);
+	return (++i);
 }
 int	l_squote(t_list **ret, char *arg)
 {
@@ -57,16 +59,18 @@ int	l_squote(t_list **ret, char *arg)
 	int		i;
 
 	i = 1;
-	token = ft_calloc(1, sizeof(t_token));
-	token->type = SQUOTE;
-	token->start = arg + i;
 	while (arg[i] && arg[i] != '\'')
 		i++;
+	if (i == 1)
+		return (++i);
+	token = ft_calloc(1, sizeof(t_token));
+	token->type = SQUOTE;
+	token->start = arg + 1;
 	if (arg[i + 1] && !ft_isspace(arg[i +1]))
 		token->flag = true;
 	token->length = i - 1;
 	ft_lstadd_back(ret, ft_lstnew(token));
-	return (i++);
+	return (++i);
 }
 
 int	l_word(t_list **ret, char *arg)
@@ -86,5 +90,5 @@ int	l_word(t_list **ret, char *arg)
 	ft_lstadd_back(ret, ft_lstnew(token));
 	while (arg[i] && ft_isspace(arg[i]))
 		i++;
-	return (i++);
+	return (i);
 }

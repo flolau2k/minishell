@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/22 13:57:53 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/25 10:13:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ t_list	*unite_tokens(t_list *token_str);
 bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_pipe(t_list **token_str, t_cmd **root);
-void	check_and_unite(t_list *tmp);
+void	unite(t_list *tmp);
 
 // token_utils.c
 char	**array_addback(char **arr, char *new);

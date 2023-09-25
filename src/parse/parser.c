@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/22 17:14:14 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:46:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	clear_redirects(t_list **token_str)
 			(*token_str) = tmp->next->next;
 			free_token(tmp->next);
 			free_token(tmp);
+			tmp = *token_str;
 		}
 		else if (tmp->next && is_redir(tmp->next))
 		{
@@ -130,9 +131,10 @@ void	clear_redirects(t_list **token_str)
 			free_token(tmp->next);
 			tmp->next = smt;
 		}
+		if (!tmp)
+			break ;
 		tmp = tmp->next;
 	}
-	
 }
 
 bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
@@ -156,21 +158,80 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 	return (true);
 }
 
+t_list	*delete_node(t_list **root, t_list *to_delete)
+{
+	t_list	*tmp;
+	t_list	*next;
+
+	if (*root == to_delete)
+	{
+		next = (*root)->next;
+		free_token(*root);
+		*root = next;
+		return (next);
+	}
+	tmp = *root;
+	while (tmp)
+	{
+		if (tmp->next && tmp->next == to_delete)
+		{
+			next = tmp->next->next;
+			free_token(tmp->next);
+			tmp->next = next;
+			return (tmp);
+		}
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+bool	empty_node(t_list *node)
+{
+	t_token	*val;
+
+	val = (t_token *) node->content;
+	if (!val || !val->start || val->length == 0)
+		return (true);
+	return (false);
+}
+
+/// @brief delete empty nodes
+/// @param root 
+/// @param tmp 
+t_list	*delete_empty_nodes(t_list *root)
+{
+	t_list	*tmp;
+	t_list	*next;
+
+	tmp = root;
+	while (tmp)
+	{
+		next = tmp->next;
+		if (next && empty_node(next))
+			tmp = delete_node(&root, next);
+		if (!tmp)
+			ft_error(NULL, "CRITICAL: tmp is null!", GENERAL_ERROR);
+		tmp = tmp->next;
+	}
+	return (root);
+}
+
 t_list	*unite_tokens(t_list *token_str)
 {
 	t_list	*tmp;
 
+	token_str = delete_empty_nodes(token_str);
 	tmp = token_str;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->next)
-			check_and_unite(tmp);
+			unite(tmp);
 		tmp = tmp->next;
 	}
 	return (token_str);
 }
 
-void	check_and_unite(t_list *tmp)
+void	unite(t_list *tmp)
 {
 	t_list	*next;
 	t_token	*val[2];
@@ -200,5 +261,7 @@ void	copy_expand(void *arg, t_shell *sh)
 	temp = ft_substr(token->start, 0, token->length);
 	if (token->type == WORD || token->type == DQUOTE)
 		temp = expand(temp, sh);
+	if (token->type == DQUOTE || token->type == SQUOTE)
+		token->type = WORD;
 	token->start = temp;
 }

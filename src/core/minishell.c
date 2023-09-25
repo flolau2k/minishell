@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/22 18:15:16 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/25 10:59:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,25 @@ void	main_loop(t_shell *sh)
 	while (true)
 	{
 		root = NULL;
-		// if (isatty(fileno(stdin)))
-		// 	sh->line = readline(MINISHELL_PROMPT);
-		// else
-		// {
-		// 	char *line;
-		// 	line = get_next_line(fileno(stdin));
-		// 	sh->line = line;
-		// 	if (line)
-		// 		sh->line = ft_strtrim(line, "\n");
-		// 	free(line);
-		// }
-		sh->line = readline(MINISHELL_PROMPT);
+		if (isatty(fileno(stdin)))
+			sh->line = readline(MINISHELL_PROMPT);
+		else
+		{
+			char *line;
+			line = get_next_line(fileno(stdin));
+			sh->line = line;
+			if (line)
+				sh->line = ft_strtrim(line, "\n");
+			free(line);
+		}
+		// sh->line = readline(MINISHELL_PROMPT);
 		if (g_sig)
 		{
 			sh->ret = 128 + g_sig;
 			g_sig = 0;
 		}
 		if (!sh->line)
-			f_exit2(sh, "exit", EXIT_SUCCESS);
+			f_exit2(sh, NULL, EXIT_SUCCESS);
 		if (ft_strlen(sh->line) == 0)
 			continue ;
 		add_history(sh->line);

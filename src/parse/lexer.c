@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:27:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 16:26:23 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:17:13 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_list	*do_lexing(char *arg)
 	ret = NULL;
 	while (arg[i])
 	{
+		while (arg[i] && ft_isspace(arg[i]))
+			i++;
 		if (arg[i] == '<' && arg[i + 1] && arg[i + 1] == '<')
 			i += l_dless(&ret, arg + i);
 		else if (arg[i] == '>' && arg[i + 1] && arg[i + 1] == '>')
