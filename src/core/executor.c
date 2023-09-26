@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/26 11:08:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/26 11:26:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	do_execve(t_exec *exec)
 	}
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
-		exec_error(exec, "command not found!", exec->cmd, CMD_NOT_FOUND);
+		exec_error(exec, "command not found", exec->cmd, CMD_NOT_FOUND);
 	if (execve(cmd, exec->argv, exec->sh->env) == -1)
 		exec_error(exec, cmd, strerror(errno), GENERAL_ERROR);
 }
