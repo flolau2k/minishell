@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/26 12:32:08 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/26 17:57:32 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh)
 		}
 	}
 	if (!command_token(argv, root, sh))
-		return (false);
+		return (true);
 	return (true);
 }
 
@@ -256,7 +256,7 @@ t_list	*unite_tokens(t_list *token_str)
 {
 	t_list	*tmp;
 
-	token_str = delete_empty_nodes(token_str);
+	// token_str = delete_empty_nodes(token_str);
 	tmp = token_str;
 	while (tmp)
 	{
@@ -280,7 +280,7 @@ bool	unite(t_list *tmp)
 	if (val[0]->flag && (val[1]->type == WORD || val[1]->type == DQUOTE || val[1]->type == SQUOTE))
 	{
 		temp = val[0]->start;
-		val[0]->start = ft_strjoin(temp, val[1]->start);
+		val[0]->start = ft_strjoin_s(temp, val[1]->start);
 		val[0]->type = WORD;
 		val[0]->flag = val[1]->flag;
 		free(temp);

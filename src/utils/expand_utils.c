@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/26 10:02:17 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/26 14:47:12 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*ft_realloc(char *new, char *s, int count)
 	if (!new)
 		return(s);
 	if (s)
-		count += ft_strlen(s);
+		count += ft_strlen_s(s);
 	else
 		return (new);
-	str = ft_strjoin(new, s);
+	str = ft_strjoin_s(new, s);
 	free(new);
 	new = NULL;
 	free(s);

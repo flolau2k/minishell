@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/22 18:08:24 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/26 17:43:20 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*expand(char *arg, t_shell *sh)
 
 	i = 0;
 	ret = NULL;
+	if (!arg[i])
+		return (ft_strdup(""));
 	while (arg[i])
 	{
 		if (arg[i] && arg[i + 1] && arg[i] == '$' && arg[i + 1] == '?')

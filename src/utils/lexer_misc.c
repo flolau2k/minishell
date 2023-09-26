@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_misc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:48:06 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/25 16:22:52 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/26 13:04:40 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	l_dquote(t_list **ret, char *arg)
 	ft_lstadd_back(ret, ft_lstnew(token));
 	return (++i);
 }
+
 int	l_squote(t_list **ret, char *arg)
 {
 	t_token	*token;

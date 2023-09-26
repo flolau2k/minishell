@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:20:22 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/22 18:20:27 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/26 14:47:26 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	get_special_var(t_shell *sh, char **ret)
 		*ret = val;
 		return (1);
 	}
-	*ret = ft_strjoin(tmp, val);
+	*ret = ft_strjoin_s(tmp, val);
 	free(tmp);
 	return (1);
 }
@@ -52,7 +52,7 @@ int	get_variable(t_shell *sh, char *arg, char **ret)
 		*ret = val;
 		return (i);
 	}
-	*ret = ft_strjoin(tmp, val);
+	*ret = ft_strjoin_s(tmp, val);
 	free(tmp);
 	return (i);
 }
@@ -75,7 +75,7 @@ int	get_non_variable(char *arg, char **ret)
 		*ret = val;
 		return (i);
 	}
-	*ret = ft_strjoin(tmp, val);
+	*ret = ft_strjoin_s(tmp, val);
 	free(tmp);
 	return (i);
 }

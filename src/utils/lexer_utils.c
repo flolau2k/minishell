@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 11:13:33 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/26 14:47:31 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	join_array(char **array, char *file)
 		{
 			if (file)
 				free(file);
-			file = ft_strjoin(array[i], temp);
+			file = ft_strjoin_s(array[i], temp);
 			if (!file)
 			{
 				// ERROR MANAGEMENT
