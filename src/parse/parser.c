@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/25 17:29:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/26 11:21:06 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,8 @@ t_list	*delete_empty_nodes(t_list *root)
 	t_list	*next;
 
 	tmp = root;
+	if (tmp && empty_node(tmp))
+		tmp = delete_node(&root, tmp);
 	while (tmp)
 	{
 		next = tmp->next;
@@ -232,9 +234,8 @@ t_list	*delete_empty_nodes(t_list *root)
 			reset_flags(tmp);
 			tmp = delete_node(&root, next);
 		}
-		if (!tmp)
-			ft_error(NULL, "CRITICAL: tmp is null!", GENERAL_ERROR);
-		tmp = tmp->next;
+		else
+			tmp = tmp->next;
 	}
 	return (root);
 }
