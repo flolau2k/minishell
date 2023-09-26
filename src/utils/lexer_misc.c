@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:48:06 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/26 13:04:40 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/26 18:02:49 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	l_dquote(t_list **ret, char *arg)
 	i = 1;
 	while (arg[i] && arg[i] != '\"')
 		i++;
-	// if (i == 1)
-	// 	return (++i);
 	token = ft_calloc(1, sizeof(t_token));
 	if (arg[i + 1] && !ft_isspace(arg[i +1]))
 		token->flag = true;
@@ -62,8 +60,6 @@ int	l_squote(t_list **ret, char *arg)
 	i = 1;
 	while (arg[i] && arg[i] != '\'')
 		i++;
-	// if (i == 1)
-	// 	return (++i);
 	token = ft_calloc(1, sizeof(t_token));
 	token->type = SQUOTE;
 	token->start = arg + 1;
