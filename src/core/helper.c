@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:14:37 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:21:17 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/26 11:08:25 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	do_builtin(t_fcn_p fcn, t_exec *exec)
 	sh->ret = ret;
 }
 
-void	exec_error(t_exec *exec, char *msg, char *error)
+void	exec_error(t_exec *exec, char *msg, char *error, int exitcode)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	printf("minishell: %s: %s\n", msg, error);
 	free_shell(exec->sh);
 	free_exec(exec);
-	exit(GENERAL_ERROR);
+	exit(exitcode);
 }

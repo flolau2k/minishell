@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/25 17:30:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/26 11:08:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	**set_default_env(char **env);
 // helper.c
 bool	is_file(char *name);
 void	do_builtin(t_fcn_p fcn, t_exec *exec);
-void	exec_error(t_exec *exec, char *msg, char *error);
+void	exec_error(t_exec *exec, char *msg, char *error, int exitcode);
 
 // signals.c
 void	signal_handler(int signo);
