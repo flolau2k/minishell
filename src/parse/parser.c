@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/26 11:21:06 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/26 11:52:30 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	token_copy_expand(t_list *token_str, t_shell *sh)
 {
 	while (token_str)
 	{
+		if (((t_token *)token_str->content)->type == DLESS && token_str->next)
+			((t_token *)token_str->next->content)->type = SQUOTE;
 		copy_expand(token_str->content, sh);
 		token_str = token_str->next;
 	}

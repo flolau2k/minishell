@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/25 19:47:34 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/26 11:34:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	main_loop(t_shell *sh)
 			g_sig = 0;
 		}
 		if (!sh->line)
-			f_exit2(sh, NULL, EXIT_SUCCESS);
+			f_exit2(sh, NULL, sh->ret);
 		if (ft_strlen(sh->line) == 0)
 			continue ;
 		add_history(sh->line);
