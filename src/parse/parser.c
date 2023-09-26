@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/26 11:52:30 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/26 12:32:08 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,16 @@ bool	empty_node(t_list *node)
 	return (false);
 }
 
+bool	flag_node(t_list *node)
+{
+	t_token	*val;
+
+	val = (t_token *) node->content;
+	if (val->flag)
+		return (true);
+	return (false);
+}
+
 void	reset_flags(t_list *tmp)
 {
 	t_token	*cont;
@@ -226,12 +236,12 @@ t_list	*delete_empty_nodes(t_list *root)
 	t_list	*next;
 
 	tmp = root;
-	if (tmp && empty_node(tmp))
+	if (tmp && empty_node(tmp) && flag_node(tmp))
 		tmp = delete_node(&root, tmp);
 	while (tmp)
 	{
 		next = tmp->next;
-		if (next && empty_node(next))
+		if (next && empty_node(next) && flag_node(tmp))
 		{
 			reset_flags(tmp);
 			tmp = delete_node(&root, next);
