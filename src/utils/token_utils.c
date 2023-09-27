@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 10:46:19 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/22 13:43:10 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/27 18:32:43 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,29 @@ char	**array_addback(char **argv, char *new)
 	if (argv)
 		free_arr(argv);
 	return (ret);
+}
+
+t_list	*unite_tokens(t_list *token_str)
+{
+	t_list	*tmp;
+
+	tmp = token_str;
+	while (tmp)
+	{
+		if (tmp->next && unite(tmp))
+			continue ;
+		else
+			tmp = tmp->next;
+	}
+	return (token_str);
+}
+
+void	reset_flags(t_list *tmp)
+{
+	t_token	*cont;
+	t_token	*next;
+
+	cont = (t_token *)tmp->content;
+	next = (t_token *)tmp->next->content;
+	cont->flag &= next->flag;
 }

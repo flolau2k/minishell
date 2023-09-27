@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:24:56 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/27 19:07:23 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,18 @@ void	wait_exit(void)
 	pid = waitpid(0, NULL, 0);
 	while (pid != -1)
 		pid = waitpid(0, NULL, 0);
+}
+
+bool	is_valid_identfier(char *new)
+{
+	int	i;
+
+	i = 0;
+	while (new[i])
+	{
+		if (!ft_isalnum(new[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }

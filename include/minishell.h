@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/26 14:47:42 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/27 19:07:41 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ bool	init(t_shell *sh, int argc, char **argv, char **env);
 int		array_len(char **arr);
 void	free_arr(char **arr);
 void	wait_exit(void);
+bool	is_valid_identfier(char *new);
 
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
@@ -169,7 +170,8 @@ bool	is_redir(t_list *lst);
 // token_utils.c
 char	**array_addback(char **arr, char *new);
 char	**make_array(t_list **elm);
-
+t_list	*unite_tokens(t_list *token_str);
+void	reset_flags(t_list *tmp);
 
 // tree.c
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
@@ -189,10 +191,11 @@ char	*expand(char *arg, t_shell *sh);
 bool	quote_check(char *arg);
 
 // expand_utils.c
-char	*ft_realloc(char *ret, char *s, int count);
 int		is_special_variable(t_shell *sh, char **new);
 int		is_variable(t_shell *sh, char *arg, char **new);
 int		not_variable(char *arg, char **new);
+void	copy_expand(void *arg, t_shell *sh);
+void	token_copy_expand(t_list *token_str, t_shell *sh);
 
 // expand2_utils.c
 int		get_special_var(t_shell *sh, char **ret);
@@ -216,5 +219,17 @@ void	free_token(t_list *elm);
 size_t	ft_strlcat_s(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen_s(const char *s);
 char	*ft_strjoin_s(char const *s1, char const *s2);
+
+// list_utils.c
+t_list	*delete_empty_nodes(t_list *root);
+t_list	*delete_node(t_list **root, t_list *to_delete);
+void	clear_redirects(t_list **token_str);
+bool	unite(t_list *tmp);
+
+// checkers.c
+bool	is_redir(t_list *lst);
+bool	is_pipe(t_list *lst);
+bool	empty_node(t_list *node);
+bool	flag_node(t_list *node);
 
 #endif

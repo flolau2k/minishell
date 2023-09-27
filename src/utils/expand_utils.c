@@ -6,30 +6,11 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/26 14:47:12 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/27 18:28:59 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-char	*ft_realloc(char *new, char *s, int count)
-{
-	char	*str;
-
-	str = NULL;
-	if (!new)
-		return(s);
-	if (s)
-		count += ft_strlen_s(s);
-	else
-		return (new);
-	str = ft_strjoin_s(new, s);
-	free(new);
-	new = NULL;
-	free(s);
-	s = NULL;
-	return (str);
-}
 
 int	is_variable(t_shell *sh, char *arg, char **new)
 {
@@ -70,4 +51,30 @@ int	not_variable(char *arg, char **val)
 	if (!*val)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	return (i);
+}
+
+void	copy_expand(void *arg, t_shell *sh)
+{
+	t_token	*token;
+	char	*temp;
+
+	temp = NULL;
+	token = (t_token *) arg;
+	temp = ft_substr(token->start, 0, token->length);
+	if (token->type == WORD || token->type == DQUOTE)
+		temp = expand(temp, sh);
+	if (token->type == DQUOTE || token->type == SQUOTE)
+		token->type = WORD;
+	token->start = temp;
+}
+
+void	token_copy_expand(t_list *token_str, t_shell *sh)
+{
+	while (token_str)
+	{
+		if (((t_token *)token_str->content)->type == DLESS && token_str->next)
+			((t_token *)token_str->next->content)->type = SQUOTE;
+		copy_expand(token_str->content, sh);
+		token_str = token_str->next;
+	}
 }

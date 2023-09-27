@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:11:16 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 10:49:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/27 19:35:50 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**set_env(char **env, char *newval)
 	len = array_len(env) + 1;
 	ret = malloc(sizeof(char *) * (len + 1));
 	if (!ret)
-		ft_error("malloc", strerror(errno), GENERAL_ERROR);
+		ft_error("malloc", strerror(errno), BUILTIN_MISUSE);
 	ret[len] = NULL;
 	while (i < len)
 	{
