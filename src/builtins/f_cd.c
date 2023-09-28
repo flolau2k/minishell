@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 13:37:05 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 16:48:18 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	f_cd(t_exec *cmd)
 	if (chdir(cmd->argv[1]))
 	{
 		ft_error2(cmd->argv[1], strerror(errno), NULL);
-		free_exec(cmd);
+		if (cmd->pid == 0)
+			free_exec_shell(cmd);
+		else
+			free_exec(cmd);
 		return (GENERAL_ERROR);
 	}
 	free_exec(cmd);
