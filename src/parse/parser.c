@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 13:42:22 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 13:58:34 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh)
 	content = (t_token *) tmp->content;
 	if (content->type == PIPE)
 	{	
+		if (!*root)
+		{
+			ft_error2(NULL, "unexpected token before Pipe!", NULL);
+			sh->ret = BUILTIN_MISUSE;
+			return (false);
+		}
 		if (!tmp->next)
 		{
 			ft_error2(NULL, "unexpected token after Pipe!", NULL);
