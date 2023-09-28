@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/27 18:27:37 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 11:28:46 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 		{
 			if (!redirect_token(&tmp, root, sh))
 			{
-				ft_error(NULL, "unexpected token after redirect!", BUILTIN_MISUSE);
+				ft_error2(NULL, "unexpected token after redirect!");
+				sh->ret = GENERAL_ERROR;
 				return (false); // unexpected token error
 			}
 		}
