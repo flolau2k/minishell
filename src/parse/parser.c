@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 11:28:46 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 13:36:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	get_pipe(t_list **token_str, t_cmd **root)
 	{	
 		if (!tmp->next)
 		{
-			ft_error2(NULL, "unexpected token after Pipe!");
+			ft_error2(NULL, "unexpected token after Pipe!", NULL);
 			return (false);
 		}
 		pipe_token(root);
@@ -95,7 +95,7 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 		{
 			if (!redirect_token(&tmp, root, sh))
 			{
-				ft_error2(NULL, "unexpected token after redirect!");
+				ft_error2(NULL, "unexpected token after redirect!", NULL);
 				sh->ret = GENERAL_ERROR;
 				return (false); // unexpected token error
 			}
