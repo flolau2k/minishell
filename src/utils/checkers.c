@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:19:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/27 18:25:39 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 12:03:15 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,15 @@ bool	flag_node(t_list *node)
 	if (val->flag)
 		return (true);
 	return (false);
+}
+
+bool	not_special_type(t_list *node)
+{
+	t_token	*val;
+
+	val = (t_token *) node->content;
+	if (val->type == SQUOTE || val->type == DQUOTE || val->type == WORD)
+		return (true);
+	else
+		return (false);
 }

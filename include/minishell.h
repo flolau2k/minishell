@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 09:33:21 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 12:01:41 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,5 +232,6 @@ bool	is_redir(t_list *lst);
 bool	is_pipe(t_list *lst);
 bool	empty_node(t_list *node);
 bool	flag_node(t_list *node);
+bool	not_special_type(t_list *node);
 
 #endif
