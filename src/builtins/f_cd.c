@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/27 19:35:04 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 10:28:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ int	f_cd(t_exec *cmd)
 			ft_error(NULL, "HOME dir not set!", BUILTIN_MISUSE);
 	}
 	dir = cmd->argv[1];
-	chdir(cmd->argv[1]);
+	if (chdir(cmd->argv[1]))
+	{
+		ft_error2(cmd->argv[1], strerror(errno));
+		free_exec(cmd);
+		return (GENERAL_ERROR);
+	}
 	free_exec(cmd);
 	return (EXIT_SUCCESS);
 }
