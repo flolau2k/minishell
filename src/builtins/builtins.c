@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:52:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 12:55:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 13:12:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_fcn_p	get_builtin(t_exec *exec)
 		&f_export, &f_pwd, &f_unset};
 
 	i = 0;
+	if (ft_strlen(exec->cmd) == 0)
+		return (NULL);
 	while (i < 7)
 	{
 		if (ft_strncmp(fcn_n[i], exec->cmd, ft_strlen(exec->cmd)) == 0)
