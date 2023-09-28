@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:15:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 11:54:41 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 12:12:29 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,27 @@
 
 void	ft_error(char *msg, char *errmsg, int excode)
 {
-	dup2(STDERR_FILENO, STDOUT_FILENO);
 	if (msg)
-		printf("minishell: %s: %s\n", msg, errmsg);
+		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n", msg, errmsg);
 	else
-		printf("minishell: %s\n", errmsg);
+		ft_fprintf(STDERR_FILENO, "minishell: %s\n", errmsg);
 	exit(excode);
 }
 
 void	ft_error2(char *msg, char *errmsg)
 {
-	dup2(STDERR_FILENO, STDOUT_FILENO);
 	if (msg)
-		printf("minishell: %s: %s\n", msg, errmsg);
+		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n", msg, errmsg);
 	else
-		printf("minishell: %s\n", errmsg);
+		ft_fprintf(STDERR_FILENO, "minishell: %s\n", errmsg);
 }
 
 void	ft_error3(char *msg, char *errmsg, int excode, void *tofree)
 {
-	dup2(STDERR_FILENO, STDOUT_FILENO);
 	if (msg)
-		printf("minishell: %s: %s\n", msg, errmsg);
+		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n", msg, errmsg);
 	else
-		printf("minishell: %s\n", errmsg);
+		ft_fprintf(STDERR_FILENO, "minishell: %s\n", errmsg);
 	free(tofree);
 	exit(excode);
 }
