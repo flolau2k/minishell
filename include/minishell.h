@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/27 19:07:41 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 09:33:21 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ bool	is_valid_identfier(char *new);
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
 void	ft_error2(char *msg, char *errmsg);
+void	ft_error3(char *msg, char *errmsg, int excode, void *tofree);
 
 // destructors.c
 void	free_tree(t_cmd *cmd);
