@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/27 19:07:23 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 09:26:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ bool	is_valid_identfier(char *new)
 	i = 0;
 	while (new[i])
 	{
-		if (!ft_isalnum(new[i]))
+		if (ft_isalnum(new[i]) || new[i] == '_')
+			i++;
+		else
 			return (false);
-		i++;
 	}
 	return (true);
 }
