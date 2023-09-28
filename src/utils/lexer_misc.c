@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_misc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:48:06 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/26 18:02:49 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 16:36:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	free_token(t_list *elm)
+void	free_token(void *arg)
 {
 	t_token	*cont;
 
-	cont = (t_token *) elm->content;
+	cont = (t_token *) arg;
 	free(cont->start);
 	free(cont);
-	free(elm);
 }
 
 int	l_pipe(t_list **ret, char *arg)

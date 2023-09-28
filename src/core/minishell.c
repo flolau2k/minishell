@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 11:54:16 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 16:36:21 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,14 @@ void	main_loop(t_shell *sh)
 		// print_token_list(token_str);
  		if (!parser(token_str, &root, sh))
 		{
+			// print_token_list(token_str);
+			ft_lstclear(&token_str, &free_token);
+			free_tree(root);
 			free(sh->line);
 			sh->line = NULL;
 			continue ;
 		}
+		ft_lstclear(&token_str, &free_token);
 		free(sh->line);
 		sh->line = NULL;
 		// print_tree(&root);

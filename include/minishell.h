@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 13:42:47 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 15:30:20 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ int	l_word(t_list **ret, char *arg);
 int	l_squote(t_list **ret, char *arg);
 int	l_dquote(t_list **ret, char *arg);
 int	l_pipe(t_list **ret, char *arg);
-void	free_token(t_list *elm);
+void	free_token(void *arg);
 
 // basic_functions.c
 size_t	ft_strlcat_s(char *dst, const char *src, size_t dstsize);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 13:58:34 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 16:36:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh)
 		}
 		pipe_token(root);
 		*token_str = tmp->next;
-		free_token(tmp);
 	}
 	return (true);
 }
@@ -82,12 +81,10 @@ bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh)
 			if (tmp == *token_str)
 				*token_str = tmp->next;
 			next = tmp->next;
-			free_token(tmp);
 			tmp = next;
 		}
 	}
-	if (!command_token(argv, root, sh))
-		return (true);
+	command_token(argv, root, sh);
 	return (true);
 }
 
