@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/27 18:50:35 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 11:54:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	main_loop(t_shell *sh)
 	
 	while (true)
 	{
+		reset_shell(sh);
 		root = NULL;
 		if (isatty(fileno(stdin)))
 			sh->line = readline(MINISHELL_PROMPT);
@@ -81,12 +82,15 @@ void	main_loop(t_shell *sh)
 		token_str = do_lexing(sh->line);
 		// print_token_list(token_str);
  		if (!parser(token_str, &root, sh))
+		{
+			free(sh->line);
+			sh->line = NULL;
 			continue ;
+		}
 		free(sh->line);
 		sh->line = NULL;
 		// print_tree(&root);
 		rec_execute(root);
-		reset_shell(sh);
 	}
 }
 
