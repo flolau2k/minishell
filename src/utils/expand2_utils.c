@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:20:22 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 15:12:26 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 15:16:06 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	get_special_var(t_shell *sh, char **ret)
 		return (1);
 	}
 	*ret = ft_strjoin_s(tmp, val);
+	free(val);
 	free(tmp);
 	return (1);
 }
