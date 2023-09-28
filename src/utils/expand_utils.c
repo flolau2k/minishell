@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 12:02:40 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 12:20:08 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	token_copy_expand(t_list *token_str, t_shell *sh)
 	while (token_str)
 	{
 		if (((t_token *)token_str->content)->type == DLESS && token_str->next &&
-			not_special_type(token_str))
+			not_special_type(token_str->next))
 			((t_token *)token_str->next->content)->type = SQUOTE;
 		copy_expand(token_str->content, sh);
 		token_str = token_str->next;
