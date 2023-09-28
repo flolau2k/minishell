@@ -6,11 +6,25 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 10:11:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 10:36:55 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static bool	check_nflag(char *arg)
+{
+	int	i;
+
+	i = 1;
+	if (!arg || arg[0] != '-')
+		return (false);
+	while (arg[i] == 'n')
+		i++;
+	if (arg[i])
+		return (false);
+	return (true);
+}
 
 int	f_echo(t_exec *cmd)
 {
@@ -19,7 +33,7 @@ int	f_echo(t_exec *cmd)
 
 	nl = true;
 	i = 1;
-	if (cmd->argv[1] && ft_strncmp(cmd->argv[1], "-n", 2) == 0)
+	if (check_nflag(cmd->argv[1]))
 	{
 		nl = false;
 		i = 2;
