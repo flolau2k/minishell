@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:20:22 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/27 18:27:27 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 15:12:26 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	get_variable(t_shell *sh, char *arg, char **ret)
 		return (i);
 	}
 	*ret = ft_strjoin_s(tmp, val);
+	free(val);
 	free(tmp);
 	return (i);
 }
@@ -76,6 +77,7 @@ int	get_non_variable(char *arg, char **ret)
 		return (i);
 	}
 	*ret = ft_strjoin_s(tmp, val);
+	free(val);
 	free(tmp);
 	return (i);
 }
