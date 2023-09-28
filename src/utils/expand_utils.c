@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/27 18:28:59 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 10:07:48 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,18 @@ void	copy_expand(void *arg, t_shell *sh)
 {
 	t_token	*token;
 	char	*temp;
+	char	*expanded_temp;
 
 	temp = NULL;
+	expanded_temp = NULL;
 	token = (t_token *) arg;
 	temp = ft_substr(token->start, 0, token->length);
 	if (token->type == WORD || token->type == DQUOTE)
-		temp = expand(temp, sh);
+	{
+		expanded_temp = expand(temp, sh);
+		free(temp);
+		temp = expanded_temp;
+	}
 	if (token->type == DQUOTE || token->type == SQUOTE)
 		token->type = WORD;
 	token->start = temp;
