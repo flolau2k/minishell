@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 10:07:48 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 12:02:40 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	not_variable(char *arg, char **val)
 	int		i;
 
 	i = 0;
-	while (arg[i] && (arg[i] != '$' || (arg[i] == '$' && (ft_isspace(arg[i + 1]) || !arg[i + 1]))))
+	while (arg[i] && (arg[i] != '$' || (arg[i] == '$' && 
+			(ft_isspace(arg[i + 1]) || !arg[i + 1]))))
 		i++;
 	*val = ft_substr(arg, 0, i);
 	if (i > 0)
@@ -78,7 +79,8 @@ void	token_copy_expand(t_list *token_str, t_shell *sh)
 {
 	while (token_str)
 	{
-		if (((t_token *)token_str->content)->type == DLESS && token_str->next)
+		if (((t_token *)token_str->content)->type == DLESS && token_str->next &&
+			not_special_type(token_str))
 			((t_token *)token_str->next->content)->type = SQUOTE;
 		copy_expand(token_str->content, sh);
 		token_str = token_str->next;
