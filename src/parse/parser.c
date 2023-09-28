@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 13:36:50 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 13:42:22 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ bool	parser(t_list *token_str, t_cmd **root, t_shell *sh)
 			return(false);
 		if (token_str && !get_word(&token_str, root, sh))
 			return(false);
-		if (token_str && !get_pipe(&token_str, root))
+		if (token_str && !get_pipe(&token_str, root, sh))
 			return(false);
 		tmp = token_str;
 	}
 	return (true);
 }
 
-bool	get_pipe(t_list **token_str, t_cmd **root)
+bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh)
 {
 	t_list	*tmp;
 	t_token	*content;
@@ -44,6 +44,7 @@ bool	get_pipe(t_list **token_str, t_cmd **root)
 		if (!tmp->next)
 		{
 			ft_error2(NULL, "unexpected token after Pipe!", NULL);
+			sh->ret = BUILTIN_MISUSE;
 			return (false);
 		}
 		pipe_token(root);
@@ -96,7 +97,7 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 			if (!redirect_token(&tmp, root, sh))
 			{
 				ft_error2(NULL, "unexpected token after redirect!", NULL);
-				sh->ret = GENERAL_ERROR;
+				sh->ret = BUILTIN_MISUSE;
 				return (false); // unexpected token error
 			}
 		}

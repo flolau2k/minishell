@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 13:33:42 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 13:42:47 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	copy_expand(void *arg, t_shell *sh);
 t_list	*unite_tokens(t_list *token_str);
 bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh);
-bool	get_pipe(t_list **token_str, t_cmd **root);
+bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	unite(t_list *tmp);
 bool	is_redir(t_list *lst);
 
