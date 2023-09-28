@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 10:28:16 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 13:37:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	f_cd(t_exec *cmd)
 	dir = cmd->argv[1];
 	if (chdir(cmd->argv[1]))
 	{
-		ft_error2(cmd->argv[1], strerror(errno));
+		ft_error2(cmd->argv[1], strerror(errno), NULL);
 		free_exec(cmd);
 		return (GENERAL_ERROR);
 	}
