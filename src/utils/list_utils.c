@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:18:48 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 16:37:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 17:23:23 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ bool	unite(t_list *tmp)
 		free(temp);
 		tmp->next = next->next;
 		ft_lstdelone(next, &free_token);
-		// free_token(next);
 		return (true);
 	}
 	return (false);

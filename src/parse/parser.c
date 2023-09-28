@@ -6,28 +6,28 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 16:36:37 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 17:47:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	parser(t_list *token_str, t_cmd **root, t_shell *sh)
+bool	parser(t_list **token_str, t_cmd **root, t_shell *sh)
 {
 	t_list	*tmp;
 
-	token_copy_expand(token_str, sh);
-	token_str = unite_tokens(token_str);
-	tmp = token_str;
+	token_copy_expand(*token_str, sh);
+	*token_str = unite_tokens(*token_str);
+	tmp = *token_str;
 	while (tmp)
 	{
-		if (token_str && !get_redirect(&token_str, root, sh))
+		if (tmp && !get_redirect(&tmp, root, sh))
 			return(false);
-		if (token_str && !get_word(&token_str, root, sh))
+		if (tmp && !get_word(&tmp, root, sh))
 			return(false);
-		if (token_str && !get_pipe(&token_str, root, sh))
+		if (tmp && !get_pipe(&tmp, root, sh))
 			return(false);
-		tmp = token_str;
+		// tmp = *token_str;
 	}
 	return (true);
 }
@@ -101,7 +101,7 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 			{
 				ft_error2(NULL, "unexpected token after redirect!", NULL);
 				sh->ret = BUILTIN_MISUSE;
-				return (false); // unexpected token error
+				return (false);
 			}
 		}
 		else if (is_pipe(tmp))

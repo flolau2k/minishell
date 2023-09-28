@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 15:30:20 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/28 17:24:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ bool	inside_quotes(char c);
 t_list	*do_lexing(char *arg);
 
 // parser.c
-bool	parser(t_list *token_str, t_cmd **root, t_shell *sh);
+bool	parser(t_list **token_str, t_cmd **root, t_shell *sh);
 void	copy_expand(void *arg, t_shell *sh);
 t_list	*unite_tokens(t_list *token_str);
 bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh);
