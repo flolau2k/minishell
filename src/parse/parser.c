@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/29 08:28:24 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 08:38:06 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh)
 			tmp = tmp->next;
 		}
 	}
-	if (tmp)
-		*token_str = tmp->next;
-	else
-		*token_str = tmp;
+	// if (tmp)
+	// 	*token_str = tmp->next;
+	// else
+	*token_str = tmp;
 	command_token(argv, root, sh);
 	return (true);
 }
