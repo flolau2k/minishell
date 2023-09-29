@@ -9,3 +9,5 @@ test_minishell
 out
 text
 .devcontainer/
+tmp_*/
+tmp_*

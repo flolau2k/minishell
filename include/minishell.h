@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 11:14:49 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/29 14:22:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include "structs.h"
 # include "../libft/include/libft.h"
+# include "structs.h"
 
 # define NO_COLOR "\033[0m"
 
@@ -47,6 +47,7 @@
 # define R_CHAR "<>"
 # define P_CHAR "|"
 # define S_CHAR "<>|"
+# define A_CHAR "\'\"<>|"
 
 extern int	g_sig;
 
@@ -90,7 +91,7 @@ char	**set_default_env(char **env);
 // helper.c
 bool	is_file(char *name);
 void	do_builtin(t_fcn_p fcn, t_exec *exec);
-void	exec_error(t_exec *exec, char *msg, char *error);
+void	exec_error(t_exec *exec, char *msg, char *error, int exitcode);
 
 // signals.c
 void	signal_handler(int signo);
@@ -105,6 +106,8 @@ int		f_export(t_exec *cmd);
 int		f_pwd(t_exec *pwd);
 int		f_unset(t_exec *cmd);
 void	f_exit2(t_shell *sh, char *msg, int code);
+char	**put_in_env(char **env, char *new, char *key);
+int		num_args(char **argv);
 
 // PARSE
 // init.c
@@ -114,9 +117,13 @@ bool	init(t_shell *sh, int argc, char **argv, char **env);
 int		array_len(char **arr);
 void	free_arr(char **arr);
 void	wait_exit(void);
+bool	is_valid_identfier(char *new, bool flag);
 
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
+int		ft_error2(char *msg, char *errmsg, void *tofree, int code);
+void	ft_error3(char *msg, char *errmsg, int excode, void *tofree);
+void	ft_error4(t_shell *sh, char *msg, char *errmsg, void *tofree);
 
 // destructors.c
 void	free_tree(t_cmd *cmd);
@@ -145,18 +152,30 @@ void	join_array(char **array, char *file);
 char	*ft_copystr(char *start, char *end);
 
 // lexer_helper.c
-int		redirect_type(char *instr);
+int		redirect_type(t_token *token);
 int		set_flag(char *c, int *i);
 void	allocate_array(t_array *array, int count);
 void	fill_array(t_array *array, t_word *word, int count, int flag);
 bool	inside_quotes(char c);
 
 // lexer.c
-t_cmd	*do_lexing(t_shell *sh);
+t_list	*do_lexing(char *arg);
+
+// parser.c
+bool	parser(t_list *token_str, t_cmd **root, t_shell *sh);
+void	copy_expand(void *arg, t_shell *sh);
+t_list	*unite_tokens(t_list *token_str);
+bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh);
+bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh);
+bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh);
+bool	unite(t_list *tmp);
+bool	is_redir(t_list *lst);
 
 // token_utils.c
-int		new_arr(t_array *array, int count);
-int		arr_add_back(t_array *array, int count);
+char	**array_addback(char **arr, char *new);
+char	**make_array(t_list **elm);
+t_list	*unite_tokens(t_list *token_str);
+void	reset_flags(t_list *tmp);
 
 // tree.c
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
@@ -165,25 +184,57 @@ void	arrange_command_tree(t_cmd **tree, t_exec *node);
 void	print_tree(t_cmd **tree); // Test function
 
 // tokenizer.c
-t_cmd	*pipe_token(t_cmd **tree);
-int		redirect_token(char *instr, t_cmd **tree, t_shell *sh);
-int		command_token(t_shell *sh, t_array *array, t_cmd **tree);
+bool	pipe_token(t_cmd **tree);
+bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh);
+bool	command_token(char **argv, t_cmd **tree, t_shell *sh);
 
 // expansion.c
-void	expander(t_shell *sh, t_cmd *cmd);
+char	*expand(char *arg, t_shell *sh);
 
 // quote_check.c
 bool	quote_check(char *arg);
 
 // expand_utils.c
-char	*ft_realloc(char *ret, char *s, int count);
 int		is_special_variable(t_shell *sh, char **new);
 int		is_variable(t_shell *sh, char *arg, char **new);
 int		not_variable(char *arg, char **new);
+void	copy_expand(void *arg, t_shell *sh);
+void	token_copy_expand(t_list *token_str, t_shell *sh);
 
 // expand2_utils.c
 int		get_special_var(t_shell *sh, char **ret);
 int		get_variable(t_shell *sh, char *arg, char **ret);
 int		get_non_variable(char *arg, char **ret);
+
+// lexer_redirects.c
+int		l_dless(t_list **ret, char *arg);
+int		l_dgreater(t_list **ret, char *arg);
+int		l_greater(t_list **ret, char *arg);
+int		l_less(t_list **ret, char *arg);
+
+// lexer_misc.c
+int	l_word(t_list **ret, char *arg);
+int	l_squote(t_list **ret, char *arg);
+int	l_dquote(t_list **ret, char *arg);
+int	l_pipe(t_list **ret, char *arg);
+void	free_token(void *arg);
+
+// basic_functions.c
+size_t	ft_strlcat_s(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlen_s(const char *s);
+char	*ft_strjoin_s(char const *s1, char const *s2);
+
+// list_utils.c
+t_list	*delete_empty_nodes(t_list *root);
+t_list	*delete_node(t_list **root, t_list *to_delete);
+void	clear_redirects(t_list **token_str);
+bool	unite(t_list *tmp);
+
+// checkers.c
+bool	is_redir(t_list *lst);
+bool	is_pipe(t_list *lst);
+bool	empty_node(t_list *node);
+bool	flag_node(t_list *node);
+bool	not_special_type(t_list *node);
 
 #endif

@@ -6,84 +6,89 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 11:32:18 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:33:51 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*ft_realloc(char *new, char *s, int count)
+bool	nonval_char(char c)
 {
-	char	*str;
-
-	str = NULL;
-	if (!new)
-		return(s);
-	if (s)
-		count += ft_strlen(s);
-	else
-		return (new);
-	str = ft_strjoin(new, s);
-	free(new);
-	new = NULL;
-	free(s);
-	s = NULL;
-	return (str);
+	if ((!ft_strchr("_?", c) && !ft_isalnum(c)) || !c)
+		return (true);
+	return (false);
 }
 
-int	is_special_variable(t_shell *sh, char **new)
-{
-	*new = ft_itoa(sh->ret);
-	if (!*new)
-		*new = ft_strdup("");
-	return (2);
-}
-
-int	is_variable(t_shell *sh, char *arg, char **new)
+int	is_variable(t_shell *sh, char *arg, char **val)
 {
 	int		i;
-	int		count;
 	char	*key;
 	char	*temp;
 
 	key = NULL;
 	temp = NULL;
-	count = 0;
 	i = 0;
-	while (arg[++i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
-				count++;
-	key = ft_substr(arg + i - count, 0, count);
+	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
+				i++;
+	key = ft_substr(arg, 0, i);
 	if (!key)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	temp = get_env(sh->env, key);
 	if (!temp)
 	{	
 		free(key);
-		*new = ft_strdup("");
+		*val = ft_strdup("");
 		return (i);
 	}
-	*new = ft_strdup(temp);
+	*val = ft_strdup(temp);
 	free(key);
 	return (i);
 }
 
-int	not_variable(char *arg, char **new)
+int	not_variable(char *arg, char **val)
 {
 	int		i;
-	int		count;
 
-	count = 0;
 	i = 0;
-	count = 0;
-	while (arg[i])
-	{
-		if (arg[i] && arg[i] == '$')
-			break;
-		count++;
+	while (arg[i] && (arg[i] != '$' || (arg[i] == '$' && nonval_char(arg[i + 1]))))
 		i++;
-	}
-	*new = ft_substr(arg + i - count, 0, count);
-	if (!*new)
+	*val = ft_substr(arg, 0, i);
+	if (i > 0)
+		i--;
+	if (!*val)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	return (i);
+}
+
+void	copy_expand(void *arg, t_shell *sh)
+{
+	t_token	*token;
+	char	*temp;
+	char	*expanded_temp;
+
+	temp = NULL;
+	expanded_temp = NULL;
+	token = (t_token *) arg;
+	temp = ft_substr(token->start, 0, token->length);
+	if (token->type == WORD || token->type == DQUOTE)
+	{
+		expanded_temp = expand(temp, sh);
+		free(temp);
+		temp = expanded_temp;
+	}
+	if (token->type == DQUOTE || token->type == SQUOTE)
+		token->type = WORD;
+	token->start = temp;
+}
+
+void	token_copy_expand(t_list *token_str, t_shell *sh)
+{
+	while (token_str)
+	{
+		if (((t_token *)token_str->content)->type == DLESS && token_str->next &&
+			not_special_type(token_str->next))
+			((t_token *)token_str->next->content)->type = SQUOTE;
+		copy_expand(token_str->content, sh);
+		token_str = token_str->next;
+	}
 }

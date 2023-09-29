@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:20:22 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 09:27:33 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/28 15:16:06 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,20 @@
 /// @return Returns expanded variable
 int	get_special_var(t_shell *sh, char **ret)
 {
-	int		count;
-	int		i;
-	char	*new;
-	char	*s;
+	char	*tmp;
+	char	*val;
 
-	count = 0;
-	i = 0;
-	s = NULL;
-	new = NULL;
-	i = is_special_variable(sh, &s);
-	if (s)
-		count += ft_strlen(s);
-	if (!*ret)
-		*ret = s;
-	else
+	val = ft_itoa(sh->ret);
+	tmp = *ret;
+	if (!tmp)
 	{
-		new = ft_strdup(*ret);
-		free(*ret);
-		*ret = ft_realloc(new, s, count);
+		*ret = val;
+		return (1);
 	}
-	return (i);
+	*ret = ft_strjoin_s(tmp, val);
+	free(val);
+	free(tmp);
+	return (1);
 }
 
 /// @brief Returns malloced expanded variable
@@ -48,26 +41,21 @@ int	get_special_var(t_shell *sh, char **ret)
 /// @return Returns a malloced string with the expanded variable
 int	get_variable(t_shell *sh, char *arg, char **ret)
 {
-	int		count;
+	char	*tmp;
+	char	*val;
 	int		i;
-	char	*new;
-	char	*s;
-	
-	count = 0;
+
 	i = 0;
-	s = NULL;
-	new = NULL;
-	i += is_variable(sh, arg + i, &s);
-	if (s)
-		count += ft_strlen(s);
-	if (!*ret)
-		*ret = s;
-	else
+	i += is_variable(sh, arg + 1, &val);
+	tmp = *ret;
+	if (!tmp)
 	{
-		new = ft_strdup(*ret);
-		free(*ret);
-		*ret = ft_realloc(new, s, count);
+		*ret = val;
+		return (i);
 	}
+	*ret = ft_strjoin_s(tmp, val);
+	free(val);
+	free(tmp);
 	return (i);
 }
 
@@ -77,25 +65,20 @@ int	get_variable(t_shell *sh, char *arg, char **ret)
 /// @return Returns a malloced string with the non-expanded variable
 int	get_non_variable(char *arg, char **ret)
 {
-	int		count;
+	char	*tmp;
+	char	*val;
 	int		i;
-	char	*new;
-	char	*s;
-	
-	count = 0;
+
 	i = 0;
-	s = NULL;
-	new = NULL;
-	i += not_variable(arg + i, &s);
-	if (s)
-		count += ft_strlen(s);
-	if (!*ret)
-		*ret = s;
-	else
+	i += not_variable(arg, &val);
+	tmp = *ret;
+	if (!tmp)
 	{
-		new = ft_strdup(*ret);
-		free(*ret);
-		*ret = ft_realloc(new, s, count);
+		*ret = val;
+		return (i);
 	}
+	*ret = ft_strjoin_s(tmp, val);
+	free(val);
+	free(tmp);
 	return (i);
 }

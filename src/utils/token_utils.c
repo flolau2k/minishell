@@ -3,93 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 10:46:19 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 09:45:50 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/27 18:32:43 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int		array_length(char **array)
+char	**create_arr(char *new)
 {
-	int	i;
+	char **ret;
 
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
+	ret = ft_calloc(2, sizeof(char *));
+	if (!ret)
+		ft_error("malloc", strerror(errno), GENERAL_ERROR);
+	ret[0] = ft_strdup(new);
+	return (ret);
 }
 
-/// @brief Allocates new array copies and frees old arary
-/// @param array Old array to be expanded
-/// @param count Number of cells to be added
-/// @return Total number of cells
-int	arr_add_back(t_array *array, int count)
+char	**array_addback(char **argv, char *new)
 {
-	t_array	new;
+	int		len;
 	int		i;
+	char	**ret;
 
 	i = 0;
-	count++;
-	new.start = ft_calloc(count + 1, sizeof(char *));
-	if (!(new.start))
-			ft_error("malloc", strerror(errno), GENERAL_ERROR);
-	new.end = ft_calloc(count + 1, sizeof(char *));
-	if (!(new.end))
-			ft_error("malloc", strerror(errno), GENERAL_ERROR);
-	new.flag = ft_calloc(count + 1, sizeof(bool));
-	if (!(new.flag))
+	if (!new)
+		return (argv);
+	if (!argv)
+		return (create_arr(new));
+	len = array_len(argv) + 1;
+	ret = ft_calloc((len + 1), sizeof(char *));
+	if (!ret)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
-	while (array->start[i])
+	while (i < len)
 	{
-		new.start[i] = array->start[i];
-		new.end[i] = array->end[i];
-		new.flag[i] = array->flag[i];
+		if (i == len - 1)
+			ret[i] = ft_strdup(new);
+		else
+			ret[i] = ft_strdup(argv[i]);
 		i++;
 	}
-	free(array->start);
-	free(array->end);
-	free(array->flag);
-	array->start = new.start;
-	array->end = new.end;
-	array->flag = new.flag;
-	return (0);
+	if (argv)
+		free_arr(argv);
+	return (ret);
 }
 
-/// @brief Allocates new array copies and frees old arary
-/// @param array Old array to be expanded
-/// @param count Number of cells to be added
-/// @return Total number of cells
-int	new_arr(t_array *array, int count)
+t_list	*unite_tokens(t_list *token_str)
 {
-	t_array	new;
-	int		i;
+	t_list	*tmp;
 
-	i = 0;
-	count += array_length(array->start);
-	new.start = ft_calloc(count + 1, sizeof(char *));
-	if (!(new.start))
-			ft_error("malloc", strerror(errno), GENERAL_ERROR);
-	new.end = ft_calloc(count + 1, sizeof(char *));
-	if (!(new.end))
-			ft_error("malloc", strerror(errno), GENERAL_ERROR);
-	new.flag = ft_calloc(count + 1, sizeof(bool));
-	if (!(new.flag))
-		ft_error("malloc", strerror(errno), GENERAL_ERROR);
-	while (array->start[i])
+	tmp = token_str;
+	while (tmp)
 	{
-		new.start[i] = array->start[i];
-		new.end[i] = array->end[i];
-		new.flag[i] = array->flag[i];
-		i++;
+		if (tmp->next && unite(tmp))
+			continue ;
+		else
+			tmp = tmp->next;
 	}
-	free(array->start);
-	free(array->end);
-	free(array->flag);
-	array->start = new.start;
-	array->end = new.end;
-	array->flag = new.flag;
-	return (count);
+	return (token_str);
+}
+
+void	reset_flags(t_list *tmp)
+{
+	t_token	*cont;
+	t_token	*next;
+
+	cont = (t_token *)tmp->content;
+	next = (t_token *)tmp->next->content;
+	cont->flag &= next->flag;
 }

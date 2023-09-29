@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 13:30:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 14:58:58 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	rec_execute(t_cmd *cmd)
 {
+	if (!cmd)
+		return ;
 	if (cmd->type == NODE_EXEC)
 		return (do_exec((t_exec *)cmd));
 	else if (cmd->type == NODE_PIPE)
@@ -28,6 +30,7 @@ void	do_pipe(t_pipe *cmd)
 	t_cmd	*left;
 	t_cmd	*right;
 
+	pid = -1;
 	left = cmd->left;
 	right = cmd->right;
 	free_pipe_single(cmd);
@@ -42,7 +45,8 @@ void	do_redir(t_redir *redir)
 	t_cmd	*cmd;
 
 	cmd = redir->cmd;
-	cmd->pid = redir->pid;
+	if (cmd)
+		cmd->pid = redir->pid;
 	if (redir->mode & O_HEREDOC)
 		here_doc(redir);
 	else
@@ -50,8 +54,8 @@ void	do_redir(t_redir *redir)
 		redir->fd = open(redir->file, redir->mode, 0644);
 		if (redir->fd == -1)
 		{
-			dup2(STDERR_FILENO, STDOUT_FILENO);
-			printf("minishell: %s: %s\n", redir->file, strerror(errno));
+			ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n",
+				redir->file, strerror(errno));
 			free_tree_shell((t_cmd *)redir);
 			exit(GENERAL_ERROR);
 		}
@@ -72,12 +76,15 @@ void	do_execve(t_exec *exec)
 
 	fcn = get_builtin(exec);
 	if (fcn)
-		return (do_builtin(fcn, exec));
+	{	
+		do_builtin(fcn, exec);
+		exit(EXIT_SUCCESS);
+	}
 	cmd = get_cmd(exec->cmd, exec->sh->env);
 	if (!cmd)
-		exec_error(exec, "command not found!", exec->cmd);
+		exec_error(exec, "command not found", exec->cmd, CMD_NOT_FOUND);
 	if (execve(cmd, exec->argv, exec->sh->env) == -1)
-		exec_error(exec, cmd, strerror(errno));
+		exec_error(exec, cmd, strerror(errno), CMD_ERROR);
 }
 
 /// @brief Execute exec node.
