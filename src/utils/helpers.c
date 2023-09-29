@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 12:32:32 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 12:45:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	wait_exit(void)
 		pid = waitpid(0, NULL, 0);
 }
 
-bool	is_valid_identfier(char *new)
+bool	is_valid_identfier(char *new, bool flag)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ bool	is_valid_identfier(char *new)
 	{
 		if (ft_isalnum(new[i]) || new[i] == '_')
 			i++;
-		else if (new[i] == '=')
+		else if (flag && new[i] == '=')
 			break;
 		else
 			return (false);
