@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 16:52:10 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 09:55:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@ int	f_cd(t_exec *cmd)
 {
 	char	*dir;
 
-	if (!cmd->argv[1])
+	dir = cmd->argv[1];
+	if (!dir)
 	{
 		dir = get_env(cmd->sh->env, "HOME");
 		if (!dir)
-			ft_error(NULL, "HOME dir not set!", BUILTIN_MISUSE);
+		{
+			ft_error2(NULL, "HOME dir not set!", NULL);
+			return (GENERAL_ERROR);
+		}
 	}
-	dir = cmd->argv[1];
-	if (chdir(cmd->argv[1]))
+	if (chdir(dir))
 	{
-		ft_error2(cmd->argv[1], strerror(errno), NULL);
+		ft_error2(dir, strerror(errno), NULL);
 		if (cmd->pid == -1)
 			free_exec(cmd);
 		else
