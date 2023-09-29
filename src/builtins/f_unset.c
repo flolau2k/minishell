@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:35 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 15:37:14 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 12:42:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 int	f_unset(t_exec *cmd)
 {
+	cmd->sh->ret = 0;
 	if (cmd->argv[1])
-		cmd->sh->env = unset_env(cmd->sh->env, cmd->argv[1]);
+	{
+		if (!is_valid_identfier(cmd->argv[1]))
+			ft_error4(cmd->sh, cmd->argv[1], "not a valid identifier", NULL);
+		else
+			cmd->sh->env = unset_env(cmd->sh->env, cmd->argv[1]);
+	}
 	free_exec(cmd);
-	return (EXIT_SUCCESS);
+	return (cmd->sh->ret);
 }
