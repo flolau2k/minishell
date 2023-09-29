@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 10:28:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:40:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	set_oldpwd(t_exec *cmd, char *oldpwd)
+static void	set_oldpwd(t_exec *cmd, char *oldpwd)
 {
 	char	*new;
 	char	*key;
@@ -24,7 +24,7 @@ void	set_oldpwd(t_exec *cmd, char *oldpwd)
 	free(oldpwd);
 }
 
-void	cd_error(t_exec *cmd, char *dir)
+static void	cd_error(t_exec *cmd, char *dir)
 {
 	ft_error2(dir, strerror(errno), NULL);
 	if (cmd->pid == -1)
