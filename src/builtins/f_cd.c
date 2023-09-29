@@ -6,20 +6,20 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 10:13:09 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:28:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	set_oldpwd(char **env, char *oldpwd)
+void	set_oldpwd(t_exec *cmd, char *oldpwd)
 {
 	char	*new;
 	char	*key;
 
 	new = ft_strjoin("OLDPWD=", oldpwd);
 	key = ft_strdup("OLDPWD");
-	env = put_in_env(env, new, key);
+	cmd->sh->env = put_in_env(cmd->sh->env, new, key);
 	free(new);
 	free(oldpwd);
 }
@@ -54,7 +54,7 @@ int	f_cd(t_exec *cmd)
 		cd_error(cmd, dir);
 		return (GENERAL_ERROR);
 	}
-	set_oldpwd(cmd->sh->env, oldpwd);
+	set_oldpwd(cmd, oldpwd);
 	free_exec(cmd);
 	return (EXIT_SUCCESS);
 }
