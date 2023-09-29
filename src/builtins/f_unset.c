@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:35 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 15:24:38 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:23:23 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	f_unset(t_exec *cmd)
 {
 	int	i;
-	
+
 	i = 0;
 	cmd->sh->ret = 0;
 	while (cmd->argv[i])

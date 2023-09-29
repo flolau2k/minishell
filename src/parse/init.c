@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:26:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/18 09:41:38 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:23:43 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ bool	init(t_shell *sh, int argc, char **argv, char **env)
 	sh->ttyout = dup(STDOUT_FILENO);
 	return (true);
 }
-

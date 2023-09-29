@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/22 16:14:49 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:29:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_exec
 	pid_t		pid;
 	char		*cmd;
 	char		**argv;
-	// bool		*flag;
 	t_shell		*sh;
 }	t_exec;
 
@@ -106,7 +105,7 @@ typedef struct s_redir
 	int			ttyout;
 }	t_redir;
 
-typedef int		(*t_fcn_p)(t_exec *);
+typedef int			(*t_fcn_p)(t_exec *);
 typedef struct stat	t_stat;
 
 #endif

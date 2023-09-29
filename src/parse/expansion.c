@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/26 17:43:20 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:23:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*end_arg(char *s)
 	i = 0;
 	while (s[i])
 		i++;
-	return (s+i);
+	return (s + i);
 }
 
 /// @brief Expands each string passed
@@ -42,7 +42,8 @@ char	*expand(char *arg, t_shell *sh)
 	{
 		if (arg[i] && arg[i + 1] && arg[i] == '$' && arg[i + 1] == '?')
 			i += get_special_var(sh, &ret);
-		else if (arg[i] && arg[i + 1] && arg[i] == '$' && ft_isalpha(arg[i + 1]))
+		else if (arg[i] && arg[i + 1] && arg[i] == '$'
+			&& ft_isalpha(arg[i + 1]))
 			i += get_variable(sh, arg + i, &ret);
 		else
 			i += get_non_variable(arg + i, &ret);

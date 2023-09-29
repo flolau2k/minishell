@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:22:01 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/25 15:06:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:24:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	arrange_pipe_tree(t_cmd **tree, t_pipe *node)
 	{
 		pipe = (t_pipe *)*tree;
 		if (pipe->right)
-			arrange_pipe_tree(&(pipe->right), node); 
+			arrange_pipe_tree(&(pipe->right), node);
 		else if (!pipe->right)
 			pipe->right = (t_cmd *)node;
 	}

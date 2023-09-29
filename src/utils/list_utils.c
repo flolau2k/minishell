@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:18:48 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 17:23:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:26:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	clear_redirects(t_list **token_str)
 {
 	t_list	*tmp;
 	t_token	*content;
-	
+
 	tmp = *token_str;
 	while (tmp)
 	{
@@ -71,7 +71,8 @@ bool	unite(t_list *tmp)
 	next = tmp->next;
 	val[0] = (t_token *) tmp->content;
 	val[1] = (t_token *) next->content;
-	if (val[0]->flag && (val[1]->type == WORD || val[1]->type == DQUOTE || val[1]->type == SQUOTE))
+	if (val[0]->flag && (val[1]->type == WORD
+			|| val[1]->type == DQUOTE || val[1]->type == SQUOTE))
 	{
 		temp = val[0]->start;
 		val[0]->start = ft_strjoin_s(temp, val[1]->start);

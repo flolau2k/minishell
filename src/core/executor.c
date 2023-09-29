@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 14:58:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:27:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	do_execve(t_exec *exec)
 
 	fcn = get_builtin(exec);
 	if (fcn)
-	{	
+	{
 		do_builtin(fcn, exec);
 		exit(EXIT_SUCCESS);
 	}

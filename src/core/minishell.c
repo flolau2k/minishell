@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:17:14 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:29:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_token_list(t_list *token_str)
 
 	temp = token_str;
 	content = (t_token *) temp->content;
-	while(temp)
+	while (temp)
 	{
 		ft_printf("----Token----\n");
 		content = temp->content;
@@ -33,7 +33,6 @@ void	print_token_list(t_list *token_str)
 		ft_printf("Flag:%i\n", content->flag);
 		temp = temp->next;
 	}
-	
 }
 
 static void	reset_shell(t_list *token_str, t_cmd *root, t_shell *sh, bool flag)
@@ -51,27 +50,27 @@ static void	reset_shell(t_list *token_str, t_cmd *root, t_shell *sh, bool flag)
 	}
 }
 
+// if (isatty(fileno(stdin)))
+// 	sh->line = readline(MINISHELL_PROMPT);
+// else
+// {
+// 	char *line;
+// 	line = get_next_line(fileno(stdin));
+// 	sh->line = line;
+// 	if (line)
+// 		sh->line = ft_strtrim(line, "\n");
+// 	free(line);
+// }
 void	main_loop(t_shell *sh)
 {
 	t_cmd	*root;	
 	t_list	*token_str;
-	
+
 	while (true)
 	{
 		reset_shell(NULL, NULL, sh, true);
 		root = NULL;
-		if (isatty(fileno(stdin)))
-			sh->line = readline(MINISHELL_PROMPT);
-		else
-		{
-			char *line;
-			line = get_next_line(fileno(stdin));
-			sh->line = line;
-			if (line)
-				sh->line = ft_strtrim(line, "\n");
-			free(line);
-		}
-		// sh->line = readline(MINISHELL_PROMPT);
+		sh->line = readline(MINISHELL_PROMPT);
 		apply_signal(sh);
 		if (!sh->line)
 			f_exit2(sh, NULL, sh->ret);
@@ -81,7 +80,7 @@ void	main_loop(t_shell *sh)
 		if (!quote_check(sh->line))
 			continue ;
 		token_str = do_lexing(sh->line);
- 		if (!parser(token_str, &root, sh))
+		if (!parser(token_str, &root, sh))
 		{
 			reset_shell(token_str, root, sh, false);
 			continue ;

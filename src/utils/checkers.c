@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:19:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 12:03:15 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:24:54 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_redir(t_list *lst)
 {
-	t_token *content;
+	t_token	*content;
 
 	content = (t_token *) lst->content;
 	if (content->type == LESS || content->type == DLESS
@@ -25,7 +25,7 @@ bool	is_redir(t_list *lst)
 
 bool	is_pipe(t_list *lst)
 {
-	t_token *content;
+	t_token	*content;
 
 	content = (t_token *) lst->content;
 	if (content->type == PIPE)

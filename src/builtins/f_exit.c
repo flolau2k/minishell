@@ -6,18 +6,18 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:00:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:19:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int		num_args(char **argv)
+int	num_args(char **argv)
 {
 	int	i;
 
 	i = 0;
-	while(argv[i])
+	while (argv[i])
 		i++;
 	return (i);
 }

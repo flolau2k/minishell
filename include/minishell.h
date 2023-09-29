@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 15:27:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:29:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,10 +214,10 @@ int		l_greater(t_list **ret, char *arg);
 int		l_less(t_list **ret, char *arg);
 
 // lexer_misc.c
-int	l_word(t_list **ret, char *arg);
-int	l_squote(t_list **ret, char *arg);
-int	l_dquote(t_list **ret, char *arg);
-int	l_pipe(t_list **ret, char *arg);
+int		l_word(t_list **ret, char *arg);
+int		l_squote(t_list **ret, char *arg);
+int		l_dquote(t_list **ret, char *arg);
+int		l_pipe(t_list **ret, char *arg);
 void	free_token(void *arg);
 
 // basic_functions.c
