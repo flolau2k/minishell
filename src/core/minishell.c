@@ -6,11 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 15:27:40 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:17:14 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	g_sig = 0;
 
 void	print_token_list(t_list *token_str)
 {
@@ -34,13 +36,19 @@ void	print_token_list(t_list *token_str)
 	
 }
 
-int	g_sig = 0;
-
-void	reset_shell(t_shell *sh)
+static void	reset_shell(t_list *token_str, t_cmd *root, t_shell *sh, bool flag)
 {
-	dup2(sh->ttyin, STDIN_FILENO);
-	dup2(sh->ttyout, STDOUT_FILENO);
-	// printf("%s", NO_COLOR);
+	if (token_str)
+		ft_lstclear(&token_str, &free_token);
+	if (root)
+		free_tree(root);
+	free(sh->line);
+	sh->line = NULL;
+	if (flag)
+	{
+		dup2(sh->ttyin, STDIN_FILENO);
+		dup2(sh->ttyout, STDOUT_FILENO);
+	}
 }
 
 void	main_loop(t_shell *sh)
@@ -50,7 +58,7 @@ void	main_loop(t_shell *sh)
 	
 	while (true)
 	{
-		reset_shell(sh);
+		reset_shell(NULL, NULL, sh, true);
 		root = NULL;
 		if (isatty(fileno(stdin)))
 			sh->line = readline(MINISHELL_PROMPT);
@@ -71,35 +79,16 @@ void	main_loop(t_shell *sh)
 			continue ;
 		add_history(sh->line);
 		if (!quote_check(sh->line))
-		{
-			free(sh->line);
 			continue ;
-		}
 		token_str = do_lexing(sh->line);
-		// print_token_list(token_str);
  		if (!parser(token_str, &root, sh))
 		{
-			// print_token_list(token_str);
-			ft_lstclear(&token_str, &free_token);
-			free_tree(root);
-			free(sh->line);
-			sh->line = NULL;
+			reset_shell(token_str, root, sh, false);
 			continue ;
 		}
-		// ft_printf("\n\n----------------------------\n\n");
-		// print_token_list(token_str);
-		ft_lstclear(&token_str, &free_token);
-		// free_tree(root);
-		free(sh->line);
-		sh->line = NULL;
-		// print_tree(&root);
+		reset_shell(token_str, NULL, sh, false);
 		rec_execute(root);
 	}
-}
-
-void	leaks_check(void)
-{
-	system("leaks minishell");
 }
 
 /// @brief main function of minishell
@@ -111,7 +100,6 @@ int	main(int argc, char **argv, char **env)
 {
 	t_shell	sh;
 
-	// atexit(leaks_check);
 	signal(SIGINT, &signal_handler);
 	init(&sh, argc, argv, env);
 	main_loop(&sh);
