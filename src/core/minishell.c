@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 17:42:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 08:29:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	main_loop(t_shell *sh)
 			continue ;
 		}
 		token_str = do_lexing(sh->line);
-		print_token_list(token_str);
- 		if (!parser(&token_str, &root, sh))
+		// print_token_list(token_str);
+ 		if (!parser(token_str, &root, sh))
 		{
 			// print_token_list(token_str);
 			ft_lstclear(&token_str, &free_token);
@@ -90,14 +90,14 @@ void	main_loop(t_shell *sh)
 			sh->line = NULL;
 			continue ;
 		}
-		ft_printf("\n\n----------------------------\n\n");
-		print_token_list(token_str);
+		// ft_printf("\n\n----------------------------\n\n");
+		// print_token_list(token_str);
 		ft_lstclear(&token_str, &free_token);
-		free_tree(root);
+		// free_tree(root);
 		free(sh->line);
 		sh->line = NULL;
 		// print_tree(&root);
-		// rec_execute(root);
+		rec_execute(root);
 	}
 }
 
