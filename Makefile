@@ -3,16 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+         #
+#    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/09/27 18:20:04 by pcazac           ###   ########.fr        #
+#    Updated: 2023/09/29 16:22:03 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		minishell
-T_NAME =	tests
-TEST =		test_minishell
 
 CC =		cc
 CFLAGS =	-Wall -Wextra -Werror -g
@@ -44,19 +42,10 @@ FILES +=	destructors.c helpers.c token_utils.c expand_utils.c \
 			basic_functions.c list_utils.c checkers.c
 #src/error
 FILES +=	error.c
-#src/test
-T_FILES =	test.c
 
 OBJ = 		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
-T_OBJ =		$(addprefix $(OBJDIR)/, $(T_FILES:%.c=%.o))
 
 all: $(NAME)
-
-debug: CFLAGS += -g 
-debug: clean all
-
-tests: CFLAGS += -g
-tests: $(TEST)
 
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
@@ -75,8 +64,6 @@ clean:
 fclean: clean
 	make -C libft fclean
 	/bin/rm -rf $(NAME)
-	/bin/rm -rf $(T_NAME)
-	/bin/rm -rf $(TEST)
 
 re:	fclean all
 
@@ -84,11 +71,4 @@ $(LIBFT):
 	@git submodule update --init --recursive
 	@$(MAKE) -C $(@D)
 
-$(TEST): $(LIBFT) $(T_OBJ) $(OBJ)
-	$(CC) $(OBJ) $(T_OBJ) $(LIBS) -o $(TEST)
-
 .PHONY =	all clean fclean re bonus
-
-$(T_NAME): CFLAGS += -g
-$(T_NAME): $(LIBFT) $(T_OBJ) $(OBJ)
-	$(CC) $(CFLAGS) $(T_OBJ) $(OBJ) $(LIBS) -o $(T_NAME)
