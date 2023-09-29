@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 10:04:17 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:44:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ bool	is_valid_identfier(char *new);
 void	ft_error(char *msg, char *errmsg, int excode);
 void	ft_error2(char *msg, char *errmsg, void *tofree);
 void	ft_error3(char *msg, char *errmsg, int excode, void *tofree);
+void	ft_error4(t_shell *sh, char *msg, char *errmsg, void *tofree);
 
 // destructors.c
 void	free_tree(t_cmd *cmd);

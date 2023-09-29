@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 10:04:05 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:44:54 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	f_export(t_exec *cmd)
 			key = ft_substr(new, 0, ft_strchr(new, '=') - new);
 			if (!is_valid_identfier(key))
 			{
-				ft_error2(key, "not a valid identifier", key);
+				ft_error4(cmd->sh, key, "not a valid identifier", key);
 				i++;
 				continue ;
 			}

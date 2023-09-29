@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 09:26:11 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:42:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ bool	is_valid_identfier(char *new)
 		else
 			return (false);
 	}
+	if (i == 0)
+		return (false);
 	return (true);
 }
