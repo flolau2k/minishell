@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 10:44:24 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 12:45:54 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ bool	init(t_shell *sh, int argc, char **argv, char **env);
 int		array_len(char **arr);
 void	free_arr(char **arr);
 void	wait_exit(void);
-bool	is_valid_identfier(char *new);
+bool	is_valid_identfier(char *new, bool flag);
 
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
