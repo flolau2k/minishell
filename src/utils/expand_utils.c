@@ -6,13 +6,20 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/28 12:20:08 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:33:51 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	is_variable(t_shell *sh, char *arg, char **new)
+bool	nonval_char(char c)
+{
+	if ((!ft_strchr("_?", c) && !ft_isalnum(c)) || !c)
+		return (true);
+	return (false);
+}
+
+int	is_variable(t_shell *sh, char *arg, char **val)
 {
 	int		i;
 	char	*key;
@@ -30,10 +37,10 @@ int	is_variable(t_shell *sh, char *arg, char **new)
 	if (!temp)
 	{	
 		free(key);
-		*new = ft_strdup("");
+		*val = ft_strdup("");
 		return (i);
 	}
-	*new = ft_strdup(temp);
+	*val = ft_strdup(temp);
 	free(key);
 	return (i);
 }
@@ -43,8 +50,7 @@ int	not_variable(char *arg, char **val)
 	int		i;
 
 	i = 0;
-	while (arg[i] && (arg[i] != '$' || (arg[i] == '$' && 
-			(ft_isspace(arg[i + 1]) || !arg[i + 1]))))
+	while (arg[i] && (arg[i] != '$' || (arg[i] == '$' && nonval_char(arg[i + 1]))))
 		i++;
 	*val = ft_substr(arg, 0, i);
 	if (i > 0)
