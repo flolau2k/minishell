@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 12:45:54 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 14:22:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int		f_pwd(t_exec *pwd);
 int		f_unset(t_exec *cmd);
 void	f_exit2(t_shell *sh, char *msg, int code);
 char	**put_in_env(char **env, char *new, char *key);
+int		num_args(char **argv);
 
 // PARSE
 // init.c
@@ -120,7 +121,7 @@ bool	is_valid_identfier(char *new, bool flag);
 
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
-void	ft_error2(char *msg, char *errmsg, void *tofree);
+int		ft_error2(char *msg, char *errmsg, void *tofree, int code);
 void	ft_error3(char *msg, char *errmsg, int excode, void *tofree);
 void	ft_error4(t_shell *sh, char *msg, char *errmsg, void *tofree);
 

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/29 09:16:26 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 14:25:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,13 @@ bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh)
 	{	
 		if (!*root)
 		{
-			ft_error2(NULL, "unexpected token before Pipe!", NULL);
 			sh->ret = BUILTIN_MISUSE;
-			return (false);
+			return (ft_error2(NULL, "unexpected token before Pipe!", NULL, false));
 		}
 		if (!tmp->next)
 		{
-			ft_error2(NULL, "unexpected token after Pipe!", NULL);
 			sh->ret = BUILTIN_MISUSE;
-			return (false);
+			return (ft_error2(NULL, "unexpected token after Pipe!", NULL, false));
 		}
 		pipe_token(root);
 		*token_str = tmp->next;
@@ -99,9 +97,9 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 		{
 			if (!redirect_token(&tmp, root, sh))
 			{
-				ft_error2(NULL, "unexpected token after redirect!", NULL);
 				sh->ret = BUILTIN_MISUSE;
-				return (false);
+				return (ft_error2(NULL, "unexpected token after redirect!",
+					NULL, false));
 			}
 		}
 		else if (is_pipe(tmp))
