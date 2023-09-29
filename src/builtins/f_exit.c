@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 15:44:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 16:00:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	is_numeric(char *arg)
 
 static int	exit_error(t_exec *cmd, char *msg, char *errmsg, int code)
 {
-	free_exec_shell(cmd);
+	free_exec(cmd);
 	return (ft_error2(msg, errmsg, NULL, code));
 }
 
