@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 14:22:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 15:27:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	exec_error(t_exec *exec, char *msg, char *error, int exitcode);
 
 // signals.c
 void	signal_handler(int signo);
+void	apply_signal(t_shell *sh);
 
 // BUILTINS
 t_fcn_p	get_builtin(t_exec *exec);
