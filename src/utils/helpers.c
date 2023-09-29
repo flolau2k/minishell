@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 10:42:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 12:32:32 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,14 @@ bool	is_valid_identfier(char *new)
 	int	i;
 
 	i = 0;
+	if (new[i] && ft_isdigit(new[i]))
+		return (false);
 	while (new[i])
 	{
 		if (ft_isalnum(new[i]) || new[i] == '_')
 			i++;
+		else if (new[i] == '=')
+			break;
 		else
 			return (false);
 	}
