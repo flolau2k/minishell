@@ -6,16 +6,39 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 09:55:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:13:09 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+void	set_oldpwd(char **env, char *oldpwd)
+{
+	char	*new;
+	char	*key;
+
+	new = ft_strjoin("OLDPWD=", oldpwd);
+	key = ft_strdup("OLDPWD");
+	env = put_in_env(env, new, key);
+	free(new);
+	free(oldpwd);
+}
+
+void	cd_error(t_exec *cmd, char *dir)
+{
+	ft_error2(dir, strerror(errno), NULL);
+	if (cmd->pid == -1)
+		free_exec(cmd);
+	else
+		free_exec_shell(cmd);
+}
+
 int	f_cd(t_exec *cmd)
 {
 	char	*dir;
+	char	*oldpwd;
 
+	oldpwd = getcwd(NULL, 0);
 	dir = cmd->argv[1];
 	if (!dir)
 	{
@@ -28,13 +51,10 @@ int	f_cd(t_exec *cmd)
 	}
 	if (chdir(dir))
 	{
-		ft_error2(dir, strerror(errno), NULL);
-		if (cmd->pid == -1)
-			free_exec(cmd);
-		else
-			free_exec_shell(cmd);
+		cd_error(cmd, dir);
 		return (GENERAL_ERROR);
 	}
+	set_oldpwd(cmd->sh->env, oldpwd);
 	free_exec(cmd);
 	return (EXIT_SUCCESS);
 }

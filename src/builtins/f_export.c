@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 13:45:47 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:04:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	**put_in_env(char **env, char *new, char *key)
+char	**put_in_env(char **env, char *new, char *key)
 {
 	if (get_env(env, key))
 		replace_in_env(env, new);

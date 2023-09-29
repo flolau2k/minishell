@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 08:21:09 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:04:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int		f_export(t_exec *cmd);
 int		f_pwd(t_exec *pwd);
 int		f_unset(t_exec *cmd);
 void	f_exit2(t_shell *sh, char *msg, int code);
+char	**put_in_env(char **env, char *new, char *key);
 
 // PARSE
 // init.c
