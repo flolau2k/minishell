@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 14:24:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/09/29 15:44:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,24 @@ bool	is_numeric(char *arg)
 	return (false);
 }
 
+static int	exit_error(t_exec *cmd, char *msg, char *errmsg, int code)
+{
+	free_exec_shell(cmd);
+	return (ft_error2(msg, errmsg, NULL, code));
+}
+
 int	f_exit(t_exec *cmd)
 {
 	int	code;
 
 	code = 0;
 	if (cmd->argv[1] && !is_numeric(cmd->argv[1]))
-		ft_error("exit", "numeric argument required", 255);
+		exit(exit_error(cmd, "exit", "numeric argument required", 255));
 	if (num_args(cmd->argv) > 2)
-		return (ft_error2("exit", "too many arguments", NULL, GENERAL_ERROR));
+		return (exit_error(cmd, "exit", "too many arguments", GENERAL_ERROR));
 	if (cmd->argv[1])
 		code = ft_atoi(cmd->argv[1]);
-	free_shell(cmd->sh);
-	free_exec(cmd);
+	free_exec_shell(cmd);
 	wait_exit();
 	exit(code);
 }
