@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/09/29 16:22:03 by flauer           ###   ########.fr        #
+#    Updated: 2023/10/10 17:38:08 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,9 @@ FILES +=	error.c
 
 OBJ = 		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
 
+multi:
+	$(MAKE) -j12 all
+
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
@@ -65,7 +68,7 @@ fclean: clean
 	make -C libft fclean
 	/bin/rm -rf $(NAME)
 
-re:	fclean all
+re:	fclean multi
 
 $(LIBFT):
 	@git submodule update --init --recursive
