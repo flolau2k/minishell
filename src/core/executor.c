@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 12:50:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:51:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	do_redir(t_redir *redir)
 	else
 		dup2(redir->fd, STDIN_FILENO);
 	close(redir->fd);
+	if (!cmd)
+	{
+		free_tree_shell((t_cmd *)redir);
+		exit(GENERAL_ERROR);
+	}
 	free_redir_single(redir);
 	return (rec_execute(cmd));
 }

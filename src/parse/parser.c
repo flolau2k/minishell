@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/10 13:09:33 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:46:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh)
 			return (ft_error2(NULL, "unexpected token after Pipe!",
 					NULL, false));
 		}
-		pipe_token(root);
+		pipe_token(root, sh);
 		*token_str = tmp->next;
 	}
 	return (true);

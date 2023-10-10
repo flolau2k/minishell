@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:07:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 13:09:24 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:45:39 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,17 @@ typedef struct s_token
 	bool		flag;
 }	t_token;
 
-typedef struct s_cmd
+typedef struct s_shell	t_shell;
+typedef struct s_cmd	t_cmd;
+
+struct s_cmd
 {
 	t_nodetype	type;
 	pid_t		pid;
-}	t_cmd;
+	t_shell		*sh;
+};
 
-typedef struct s_shell
+struct s_shell
 {
 	char	**env;
 	t_cmd	*root;
@@ -56,7 +60,7 @@ typedef struct s_shell
 	int		ttyin;
 	int		ttyout;
 	t_list	*tmp_files;
-}	t_shell;
+};
 
 typedef struct s_word
 {
@@ -81,15 +85,16 @@ typedef struct s_exec
 {
 	t_nodetype	type;
 	pid_t		pid;
+	t_shell		*sh;
 	char		*cmd;
 	char		**argv;
-	t_shell		*sh;
 }	t_exec;
 
 typedef struct s_pipe
 {
 	t_nodetype	type;
 	pid_t		pid;
+	t_shell		*sh;
 	t_cmd		*left;
 	t_cmd		*right;
 }	t_pipe;
@@ -98,6 +103,7 @@ typedef struct s_redir
 {
 	t_nodetype	type;
 	pid_t		pid;
+	t_shell		*sh;
 	t_cmd		*cmd;
 	char		*file;
 	int			mode;

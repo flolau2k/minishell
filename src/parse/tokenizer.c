@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/10 13:43:38 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:45:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// @param instr The pointer to the instruction
 /// @param tree The tree structure to be filled
 /// @return The length of the instruction
-bool	pipe_token(t_cmd **tree)
+bool	pipe_token(t_cmd **tree, t_shell *sh)
 {
 	t_pipe	*node;
 
@@ -25,6 +25,7 @@ bool	pipe_token(t_cmd **tree)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_PIPE;
 	node->pid = -1;
+	node->sh = sh;
 	node->left = NULL;
 	node->right = NULL;
 	arrange_pipe_tree(tree, node);
@@ -51,6 +52,7 @@ bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh)
 	*node = (t_redir){};
 	node->type = NODE_REDIRECT;
 	node->pid = -1;
+	node->sh = sh;
 	if (conts[0]->type == DLESS)
 		node->file = hd_parse(conts[1]->start, sh);
 	else
@@ -77,9 +79,9 @@ bool	command_token(char **argv, t_cmd **tree, t_shell *sh)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	node->type = NODE_EXEC;
 	node->pid = -1;
+	node->sh = sh;
 	node->argv = argv;
 	node->cmd = argv[0];
-	node->sh = sh;
 	node->pid = -1;
 	arrange_command_tree(tree, node);
 	return (true);

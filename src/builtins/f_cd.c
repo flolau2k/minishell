@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 16:07:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:22:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ int	f_cd(t_exec *cmd)
 		return (cd_error(cmd, dir, strerror(errno)));
 	}
 	set_oldpwd(cmd, oldpwd);
-	free_exec(cmd);
+	if (cmd->pid == -1)
+		free_exec(cmd);
+	else
+		free_exec_shell(cmd);
 	return (EXIT_SUCCESS);
 }

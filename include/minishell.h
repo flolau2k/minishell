@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 15:54:58 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:47:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	ft_error4(t_shell *sh, char *msg, char *errmsg, void *tofree);
 
 // destructors.c
 void	free_tree(t_cmd *cmd);
+void	free_tree_shell(t_cmd *cmd);
 void	free_exec(t_exec *arg);
 void	free_pipe(t_pipe *arg);
 void	free_redir(t_redir *arg);
@@ -138,7 +139,6 @@ void	free_pipe_single(t_pipe *arg);
 void	free_redir_single(t_redir *arg);
 
 // destructors_shell.c
-void	free_tree_shell(t_cmd *cmd);
 void	free_exec_shell(t_exec *arg);
 void	free_pipe_shell(t_pipe *arg);
 void	free_redir_shell(t_redir *arg);
@@ -170,7 +170,7 @@ void	arrange_command_tree(t_cmd **tree, t_exec *node);
 void	print_tree(t_cmd **tree); // Test function
 
 // tokenizer.c
-bool	pipe_token(t_cmd **tree);
+bool	pipe_token(t_cmd **tree, t_shell *sh);
 bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh);
 bool	command_token(char **argv, t_cmd **tree, t_shell *sh);
 
@@ -220,6 +220,6 @@ bool	is_pipe(t_list *lst);
 bool	empty_node(t_list *node);
 bool	flag_node(t_list *node);
 bool	not_special_type(t_list *node);
-// void	print_tree(t_cmd **tree);
+void	print_tree(t_cmd **tree);
 
 #endif
