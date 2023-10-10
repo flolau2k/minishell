@@ -6,19 +6,17 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 13:26:32 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 13:31:28 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*hd_parse(char *lim, t_shell *sh)
+static char	*find_fname()
 {
-	char		*line[2];
-	char		*nlim;
-	char		*fname;
-	int			fd;
-	int			n;
+	int		n;
+	char	*nlim;
+	char	*fname;
 
 	n = 0;
 	while (true)
@@ -31,6 +29,16 @@ char	*hd_parse(char *lim, t_shell *sh)
 		free(fname);
 		n++;
 	}
+	return (fname);
+}
+
+char	*hd_parse(char *lim, t_shell *sh)
+{
+	char	*line[2];
+	char	*fname;
+	int		fd;
+
+	fname = find_fname();
 	fd = open(fname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	ft_lstadd_back(&(sh->tmp_files), ft_lstnew(ft_strdup(fname)));
 	line[0] = readline(HERE_DOC_PROMPT);
