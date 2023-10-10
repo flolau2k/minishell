@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 15:38:41 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:07:23 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	f_cd(t_exec *cmd)
 	char	*dir;
 	char	*oldpwd;
 
-	if (num_args(cmd->argv) > 2)
-		return (cd_error(cmd, "cd", "too many arguments"));
 	dir = cmd->argv[1];
 	if (!cmd->argv[1])
 	{
