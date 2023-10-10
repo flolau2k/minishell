@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 13:48:56 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/10 17:10:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*hd_parse(char *lim, t_shell *sh)
 	ft_lstadd_back(&(sh->tmp_files), ft_lstnew(ft_strdup(fname)));
 	// line[0] = readline(HERE_DOC_PROMPT);
 	if (isatty(fileno(stdin)))
-		line[0] = readline(MINISHELL_PROMPT);
+		line[0] = readline(HERE_DOC_PROMPT);
 	else
 	{
 		char *line1;
@@ -60,7 +60,7 @@ char	*hd_parse(char *lim, t_shell *sh)
 		free(line[0]);
 		free(line[1]);
 		if (isatty(fileno(stdin)))
-			line[0] = readline(MINISHELL_PROMPT);
+			line[0] = readline(HERE_DOC_PROMPT);
 		else
 		{
 			char *line2;
