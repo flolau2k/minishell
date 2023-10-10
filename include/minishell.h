@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 13:11:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 13:42:23 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,18 +143,8 @@ void	free_exec_shell(t_exec *arg);
 void	free_pipe_shell(t_pipe *arg);
 void	free_redir_shell(t_redir *arg);
 
-// lexer_utils.c
-void	get_args(t_array *array, t_word *block, int *i, int count);
-int		end_expression(char *instr, t_array *array);
-void	join_array(char **array, char *file);
-char	*ft_copystr(char *start, char *end);
-
 // lexer_helper.c
 int		redirect_type(t_token *token);
-int		set_flag(char *c, int *i);
-void	allocate_array(t_array *array, int count);
-void	fill_array(t_array *array, t_word *word, int count, int flag);
-bool	inside_quotes(char c);
 
 // lexer.c
 t_list	*do_lexing(char *arg);
@@ -167,11 +157,9 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	unite(t_list *tmp);
-bool	is_redir(t_list *lst);
 
 // token_utils.c
 char	**array_addback(char **arr, char *new);
-char	**make_array(t_list **elm);
 t_list	*unite_tokens(t_list *token_str);
 void	reset_flags(t_list *tmp);
 
@@ -193,7 +181,6 @@ char	*expand(char *arg, t_shell *sh);
 bool	quote_check(char *arg);
 
 // expand_utils.c
-int		is_special_variable(t_shell *sh, char **new);
 int		is_variable(t_shell *sh, char *arg, char **new);
 int		not_variable(char *arg, char **new);
 void	copy_expand(void *arg, t_shell *sh);
@@ -223,7 +210,6 @@ size_t	ft_strlen_s(const char *s);
 char	*ft_strjoin_s(char const *s1, char const *s2);
 
 // list_utils.c
-t_list	*delete_empty_nodes(t_list *root);
 t_list	*delete_node(t_list **root, t_list *to_delete);
 void	clear_redirects(t_list **token_str);
 bool	unite(t_list *tmp);

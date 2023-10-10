@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:01:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/29 14:25:17 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 13:09:33 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ bool	parser(t_list *token_str, t_cmd **root, t_shell *sh)
 	while (tmp)
 	{
 		if (tmp && !get_redirect(&tmp, root, sh))
-			return(false);
+			return (false);
 		if (tmp && !get_word(&tmp, root, sh))
-			return(false);
+			return (false);
 		if (tmp && !get_pipe(&tmp, root, sh))
-			return(false);
+			return (false);
 	}
 	return (true);
 }
@@ -39,16 +39,18 @@ bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh)
 	tmp = *token_str;
 	content = (t_token *) tmp->content;
 	if (content->type == PIPE)
-	{	
+	{
 		if (!*root)
 		{
 			sh->ret = BUILTIN_MISUSE;
-			return (ft_error2(NULL, "unexpected token before Pipe!", NULL, false));
+			return (ft_error2(NULL, "unexpected token before Pipe!",
+					NULL, false));
 		}
 		if (!tmp->next)
 		{
 			sh->ret = BUILTIN_MISUSE;
-			return (ft_error2(NULL, "unexpected token after Pipe!", NULL, false));
+			return (ft_error2(NULL, "unexpected token after Pipe!",
+					NULL, false));
 		}
 		pipe_token(root);
 		*token_str = tmp->next;
@@ -71,10 +73,7 @@ bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh)
 		if (content->type == PIPE)
 			break ;
 		else if (is_redir(tmp))
-		{
 			tmp = tmp->next->next;
-			continue ;
-		}
 		else
 		{
 			argv = array_addback(argv, content->start);
@@ -99,7 +98,7 @@ bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh)
 			{
 				sh->ret = BUILTIN_MISUSE;
 				return (ft_error2(NULL, "unexpected token after redirect!",
-					NULL, false));
+						NULL, false));
 			}
 		}
 		else if (is_pipe(tmp))

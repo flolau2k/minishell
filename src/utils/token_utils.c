@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 10:46:19 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/27 18:32:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:36:42 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	**create_arr(char *new)
 {
-	char **ret;
+	char	**ret;
 
 	ret = ft_calloc(2, sizeof(char *));
 	if (!ret)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 13:31:28 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 13:43:20 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	*find_fname()
+static char	*find_fname(void)
 {
 	int		n;
 	char	*nlim;
@@ -25,7 +25,7 @@ static char	*find_fname()
 		fname = ft_strjoin(".hd_tmp", nlim);
 		free(nlim);
 		if (access(fname, F_OK))
-			break;
+			break ;
 		free(fname);
 		n++;
 	}

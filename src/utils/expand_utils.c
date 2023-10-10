@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/29 10:33:51 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/10 11:37:37 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	is_variable(t_shell *sh, char *arg, char **val)
 	temp = NULL;
 	i = 0;
 	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
-				i++;
+		i++;
 	key = ft_substr(arg, 0, i);
 	if (!key)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
 	temp = get_env(sh->env, key);
 	if (!temp)
-	{	
+	{
 		free(key);
 		*val = ft_strdup("");
 		return (i);
@@ -47,10 +47,11 @@ int	is_variable(t_shell *sh, char *arg, char **val)
 
 int	not_variable(char *arg, char **val)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (arg[i] && (arg[i] != '$' || (arg[i] == '$' && nonval_char(arg[i + 1]))))
+	while (arg[i] && (arg[i] != '$' || (arg[i] == '$'
+				&& nonval_char(arg[i + 1]))))
 		i++;
 	*val = ft_substr(arg, 0, i);
 	if (i > 0)
@@ -85,8 +86,8 @@ void	token_copy_expand(t_list *token_str, t_shell *sh)
 {
 	while (token_str)
 	{
-		if (((t_token *)token_str->content)->type == DLESS && token_str->next &&
-			not_special_type(token_str->next))
+		if (((t_token *)token_str->content)->type == DLESS && token_str->next
+			&& not_special_type(token_str->next))
 			((t_token *)token_str->next->content)->type = SQUOTE;
 		copy_expand(token_str->content, sh);
 		token_str = token_str->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/10 12:59:09 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 13:43:38 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh)
 
 	if (!(*elm)->next)
 		return (false);
-	conts[0] = (t_token *) (*elm)->content;
-	conts[1] = (t_token *) (*elm)->next->content;
+	conts[0] = (t_token *)(*elm)->content;
+	conts[1] = (t_token *)(*elm)->next->content;
 	if (conts[1]->type != WORD)
 		return (false);
 	node = ft_calloc(1, sizeof(t_redir));
