@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 16:54:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 17:45:32 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ static void	reset_shell(t_list *token_str, t_cmd *root, t_shell *sh, bool flag)
 	{
 		dup2(sh->ttyin, STDIN_FILENO);
 		dup2(sh->ttyout, STDOUT_FILENO);
-	}
-	else
-	{
 		ft_lstiter(sh->tmp_files, &clear_tmp_file);
 		ft_lstclear(&(sh->tmp_files), &free);
 	}
@@ -95,7 +92,6 @@ void	main_loop(t_shell *sh)
 			reset_shell(token_str, root, sh, false);
 			continue ;
 		}
-		// print_tree(&root);
 		reset_shell(token_str, NULL, sh, false);
 		rec_execute(root);
 	}
