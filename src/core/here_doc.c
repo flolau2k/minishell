@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 12:50:28 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:56:52 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*hd_parse(char *lim, t_shell *sh)
 	(sh->n_hd)++;
 	free(nlim);
 	fd = open(fname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	// nlim = ft_strjoin(lim, "\n");
 	line[0] = readline(HERE_DOC_PROMPT);
 	while (line[0] && ft_strncmp(line[0], lim, ft_strlen(line[0])))
 	{
