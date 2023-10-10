@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:32:01 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:49:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	print_token_list(t_list *token_str)
 
 static void	reset_shell(t_list *token_str, t_cmd *root, t_shell *sh, bool flag)
 {
+	int		i;
+	char	*fname[2];
+
+	i = 0;
 	if (token_str)
 		ft_lstclear(&token_str, &free_token);
 	if (root)
@@ -48,6 +52,16 @@ static void	reset_shell(t_list *token_str, t_cmd *root, t_shell *sh, bool flag)
 		dup2(sh->ttyin, STDIN_FILENO);
 		dup2(sh->ttyout, STDOUT_FILENO);
 	}
+	while (i < sh->n_hd)
+	{
+		fname[0] = ft_itoa(i);
+		fname[1] = ft_strjoin(".hd_tmp", fname[0]);
+		unlink(fname[1]);
+		free(fname[0]);
+		free(fname[1]);
+		i++;
+	}
+	sh->n_hd = 0;
 }
 
 // if (isatty(fileno(stdin)))
@@ -85,8 +99,8 @@ void	main_loop(t_shell *sh)
 			reset_shell(token_str, root, sh, false);
 			continue ;
 		}
-		reset_shell(token_str, NULL, sh, false);
 		rec_execute(root);
+		reset_shell(token_str, NULL, sh, false);
 	}
 }
 

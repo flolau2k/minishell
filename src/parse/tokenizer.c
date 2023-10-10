@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/25 11:27:11 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:21:01 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh)
 	node->type = NODE_REDIRECT;
 	node->pid = -1;
 	node->cmd = NULL;
-	node->file = ft_strdup(conts[1]->start);
+	if (conts[0]->type == DLESS)
+		node->file = hd_parse(conts[1]->start, sh);
+	else
+		node->file = ft_strdup(conts[1]->start);
 	node->mode = redirect_type(conts[0]);
 	node->fd = 0;
 	node->ttyin = sh->ttyin;

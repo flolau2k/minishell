@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:27:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:50:58 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,19 @@ void	do_redir(t_redir *redir)
 	cmd = redir->cmd;
 	if (cmd)
 		cmd->pid = redir->pid;
-	if (redir->mode & O_HEREDOC)
-		here_doc(redir);
-	else
+	redir->fd = open(redir->file, redir->mode, 0644);
+	if (redir->fd == -1)
 	{
-		redir->fd = open(redir->file, redir->mode, 0644);
-		if (redir->fd == -1)
-		{
-			ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n",
-				redir->file, strerror(errno));
-			free_tree_shell((t_cmd *)redir);
-			exit(GENERAL_ERROR);
-		}
-		if (redir->mode & O_WRONLY)
-			dup2(redir->fd, STDOUT_FILENO);
-		else
-			dup2(redir->fd, STDIN_FILENO);
-		close(redir->fd);
+		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n",
+			redir->file, strerror(errno));
+		free_tree_shell((t_cmd *)redir);
+		exit(GENERAL_ERROR);
 	}
+	if (redir->mode & O_WRONLY)
+		dup2(redir->fd, STDOUT_FILENO);
+	else
+		dup2(redir->fd, STDIN_FILENO);
+	close(redir->fd);
 	free_redir_single(redir);
 	return (rec_execute(cmd));
 }

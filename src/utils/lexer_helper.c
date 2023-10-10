@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:40:14 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/18 18:38:57 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/10 11:42:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	redirect_type(t_token *token)
 	if (token->type == DGREATER)
 		return (O_WRONLY | O_CREAT | O_APPEND);
 	else if (token->type == DLESS)
-		return (O_HEREDOC);
+		return (O_RDONLY);
 	else if (token->type == GREATER)
 		return (O_WRONLY | O_CREAT | O_TRUNC);
 	else if (token->type == LESS)
