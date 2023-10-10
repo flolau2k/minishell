@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 13:42:23 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/10 15:54:58 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,5 +220,6 @@ bool	is_pipe(t_list *lst);
 bool	empty_node(t_list *node);
 bool	flag_node(t_list *node);
 bool	not_special_type(t_list *node);
+// void	print_tree(t_cmd **tree);
 
 #endif
