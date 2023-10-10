@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 12:50:24 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:52:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@
 # define CMD_NOT_FOUND 127
 # define INVALID_ARG_EXIT 128
 # define CTRL_C 130
-
-# define O_HEREDOC 0x0010
 
 # define R_CHAR "<>"
 # define P_CHAR "|"
