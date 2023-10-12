@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 15:01:57 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:21:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ void	open_failure(t_redir *redir)
 		exit(GENERAL_ERROR);
 	}
 	redir->sh->ret = GENERAL_ERROR;
+	free_redir_single(redir);
 }
