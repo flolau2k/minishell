@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/15 11:21:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:40:34 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close_pipe(pipe_fd);
 		if (tofree)

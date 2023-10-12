@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 14:50:15 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:57:09 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ void	do_exec(t_exec *exec)
 		if (npid == 0)
 		{
 			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
 			do_execve(exec);
 		}
 		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
 		waitpid(npid, &stat_loc, 0);
 		exec->sh->ret = WEXITSTATUS(stat_loc);
 		close(STDIN_FILENO);
