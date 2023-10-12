@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 16:47:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 11:58:52 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*execute_command(char *cmd, char **argv);
 void	close_pipe(int *pipe_fd);
 
 // here_doc.c
-char	*hd_parse(char *lim, t_shell *sh);
+char	*hd_parse(char *lim, t_shell *sh, bool to_expand);
 
 // executor.c
 void	rec_execute(t_cmd *cmd);

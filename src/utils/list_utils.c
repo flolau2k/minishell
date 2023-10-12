@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:18:48 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/29 16:26:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 13:06:15 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ bool	unite(t_list *tmp)
 		val[0]->start = ft_strjoin_s(temp, val[1]->start);
 		val[0]->type = WORD;
 		val[0]->flag = val[1]->flag;
+		val[0]->heredoc |= val[1]->heredoc;
 		free(temp);
 		tmp->next = next->next;
 		ft_lstdelone(next, &free_token);

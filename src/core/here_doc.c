@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 17:10:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 13:00:08 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*find_fname(void)
 	return (fname);
 }
 
-char	*hd_parse(char *lim, t_shell *sh)
+char	*hd_parse(char *lim, t_shell *sh, bool to_expand)
 {
 	char	*line[2];
 	char	*fname;
@@ -55,7 +55,10 @@ char	*hd_parse(char *lim, t_shell *sh)
 	}
 	while (line[0] && ft_strncmp(line[0], lim, ft_strlen(line[0])))
 	{
-		line[1] = expand(line[0], sh);
+		if (to_expand)
+			line[1] = expand(line[0], sh);
+		else
+			line[1] = ft_strdup(line[0]);
 		ft_fprintf(fd, "%s\n", line[1]);
 		free(line[0]);
 		free(line[1]);

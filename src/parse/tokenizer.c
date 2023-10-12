@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/10 16:45:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 11:57:10 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh)
 	node->pid = -1;
 	node->sh = sh;
 	if (conts[0]->type == DLESS)
-		node->file = hd_parse(conts[1]->start, sh);
+		node->file = hd_parse(conts[1]->start, sh, conts[1]->heredoc);
 	else
 		node->file = ft_strdup(conts[1]->start);
 	node->mode = redirect_type(conts[0]);
