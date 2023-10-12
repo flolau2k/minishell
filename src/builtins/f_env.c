@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:54:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:23:30 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 09:51:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	f_env(t_exec *cmd)
 	while (cmd->sh->env[i])
 	{
 		if (ft_strlen(cmd->sh->env[i]) > 0)
-			printf("%s\n", cmd->sh->env[i]);
+			ft_printf("%s\n", cmd->sh->env[i]);
 		i++;
 	}
 	free_exec(cmd);

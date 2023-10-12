@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:19:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 10:47:04 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void	f_exit2(t_shell *sh, char *msg, int code)
 {
 	free_shell(sh);
 	if (msg)
-		printf("%s\n", msg);
+		ft_printf("%s\n", msg);
 	exit(code);
 }

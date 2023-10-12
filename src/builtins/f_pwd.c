@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:29 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/13 15:37:11 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 09:51:13 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	f_pwd(t_exec *cmd)
 
 	(void)cmd;
 	cwd = getcwd(NULL, 0);
-	printf("%s\n", cwd);
+	ft_printf("%s\n", cwd);
 	free(cwd);
 	free_exec(cmd);
 	return (EXIT_SUCCESS);

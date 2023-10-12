@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:01:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/22 10:35:57 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 10:10:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	signal_handler(int signo)
 	g_sig = signo;
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	printf("\n");
+	ft_printf("\n");
 	rl_redisplay();
 }
 

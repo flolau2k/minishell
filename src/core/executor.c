@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 17:35:04 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 10:26:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	do_redir(t_redir *redir)
 		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n",
 			redir->file, strerror(errno));
 		free_tree_shell((t_cmd *)redir);
-		exit(GENERAL_ERROR);
+		redir->sh->ret = GENERAL_ERROR;
+		return ;
 	}
 	if (redir->mode & O_WRONLY)
 		dup2(redir->fd, STDOUT_FILENO);
@@ -109,6 +110,8 @@ void	do_exec(t_exec *exec)
 			signal(SIGINT, SIG_DFL);
 			do_execve(exec);
 		}
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		waitpid(npid, &stat_loc, 0);
 		exec->sh->ret = WEXITSTATUS(stat_loc);
 		close(STDIN_FILENO);
