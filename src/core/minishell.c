@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 14:37:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 16:43:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,7 @@ void	main_loop(t_shell *sh)
 	{
 		reset_shell(NULL, NULL, sh, true);
 		root = NULL;
-		if (isatty(fileno(stdin)))
-			sh->line = readline(MINISHELL_PROMPT);
-		else
-		{
-			char *line;
-			line = get_next_line(fileno(stdin));
-			sh->line = line;
-			if (line)
-				sh->line = ft_strtrim(line, "\n");
-			free(line);
-		}
-		// sh->line = readline(MINISHELL_PROMPT);
+		sh->line = readline(MINISHELL_PROMPT);
 		apply_signal(sh);
 		if (!sh->line)
 			f_exit2(sh, NULL, sh->ret);
@@ -108,7 +97,6 @@ int	main(int argc, char **argv, char **env)
 {
 	t_shell	sh;
 
-	// signal(SIGINT, &signal_handler);
 	init(&sh, argc, argv, env);
 	main_loop(&sh);
 }
