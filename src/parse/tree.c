@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:22:01 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/10 15:55:29 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:35:17 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,58 +106,3 @@ void	arrange_command_tree(t_cmd **tree, t_exec *node)
 		redir->cmd = (t_cmd *)node;
 	}
 }
-
-// void	print_tree(t_cmd **tree)
-// {
-// 	t_pipe	*pipe;
-// 	t_redir	*redir;
-// 	t_exec	*exec;
-
-
-// 	if ( *tree && (*tree)->type == NODE_PIPE)
-// 	{
-// 		pipe = (t_pipe *)(*tree);
-// 		printf("|||---START PIPE---|||\n");
-// 		printf("Pipe: %p\n", pipe);
-// 		printf("Pipe Type: %i\n", pipe->type);
-// 		if (pipe->left)
-// 		{
-// 			printf("|||---Pipe Left---|||\n");
-// 			printf("Pipe Left: %p\n", pipe->left);
-// 			printf("Pipe Type Left: %i\n", pipe->left->type);
-// 			print_tree(&(pipe->left));
-// 		}
-// 		if (pipe->right)
-// 		{
-// 			printf("|||---Pipe Right---|||\n");
-// 			printf("Pipe Right: %p\n", pipe->right);
-// 			printf("Pipe Type Right: %i\n", pipe->right->type);
-// 			print_tree(&(pipe->right));
-// 		}
-// 		return ;
-// 	}
-// 	else if ( *tree && (*tree)->type == NODE_REDIRECT)
-// 	{
-// 		redir = (t_redir *)(*tree);
-// 		printf("---START REDIRECT---\n");
-// 		printf("Redir Type: %i\n", redir->type);
-// 		printf("Redir Mode: %i\n", redir->mode);
-// 		printf("Exec Arrg: ##%s##\n", redir->file);
-// 		if (redir->cmd)
-// 			print_tree(&(redir->cmd));
-// 		return ;
-// 	}
-// 	else if ( *tree && (*tree)->type == NODE_EXEC)
-// 	{
-// 		exec = (t_exec *)(*tree);
-// 		printf("---START COMMAND---\n");
-// 		printf("Exec Type: %i\n", exec->type);
-// 		printf("Exec Command: %s\n", exec->cmd);
-// 		int	i = -1;
-// 		while(exec->argv[++i])
-// 		{
-// 			printf("Exec Arrg: ##%s##\n", exec->argv[i]);
-// 		}
-// 		return ;
-// 	}
-// }

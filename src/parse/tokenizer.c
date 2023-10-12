@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:02:40 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/12 11:57:10 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:45:46 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ bool	redirect_token(t_list **elm, t_cmd **tree, t_shell *sh)
 	node = ft_calloc(1, sizeof(t_redir));
 	if (!node)
 		ft_error("malloc", strerror(errno), GENERAL_ERROR);
-	*node = (t_redir){};
-	node->type = NODE_REDIRECT;
-	node->pid = -1;
-	node->sh = sh;
+	*node = (t_redir){.type = NODE_REDIRECT, .pid = -1, .sh = sh};
 	if (conts[0]->type == DLESS)
 		node->file = hd_parse(conts[1]->start, sh, conts[1]->heredoc);
 	else

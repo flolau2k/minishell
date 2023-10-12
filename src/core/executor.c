@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 10:51:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:50:15 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ void	do_pipe(t_pipe *cmd)
 	return (rec_execute(right));
 }
 
+void	open_failure(t_redir *redir)
+{
+	ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n",
+		redir->file, strerror(errno));
+	if (redir->pid != -1)
+	{
+		free_tree_shell((t_cmd *)redir);
+		exit(GENERAL_ERROR);
+	}
+	redir->sh->ret = GENERAL_ERROR;
+}
+
 void	do_redir(t_redir *redir)
 {
 	t_cmd	*cmd;
@@ -50,14 +62,7 @@ void	do_redir(t_redir *redir)
 	redir->fd = open(redir->file, redir->mode, 0644);
 	if (redir->fd == -1)
 	{
-		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n",
-			redir->file, strerror(errno));
-		if (redir->pid != -1)
-		{
-			free_tree_shell((t_cmd *)redir);
-			exit(GENERAL_ERROR);
-		}
-		redir->sh->ret = GENERAL_ERROR;
+		open_failure(redir);
 		return ;
 	}
 	if (redir->mode & O_WRONLY)
