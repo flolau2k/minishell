@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:35 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:23:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:59:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	f_unset(t_exec *cmd)
 			cmd->sh->env = unset_env(cmd->sh->env, cmd->argv[i]);
 		i++;
 	}
-	free_exec(cmd);
+	if (cmd->pid == -1)
+		free_exec(cmd);
 	return (cmd->sh->ret);
 }

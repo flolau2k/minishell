@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 15:02:36 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:50:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	do_execve(t_exec *exec)
 	if (fcn)
 	{
 		do_builtin(fcn, exec);
+		free_exec_shell(exec);
 		exit(EXIT_SUCCESS);
 	}
 	cmd = get_cmd(exec->cmd, exec->sh->env);

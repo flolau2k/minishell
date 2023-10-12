@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:31 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/10 16:22:42 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:50:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,5 @@ int	f_cd(t_exec *cmd)
 	set_oldpwd(cmd, oldpwd);
 	if (cmd->pid == -1)
 		free_exec(cmd);
-	else
-		free_exec_shell(cmd);
 	return (EXIT_SUCCESS);
 }
