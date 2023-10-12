@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:28:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 13:46:37 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:11:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,17 @@ char	**get_env_s(char **env, char *key)
 char	*get_cmd(char *name, char **env)
 {
 	char	*ret;
+	char	*paths;
 
+	paths = get_env(env, "PATH");
 	if (!name)
 		return (NULL);
-	ret = get_cmd_path(name, env);
-	if (ret && !ft_strnstr(name, "/", ft_strlen(name)))
+	if (paths && !ft_strnstr(name, "/", ft_strlen(name)))
+	{
+		ret = get_cmd_path(name, env);
 		return (ret);
-	if (!access(name, F_OK))
+	}
+	else if (ft_strnstr(name, "/", ft_strlen(name)) || !access(name, F_OK))
 		return (ft_strdup(name));
 	return (NULL);
 }
