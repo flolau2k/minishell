@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 12:51:09 by flauer            #+#    #+#              #
-#    Updated: 2023/10/10 17:38:08 by flauer           ###   ########.fr        #
+#    Updated: 2023/10/12 17:19:30 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "built $(NAME)"
 
-$(OBJDIR)/%.o: %.c $(HEADERS) | $(OBJDIR)
+$(OBJDIR)/%.o: %.c $(HEADERS) $(LIBFT) | $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 $(OBJDIR):
