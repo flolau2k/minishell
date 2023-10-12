@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:33:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 14:40:34 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:01:13 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void	close_pipe(int *pipe_fd)
 {
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
+}
+
+static void	it_s_a_child(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree)
@@ -30,8 +36,7 @@ pid_t	create_pipe(void (f1)(t_cmd *), t_cmd *a1, t_cmd *tofree)
 		ft_error("fork", strerror(errno), GENERAL_ERROR);
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
+		it_s_a_child();
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close_pipe(pipe_fd);
 		if (tofree)

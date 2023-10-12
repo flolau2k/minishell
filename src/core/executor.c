@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:28:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 14:57:09 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:02:36 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,6 @@ void	do_pipe(t_pipe *cmd)
 	free_tree(left);
 	right->pid = pid;
 	return (rec_execute(right));
-}
-
-void	open_failure(t_redir *redir)
-{
-	ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n",
-		redir->file, strerror(errno));
-	if (redir->pid != -1)
-	{
-		free_tree_shell((t_cmd *)redir);
-		exit(GENERAL_ERROR);
-	}
-	redir->sh->ret = GENERAL_ERROR;
 }
 
 void	do_redir(t_redir *redir)

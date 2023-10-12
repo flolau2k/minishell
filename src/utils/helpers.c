@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:23:26 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:25:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:01:57 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,16 @@ bool	is_valid_identfier(char *new, bool flag)
 	if (i == 0)
 		return (false);
 	return (true);
+}
+
+void	open_failure(t_redir *redir)
+{
+	ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n",
+		redir->file, strerror(errno));
+	if (redir->pid != -1)
+	{
+		free_tree_shell((t_cmd *)redir);
+		exit(GENERAL_ERROR);
+	}
+	redir->sh->ret = GENERAL_ERROR;
 }

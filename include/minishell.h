@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 11:58:52 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:02:24 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		array_len(char **arr);
 void	free_arr(char **arr);
 void	wait_exit(void);
 bool	is_valid_identfier(char *new, bool flag);
+void	open_failure(t_redir *redir);
 
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
