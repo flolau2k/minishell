@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:14:37 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/28 12:13:38 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 13:44:17 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	is_file(char *name)
 	if (stat(name, &statbuf) != 0)
 		return (0);
 	ret = S_ISDIR(statbuf.st_mode);
-	return (ret);
+	return (!ret);
 }
 
 void	do_builtin(t_fcn_p fcn, t_exec *exec)
