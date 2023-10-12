@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 10:20:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:37:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	reset_shell(t_list *token_str, t_cmd *root, t_shell *sh, bool flag)
 		ft_lstclear(&(sh->tmp_files), &free);
 	}
 	signal(SIGINT, &signal_handler);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	main_loop(t_shell *sh)
