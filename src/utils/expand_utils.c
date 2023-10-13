@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:04:59 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/10 11:37:37 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:36:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	nonval_char(char c)
+static bool	nonval_char(char c)
 {
 	if ((!ft_strchr("_?", c) && !ft_isalnum(c)) || !c)
 		return (true);

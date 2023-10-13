@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 15:02:24 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:40:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	open_failure(t_redir *redir);
 // error.c
 void	ft_error(char *msg, char *errmsg, int excode);
 int		ft_error2(char *msg, char *errmsg, void *tofree, int code);
-void	ft_error3(char *msg, char *errmsg, int excode, void *tofree);
 void	ft_error4(t_shell *sh, char *msg, char *errmsg, void *tofree);
 
 // destructors.c
@@ -141,8 +140,6 @@ void	free_redir_single(t_redir *arg);
 
 // destructors_shell.c
 void	free_exec_shell(t_exec *arg);
-void	free_pipe_shell(t_pipe *arg);
-void	free_redir_shell(t_redir *arg);
 
 // lexer_helper.c
 int		redirect_type(t_token *token);
@@ -152,12 +149,9 @@ t_list	*do_lexing(char *arg);
 
 // parser.c
 bool	parser(t_list *token_str, t_cmd **root, t_shell *sh);
-void	copy_expand(void *arg, t_shell *sh);
-t_list	*unite_tokens(t_list *token_str);
 bool	get_redirect(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_word(t_list **token_str, t_cmd **root, t_shell *sh);
 bool	get_pipe(t_list **token_str, t_cmd **root, t_shell *sh);
-bool	unite(t_list *tmp);
 
 // token_utils.c
 char	**array_addback(char **arr, char *new);
@@ -168,7 +162,6 @@ void	reset_flags(t_list *tmp);
 void	arrange_pipe_tree(t_cmd **tree, t_pipe *node);
 void	arrange_redir_tree(t_cmd **tree, t_redir *node);
 void	arrange_command_tree(t_cmd **tree, t_exec *node);
-void	print_tree(t_cmd **tree); // Test function
 
 // tokenizer.c
 bool	pipe_token(t_cmd **tree, t_shell *sh);
@@ -182,8 +175,8 @@ char	*expand(char *arg, t_shell *sh);
 bool	quote_check(char *arg);
 
 // expand_utils.c
-int		is_variable(t_shell *sh, char *arg, char **new);
-int		not_variable(char *arg, char **new);
+int		is_variable(t_shell *sh, char *arg, char **val);
+int		not_variable(char *arg, char **val);
 void	copy_expand(void *arg, t_shell *sh);
 void	token_copy_expand(t_list *token_str, t_shell *sh);
 
@@ -221,6 +214,5 @@ bool	is_pipe(t_list *lst);
 bool	empty_node(t_list *node);
 bool	flag_node(t_list *node);
 bool	not_special_type(t_list *node);
-void	print_tree(t_cmd **tree);
 
 #endif

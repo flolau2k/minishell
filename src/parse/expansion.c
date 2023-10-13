@@ -6,24 +6,11 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:01:55 by pcazac            #+#    #+#             */
-/*   Updated: 2023/09/29 16:23:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:36:01 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-/// @brief Returns the pointer to the end of the string
-/// @param s Input string
-/// @return A pointer to the end of the string
-char	*end_arg(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (s + i);
-}
 
 /// @brief Expands each string passed
 /// @param arg String from the token

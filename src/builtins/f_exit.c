@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:10:39 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 15:58:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:41:54 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	num_args(char **argv)
 	return (i);
 }
 
-bool	is_numeric(char *arg)
+static bool	is_numeric(char *arg)
 {
 	int	i;
 

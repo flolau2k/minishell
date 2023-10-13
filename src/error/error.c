@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:15:15 by flauer            #+#    #+#             */
-/*   Updated: 2023/09/29 16:26:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:40:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@ int	ft_error2(char *msg, char *errmsg, void *tofree, int code)
 	if (tofree)
 		free(tofree);
 	return (code);
-}
-
-void	ft_error3(char *msg, char *errmsg, int excode, void *tofree)
-{
-	if (msg)
-		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n", msg, errmsg);
-	else
-		ft_fprintf(STDERR_FILENO, "minishell: %s\n", errmsg);
-	free(tofree);
-	exit(excode);
 }
 
 void	ft_error4(t_shell *sh, char *msg, char *errmsg, void *tofree)

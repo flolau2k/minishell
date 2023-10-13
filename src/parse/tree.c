@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:22:01 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/12 14:35:17 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:35:04 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	arrange_pipe_tree(t_cmd **tree, t_pipe *node)
 	}
 }
 
-void	go_along_pipe(t_cmd **tree, t_cmd *node)
+static void	go_along_pipe(t_cmd **tree, t_cmd *node)
 {
 	t_pipe	*pipe;
 
@@ -55,7 +55,7 @@ void	go_along_pipe(t_cmd **tree, t_cmd *node)
 		arrange_command_tree(&pipe->right, (t_exec *)node);
 }
 
-void	go_along_redirect(t_cmd **tree, t_redir *node)
+static void	go_along_redirect(t_cmd **tree, t_redir *node)
 {
 	t_redir	*redir;
 

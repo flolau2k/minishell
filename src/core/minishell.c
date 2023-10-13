@@ -6,34 +6,13 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:04:24 by flauer            #+#    #+#             */
-/*   Updated: 2023/10/12 16:43:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:49:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 int	g_sig = 0;
-
-void	print_token_list(t_list *token_str)
-{
-	t_list	*temp;
-	t_token	*content;
-
-	temp = token_str;
-	content = (t_token *) temp->content;
-	while (temp)
-	{
-		ft_printf("----Token----\n");
-		content = temp->content;
-		ft_printf("Type:%i\n", content->type);
-		ft_printf("Content:");
-		write(1, content->start, content->length);
-		write(1, "\n", 1);
-		ft_printf("Length:%i\n", content->length);
-		ft_printf("Flag:%i\n", content->flag);
-		temp = temp->next;
-	}
-}
 
 void	clear_tmp_file(void *arg)
 {
@@ -61,7 +40,7 @@ static void	reset_shell(t_list *token_str, t_cmd *root, t_shell *sh, bool flag)
 
 void	main_loop(t_shell *sh)
 {
-	t_cmd	*root;	
+	t_cmd	*root;
 	t_list	*token_str;
 
 	while (true)

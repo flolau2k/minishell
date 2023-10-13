@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 10:46:19 by pcazac            #+#    #+#             */
-/*   Updated: 2023/10/10 12:36:42 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:33:55 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**create_arr(char *new)
+static char	**create_arr(char *new)
 {
 	char	**ret;
 
